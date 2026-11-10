@@ -1,0 +1,462 @@
+<title>Arahet Hikes Armenia</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Golos+Text:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&family=Noto+Sans+Armenian:wdth,wght@75..100,400..700&display=swap">
+<style>
+/* Layout: trail-sign wordmark over a contour-map hero, a sticky filter strip, then a day-by-day trail log; difficulty shown as painted trail blazes. */
+:root{
+  --paper:#ECEFE7; --card:#F8FAF4; --ink:#1C221F; --muted:#5B675F; --line:#CBD2C8;
+  --accent:#B9412B; --accent-ink:#FFFFFF; --moss:#3D6A49; --contour:#B7C1B3;
+  --easy:#3E8A57; --moderate:#D0911B; --hard:#C23F2A; --blaze-top:#FFFFFF;
+  --chip:#E1E6DC;
+  --f-display:"Oswald","Noto Sans Armenian",Impact,"Arial Narrow",sans-serif;
+  --f-body:"Golos Text","Noto Sans Armenian",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-data:"IBM Plex Mono",ui-monospace,"Cascadia Mono",Consolas,monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#121614; --card:#1A1F1C; --ink:#E5EAE2; --muted:#98A49B; --line:#2C3530;
+  --accent:#E2654B; --accent-ink:#1A0A06; --moss:#7FB28A; --contour:#2D3832;
+  --easy:#5DB27A; --moderate:#E6AB3C; --hard:#E8664E; --blaze-top:#E9EDE6; --chip:#232A26; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#121614; --card:#1A1F1C; --ink:#E5EAE2; --muted:#98A49B; --line:#2C3530;
+  --accent:#E2654B; --accent-ink:#1A0A06; --moss:#7FB28A; --contour:#2D3832;
+  --easy:#5DB27A; --moderate:#E6AB3C; --hard:#E8664E; --blaze-top:#E9EDE6; --chip:#232A26; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:15px/1.5 var(--f-body);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+h1,h2{font-family:var(--f-display);text-wrap:balance;margin:0}
+.num{font-family:var(--f-data);font-variant-numeric:tabular-nums}
+
+/* hero */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+#topo{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hero .wrap{position:relative;padding-block:22px 34px;display:grid;gap:18px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.draft{font:600 11px/1 var(--f-data);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border:1px dashed var(--line);padding:6px 8px;border-radius:6px;background:var(--paper)}
+.langs{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--card)}
+.langs button{border:0;background:none;color:var(--muted);font:600 13px var(--f-body);padding:7px 13px;cursor:pointer}
+.langs button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.sign{display:inline-grid;gap:2px;justify-self:start;background:var(--moss);color:#fff;padding:14px 22px 12px;border-radius:8px;box-shadow:0 2px 0 rgba(0,0,0,.15)}
+.sign h1{font-size:clamp(44px,9vw,84px);line-height:.9;letter-spacing:.04em;text-transform:uppercase;font-weight:700}
+.sign small{font:500 13px/1.2 var(--f-body);opacity:.85;letter-spacing:.02em}
+.tag{font-size:clamp(19px,2.6vw,25px);line-height:1.3;max-width:28ch;font-weight:500;margin:0;text-wrap:balance}
+.stats{display:flex;flex-wrap:wrap;gap:8px 22px;margin:0;padding:0;list-style:none;font:500 13px var(--f-data);color:var(--muted)}
+.stats b{color:var(--ink);font-size:20px;font-weight:600;margin-right:6px}
+
+/* filters */
+.filters{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.filters .wrap{padding-block:10px;display:grid;gap:8px}
+.days{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.days::-webkit-scrollbar{display:none}
+.day{flex:0 0 auto;display:grid;justify-items:center;gap:1px;min-width:50px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);cursor:pointer;font:500 11px var(--f-body)}
+.day .dn{font:600 17px/1.1 var(--f-data)}
+.day .dc{font:500 10px var(--f-data);color:var(--muted)}
+.day.we{border-color:color-mix(in srgb,var(--moss) 50%,var(--line))}
+.day.we .dw{color:var(--moss);font-weight:700}
+.day[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.day[aria-pressed="true"] .dc,.day[aria-pressed="true"] .dw{color:var(--paper)}
+.day.all{min-width:64px;font-weight:600;align-content:center;font-size:12px}
+.row{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.chip{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:6px 12px;font:500 13px var(--f-body);cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+select.chip,input.chip{cursor:auto;appearance:none}
+select.chip{cursor:pointer;padding-right:26px;background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);background-position:calc(100% - 14px) 52%,calc(100% - 9px) 52%;background-size:5px 5px;background-repeat:no-repeat;max-width:200px}
+input.chip{flex:1 1 180px;min-width:0}
+input.chip::placeholder{color:var(--muted)}
+
+/* blaze */
+.blaze{display:inline-flex;align-items:center;gap:6px;font:600 12px var(--f-body);white-space:nowrap}
+.blaze i{width:9px;height:14px;border-radius:2px;background:linear-gradient(var(--blaze-top) 0 45%,var(--bc) 45% 100%);box-shadow:0 0 0 1px color-mix(in srgb,var(--ink) 25%,transparent)}
+.b-easy{--bc:var(--easy)} .b-moderate{--bc:var(--moderate)} .b-hard{--bc:var(--hard)}
+
+/* list */
+main .wrap{padding-block:26px 40px;display:grid;gap:44px}
+main .wrap > section{min-width:0}
+.legend > span:last-child{flex:1 1 220px;min-width:0}
+.sec-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;border-bottom:2px solid var(--ink);padding-bottom:8px}
+.sec-head h2{font-size:clamp(26px,4vw,34px);text-transform:uppercase;letter-spacing:.02em;font-weight:600}
+.sec-head p{margin:0;color:var(--muted);font-size:13px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;align-items:center;color:var(--muted);font-size:12.5px;margin-top:10px}
+.daygroup{display:grid;gap:10px;margin-top:22px}
+.daygroup h3{margin:0;font:600 13px var(--f-data);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;gap:10px;align-items:center}
+.daygroup h3::after{content:"";flex:1;height:1px;background:var(--line)}
+.daygroup h3 .we{color:var(--moss)}
+.hike{display:grid;grid-template-columns:76px minmax(0,1fr) auto;gap:6px 16px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px}
+.when{display:grid;align-content:start;gap:2px}
+.time{font:600 20px/1.1 var(--f-data)}
+.time.tbc{font:500 12px/1.3 var(--f-body);color:var(--muted)}
+.back{font:500 11px var(--f-data);color:var(--muted)}
+.mid{min-width:0;display:grid;gap:5px}
+.mid h4{margin:0;font-size:16.5px;line-height:1.3;font-weight:600}
+.by{margin:0;font-size:13px;color:var(--muted)}
+.by a{color:var(--muted);text-decoration-color:var(--line)}
+.meta{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center;font:500 12.5px var(--f-data);color:var(--ink)}
+.meta .k{font:600 11px var(--f-body);text-transform:uppercase;letter-spacing:.06em;color:var(--moss);border:1px solid currentColor;padding:1px 6px;border-radius:4px}
+.meet{margin:0;font-size:13px;color:var(--muted)}
+details{font-size:13.5px;color:var(--muted)}
+details summary{cursor:pointer;color:var(--ink);font-weight:500;width:max-content;list-style:none}
+details summary::before{content:"+ ";font-family:var(--f-data)}
+details[open] summary::before{content:"− "}
+details p{margin:6px 0 0;max-width:62ch}
+.buy{display:grid;justify-items:end;align-content:space-between;gap:10px}
+.price{font:600 16px var(--f-data);white-space:nowrap}
+.price.na{font:500 12px var(--f-body);color:var(--muted)}
+.book{display:inline-flex;align-items:center;gap:6px;background:var(--accent);color:var(--accent-ink);text-decoration:none;font:600 13.5px var(--f-body);padding:9px 14px;border-radius:8px;white-space:nowrap}
+.book:hover{filter:brightness(1.07)}
+.empty{padding:28px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:var(--r)}
+.empty button{margin-top:10px}
+
+/* ararat */
+.tbl{overflow-x:auto;margin-top:14px;border:1px solid var(--line);border-radius:var(--r);background:var(--card)}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:560px}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:600 11px var(--f-data);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+tr:last-child td{border-bottom:0}
+td .num{white-space:nowrap}
+td a.book{padding:6px 11px;font-size:12.5px}
+.trips{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;margin-top:14px}
+.trip{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:13px 15px;display:grid;gap:4px;align-content:start}
+.trip .when2{font:600 12px var(--f-data);color:var(--moss);letter-spacing:.04em}
+.trip h4{margin:0;font-size:15px;line-height:1.3}
+.trip p{margin:0;font-size:13px;color:var(--muted)}
+.trip a{font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;margin-top:4px}
+
+/* clubs */
+.clubs{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;margin-top:14px}
+.club{display:grid;gap:2px;padding:12px 14px;border:1px solid var(--line);border-radius:var(--r);background:var(--card);text-decoration:none}
+.club b{font-size:14.5px}
+.club span{font:500 12px var(--f-data);color:var(--muted)}
+.club:hover{border-color:var(--ink)}
+
+footer{border-top:1px solid var(--line)}
+footer .wrap{padding-block:22px 34px;color:var(--muted);font-size:13px;max-width:1040px}
+footer p{margin:0;max-width:70ch}
+
+@media (max-width:640px){
+  .hike{grid-template-columns:minmax(0,1fr) auto;padding:13px 14px}
+  .when{grid-column:1;display:flex;gap:10px;align-items:baseline}
+  .buy{grid-column:2;grid-row:1;justify-items:end}
+  .buy .book{display:none}
+  .mid{grid-column:1/-1}
+  .book-m{display:inline-flex!important;justify-self:start;margin-top:4px}
+}
+.book-m{display:none!important}
+@media (prefers-reduced-motion:no-preference){.hike{transition:border-color .15s}.hike:hover{border-color:color-mix(in srgb,var(--ink) 35%,var(--line))}}
+</style>
+
+<header class="hero">
+  <canvas id="topo" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="topbar">
+      <span class="draft" data-i="draft"></span>
+      <div class="langs" role="group" aria-label="Language">
+        <button type="button" id="l-en" data-l="en">EN</button>
+        <button type="button" id="l-hy" data-l="hy">ՀԱՅ</button>
+        <button type="button" id="l-ru" data-l="ru">РУ</button>
+      </div>
+    </div>
+    <div class="sign"><h1 id="brand">Arahet</h1><small data-i="brandSub"></small></div>
+    <p class="tag" data-i="tag"></p>
+    <ul class="stats" id="stats"></ul>
+  </div>
+</header>
+
+<nav class="filters" aria-label="Filters">
+  <div class="wrap">
+    <div class="days" id="days"></div>
+    <div class="row">
+      <button type="button" class="chip" id="f-easy" data-df="easy"><span class="blaze b-easy"><i></i></span><span data-i="easy"></span></button>
+      <button type="button" class="chip" id="f-moderate" data-df="moderate"><span class="blaze b-moderate"><i></i></span><span data-i="moderate"></span></button>
+      <button type="button" class="chip" id="f-hard" data-df="hard"><span class="blaze b-hard"><i></i></span><span data-i="hard"></span></button>
+      <button type="button" class="chip" id="f-cheap" data-i="cheap"></button>
+      <button type="button" class="chip" id="f-kids" data-i="kids"></button>
+      <select class="chip" id="f-club" aria-label="Club"></select>
+      <input class="chip" id="f-q" type="search" autocomplete="off">
+    </div>
+  </div>
+</nav>
+
+<main>
+  <div class="wrap">
+    <section id="nov">
+      <div class="sec-head"><h2 data-i="novTitle"></h2><p id="count"></p></div>
+      <div class="legend">
+        <span class="blaze b-easy"><i></i><span data-i="easy"></span></span>
+        <span class="blaze b-moderate"><i></i><span data-i="moderate"></span></span>
+        <span class="blaze b-hard"><i></i><span data-i="hard"></span></span>
+        <span data-i="legendEst"></span>
+      </div>
+      <div id="list"></div>
+    </section>
+
+    <section id="ararat">
+      <div class="sec-head"><h2 data-i="araratTitle"></h2><p data-i="araratSub"></p></div>
+      <div class="tbl"><table><thead><tr><th data-i="thClub"></th><th data-i="thTrip"></th><th data-i="thDates"></th><th data-i="thDays"></th><th data-i="thPrice"></th><th></th></tr></thead><tbody id="araratRows"></tbody></table></div>
+    </section>
+
+    <section id="abroad">
+      <div class="sec-head"><h2 data-i="bigTitle"></h2><p data-i="bigSub"></p></div>
+      <div class="trips" id="trips"></div>
+    </section>
+
+    <section id="clubsSec">
+      <div class="sec-head"><h2 data-i="clubsTitle"></h2><p id="clubsCount"></p></div>
+      <div class="clubs" id="clubs"></div>
+    </section>
+  </div>
+</main>
+
+<footer><div class="wrap"><p data-i="foot"></p></div></footer>
+
+<script>
+const HIKES = /*__DATA__*/[];
+
+const T = {
+  en:{draft:"Draft preview",brandSub:"“Arahet” means trail in Armenian",tag:"Every group hike in Armenia, in one place.",
+    sHikes:"upcoming hikes",sClubs:"clubs",sFrom:"cheapest day hike",
+    all:"All days",today:"Today",tomorrow:"Tomorrow",easy:"Easy",moderate:"Moderate",hard:"Hard",cheap:"Under 10,000 ֏",kids:"With kids",
+    allClubs:"All clubs",q:"Mountain, gorge, monastery…",novTitle:"Upcoming hikes",
+    count:n=>`${n} hikes`,legendEst:"~ means we estimated the level from distance and climb.",
+    tbc:"Time TBC",back:"back",summit:"summit",meet:"Meet:",more:"About this hike",book:"Book with club",onReq:"Price on request",
+    kKids:"Kids",kRun:"Trail run",kAdv:"Adventure",kTrip:"Day trip",days:n=>`${n} days`,
+    none:"No hikes match these filters.",clear:"Clear filters",
+    araratTitle:"Ararat",araratSub:"Every club’s Ararat trip side by side",thClub:"Club",thTrip:"Trip",thDates:"Dates",thDays:"Days",thPrice:"Price",view:"Details",
+    bigTitle:"Big trips abroad",bigSub:"Expeditions clubs are already booking for 2027",
+    clubsTitle:"The clubs",clubsCount:n=>`${n} clubs with upcoming hikes`,clubNov:n=>`${n} upcoming`,clubBig:n=>`${n} big trips`,
+    foot:"Draft for partner conversations. Listings come from the clubs’ public announcements, gathered on {date}. Booking always happens directly with the club."},
+  hy:{draft:"Սևագիր",brandSub:"Հայաստանի արահետները",tag:"Հայաստանի բոլոր խմբային արշավները՝ մեկ տեղում։",
+    sHikes:"առաջիկա արշավ",sClubs:"ակումբ",sFrom:"ամենամատչելի արշավը",
+    all:"Բոլոր օրերը",today:"Այսօր",tomorrow:"Վաղը",easy:"Հեշտ",moderate:"Միջին",hard:"Բարդ",cheap:"Մինչև 10 000 ֏",kids:"Երեխաների հետ",
+    allClubs:"Բոլոր ակումբները",q:"Լեռ, կիրճ, վանք…",novTitle:"Առաջիկա արշավներ",
+    count:n=>`${n} արշավ`,legendEst:"~ նշանը նշանակում է, որ մակարդակը գնահատել ենք ըստ երկարության և բարձրության։",
+    tbc:"Ժամը ճշտվում է",back:"վերադարձ",summit:"գագաթ",meet:"Հանդիպում՝",more:"Արշավի մասին",book:"Գրանցվել",onReq:"Գինը՝ հարցմամբ",
+    kKids:"Մանկական",kRun:"Վազք",kAdv:"Արկած",kTrip:"Էքսկուրսիա",days:n=>`${n} օր`,
+    none:"Այս ֆիլտրերով արշավ չկա։",clear:"Մաքրել ֆիլտրերը",
+    araratTitle:"Արարատ",araratSub:"Բոլոր ակումբների Արարատյան արշավները կողք կողքի",thClub:"Ակումբ",thTrip:"Արշավ",thDates:"Ամսաթվեր",thDays:"Օր",thPrice:"Գին",view:"Մանրամասներ",
+    bigTitle:"Մեծ արշավներ արտերկրում",bigSub:"Արշավախմբեր, որոնց գրանցումն արդեն բաց է 2027-ի համար",
+    clubsTitle:"Ակումբները",clubsCount:n=>`${n} ակումբ առաջիկա արշավներով`,clubNov:n=>`${n} առաջիկա`,clubBig:n=>`${n} մեծ արշավ`,
+    foot:"Սևագիր՝ գործընկերների հետ քննարկման համար։ Տվյալները վերցված են ակումբների հրապարակային հայտարարություններից ({date})։ Գրանցումը միշտ անմիջապես ակումբի մոտ է։"},
+  ru:{draft:"Черновик",brandSub:"«Арахет» по-армянски значит «тропа»",tag:"Все групповые походы по Армении в одном месте.",
+    sHikes:"ближайших походов",sClubs:"клубов",sFrom:"самый доступный поход",
+    all:"Все дни",today:"Сегодня",tomorrow:"Завтра",easy:"Лёгкий",moderate:"Средний",hard:"Сложный",cheap:"До 10 000 ֏",kids:"С детьми",
+    allClubs:"Все клубы",q:"Гора, ущелье, монастырь…",novTitle:"Ближайшие походы",
+    count:n=>`Найдено: ${n}`,legendEst:"~ значит, что уровень мы оценили по длине и набору высоты.",
+    tbc:"Время уточняется",back:"возврат",summit:"вершина",meet:"Сбор:",more:"О походе",book:"Записаться",onReq:"Цена по запросу",
+    kKids:"Детский",kRun:"Забег",kAdv:"Экстрим",kTrip:"Поездка",days:n=>`Дней: ${n}`,
+    none:"По этим фильтрам походов нет.",clear:"Сбросить фильтры",
+    araratTitle:"Арарат",araratSub:"Туры всех клубов на Арарат рядом",thClub:"Клуб",thTrip:"Тур",thDates:"Даты",thDays:"Дней",thPrice:"Цена",view:"Подробнее",
+    bigTitle:"Большие поездки за рубеж",bigSub:"Экспедиции, на которые клубы уже записывают на 2027",
+    clubsTitle:"Клубы",clubsCount:n=>`Клубов с ближайшими походами: ${n}`,clubNov:n=>`Ближайших: ${n}`,clubBig:n=>`Больших поездок: ${n}`,
+    foot:"Черновик для разговоров с партнёрами. Данные взяты из открытых анонсов клубов ({date}). Запись всегда напрямую у клуба."}
+};
+const LOC = {en:"en-GB",hy:"hy-AM",ru:"ru-RU"};
+const BRAND = {en:"Arahet",hy:"Արահետ",ru:"Арахет"};
+const TODAY = new Date().toLocaleDateString("en-CA", {timeZone:"Asia/Yerevan"});
+const UPDATED = "__UPDATED__";
+
+let lang = "en";
+try { lang = localStorage.getItem("arahet-lang") || "en"; } catch(e){}
+if(!T[lang]) lang = "en";
+const S = {day:"", df:new Set(), cheap:false, kids:false, club:"", q:""};
+
+const t = k => T[lang][k];
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const name = h => h.n[lang] || h.n.en;
+const dt = d => new Date(d + "T12:00:00+04:00");
+/* Many browsers ship no Armenian date names, so Armenian dates are built by hand. */
+const HY_WD = ["Կիրակի","Երկուշաբթի","Երեքշաբթի","Չորեքշաբթի","Հինգշաբթի","Ուրբաթ","Շաբաթ"];
+const HY_WS = ["Կիր","Երկ","Երք","Չրք","Հնգ","Ուր","Շբթ"];
+const HY_M = ["հունվարի","փետրվարի","մարտի","ապրիլի","մայիսի","հունիսի","հուլիսի","օգոստոսի","սեպտեմբերի","հոկտեմբերի","նոյեմբերի","դեկտեմբերի"];
+function fmtDate(d, o){
+  if(lang !== "hy") return dt(d).toLocaleDateString(LOC[lang], {timeZone:"Asia/Yerevan", ...o});
+  const x = dt(d), wd = x.getUTCDay(), day = x.getUTCDate(), m = HY_M[x.getUTCMonth()];
+  if(o.weekday && !o.day) return o.weekday === "short" ? HY_WS[wd] : HY_WD[wd];
+  const ms = ["հնվ","փտվ","մրտ","ապր","մյս","հնս","հլս","օգս","սեպ","հոկ","նոյ","դեկ"][x.getUTCMonth()];
+  const dm = o.month === "short" ? `${ms}. ${day}` : `${m} ${day}`;
+  return o.weekday ? `${HY_WD[wd]}, ${dm}` : dm;
+}
+const isWE = d => [0,6].includes(dt(d).getUTCDay());
+const nf = n => Number(n).toLocaleString(LOC[lang] === "hy-AM" ? "ru-RU" : LOC[lang]).replace(/ /g," ");
+function price(h){
+  if(!h.p) return `<span class="price na">${t("onReq")}</span>`;
+  return `<span class="price">${h.c === "USD" ? "$" + nf(h.p) : nf(h.p) + " ֏"}</span>`;
+}
+const priceText = h => !h.p ? t("onReq") : (h.c === "USD" ? "$" + nf(h.p) : nf(h.p) + " ֏");
+const daysLen = h => h.e ? Math.round((dt(h.e) - dt(h.d)) / 864e5) + 1 : 1;
+
+const NOV = HIKES.filter(h => h.k !== "big" && (h.e || h.d) >= TODAY);
+const BIG = HIKES.filter(h => h.k === "big" && (h.e || h.d) >= TODAY);
+const isArarat = h => /ararat|masis/i.test(h.n.en);
+
+function blaze(h){
+  if(!h.df) return "";
+  return `<span class="blaze b-${h.df}"><i></i>${h.est ? "~" : ""}${t(h.df)}</span>`;
+}
+function kindTag(h){
+  const m = {kids:"kKids", run:"kRun", adventure:"kAdv", trip:"kTrip"}[h.k];
+  return m ? `<span class="k">${t(m)}</span>` : "";
+}
+function card(h){
+  const meta = [kindTag(h), blaze(h),
+    h.km ? `<span>${nf(h.km)} km</span>` : "",
+    h.g ? `<span>↑ ${nf(h.g)} m</span>` : "",
+    h.s ? `<span>${t("summit")} ${nf(h.s)} m</span>` : "",
+    h.e ? `<span>${t("days")(daysLen(h))}</span>` : ""].filter(Boolean).join("");
+  const book = `<a class="book" href="${esc(h.b)}" target="_blank" rel="noopener">${t("book")} ↗</a>`;
+  return `<article class="hike">
+    <div class="when">${h.t ? `<span class="time">${h.t}</span>` : `<span class="time tbc">${t("tbc")}</span>`}${h.back ? `<span class="back">${t("back")} ~${h.back}</span>` : ""}</div>
+    <div class="mid">
+      <h4>${esc(name(h))}</h4>
+      <p class="by">${h.ig ? `<a href="https://www.instagram.com/${esc(h.ig)}/" target="_blank" rel="noopener">${esc(h.o)}</a>` : esc(h.o)}</p>
+      ${meta ? `<div class="meta">${meta}</div>` : ""}
+      ${h.m ? `<p class="meet">${t("meet")} ${esc(h.m)}</p>` : ""}
+      ${h.ds ? `<details><summary>${t("more")}</summary><p>${esc(h.ds)}</p></details>` : ""}
+      ${book.replace('class="book"','class="book book-m"')}
+    </div>
+    <div class="buy">${price(h)}${book}</div>
+  </article>`;
+}
+
+function match(h){
+  if(S.day && h.d !== S.day) return false;
+  if(S.df.size && !S.df.has(h.df)) return false;
+  if(S.cheap && !(h.p && h.c === "AMD" && h.p < 10000)) return false;
+  if(S.kids && h.k !== "kids" && !/kid|child|famil|beginner/i.test(h.ds + h.n.en)) return false;
+  if(S.club && h.o !== S.club) return false;
+  if(S.q){
+    const hay = [h.n.en, h.n.hy, h.n.ru, h.o, h.m, h.ds].join(" ").toLowerCase();
+    if(!S.q.toLowerCase().split(/\s+/).every(w => hay.includes(w))) return false;
+  }
+  return true;
+}
+
+function renderDays(){
+  const counts = {};
+  NOV.forEach(h => counts[h.d] = (counts[h.d] || 0) + 1);
+  const days = Object.keys(counts).sort();
+  document.getElementById("days").innerHTML =
+    `<button type="button" class="day all" id="d-all" data-d="" aria-pressed="${!S.day}">${t("all")}</button>` +
+    days.map(d => `<button type="button" class="day${isWE(d) ? " we" : ""}" id="d-${d}" data-d="${d}" aria-pressed="${S.day === d}">
+      <span class="dw">${fmtDate(d, {weekday:"short"})}</span><span class="dn">${dt(d).getUTCDate()}</span><span class="dc">${counts[d]}</span></button>`).join("");
+}
+
+function renderList(){
+  const rows = NOV.filter(match).sort((a, b) => (a.d + (a.t || "99")).localeCompare(b.d + (b.t || "99")));
+  document.getElementById("count").textContent = t("count")(rows.length);
+  if(!rows.length){
+    document.getElementById("list").innerHTML = `<div class="empty daygroup">${t("none")}<br><button type="button" class="chip" id="clear">${t("clear")}</button></div>`;
+    return;
+  }
+  const by = {};
+  rows.forEach(h => (by[h.d] = by[h.d] || []).push(h));
+  document.getElementById("list").innerHTML = Object.entries(by).map(([d, hs]) => {
+    const rel = d === TODAY ? t("today") + " · " : (dt(d) - dt(TODAY) === 864e5 ? t("tomorrow") + " · " : "");
+    const label = fmtDate(d, {weekday:"long", day:"numeric", month:"long"});
+    return `<div class="daygroup"><h3><span class="${isWE(d) ? "we" : ""}">${rel}${label}</span></h3>${hs.map(card).join("")}</div>`;
+  }).join("");
+}
+
+function renderStatic(){
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-i]").forEach(el => {
+    const v = T[lang][el.dataset.i];
+    if(typeof v === "string") el.textContent = v;
+  });
+  document.getElementById("brand").textContent = BRAND[lang];
+  document.getElementById("f-q").placeholder = t("q");
+  document.querySelector("[data-i=foot]").textContent = t("foot").replace("{date}", fmtDate(UPDATED, {day:"numeric", month:"long"}) + " " + UPDATED.slice(0,4));
+  const ar = BIG.filter(isArarat).map(h => h.d.slice(0,4)).sort()[0];
+  if(ar) document.querySelector("[data-i=araratTitle]").textContent = t("araratTitle") + " " + ar;
+  document.getElementById("ararat").hidden = !ar;
+  document.querySelectorAll(".langs button").forEach(b => b.setAttribute("aria-pressed", b.dataset.l === lang));
+
+  const clubs = [...new Set(HIKES.map(h => h.o))];
+  const cheapest = Math.min(...NOV.filter(h => h.p && h.c === "AMD" && h.k === "hike").map(h => h.p));
+  document.getElementById("stats").innerHTML =
+    `<li><b>${NOV.length}</b>${t("sHikes")}</li><li><b>${clubs.length}</b>${t("sClubs")}</li><li><b>${nf(cheapest)} ֏</b>${t("sFrom")}</li>`;
+
+  const sel = document.getElementById("f-club");
+  const novClubs = [...new Set(NOV.map(h => h.o))].sort((a, b) => a.localeCompare(b));
+  sel.innerHTML = `<option value="">${t("allClubs")}</option>` + novClubs.map(c => `<option value="${esc(c)}"${S.club === c ? " selected" : ""}>${esc(c)}</option>`).join("");
+
+  const range = h => fmtDate(h.d, {day:"numeric", month:"short"}) + (h.e ? " – " + fmtDate(h.e, {day:"numeric", month:"short"}) : "");
+  document.getElementById("araratRows").innerHTML = BIG.filter(isArarat).sort((a, b) => a.d.localeCompare(b.d)).map(h => `<tr>
+    <td><b>${esc(h.o)}</b></td><td>${esc(name(h))}</td><td class="num">${range(h)}</td><td class="num">${h.e ? daysLen(h) : "—"}</td>
+    <td class="num">${priceText(h)}</td><td><a class="book" href="${esc(h.b)}" target="_blank" rel="noopener">${t("view")} ↗</a></td></tr>`).join("");
+
+  document.getElementById("trips").innerHTML = BIG.filter(h => !isArarat(h)).sort((a, b) => a.d.localeCompare(b.d)).map(h => `<div class="trip">
+    <span class="when2">${range(h)}${h.d.slice(0,4) !== TODAY.slice(0,4) ? " " + h.d.slice(0,4) : ""}</span><h4>${esc(name(h))}</h4>
+    <p>${esc(h.o)} · ${priceText(h)}</p><a href="${esc(h.b)}" target="_blank" rel="noopener">${t("view")} ↗</a></div>`).join("");
+
+  const cs = clubs.map(o => {
+    const hs = HIKES.filter(h => h.o === o);
+    return {o, ig: hs[0].ig, nov: hs.filter(h => NOV.includes(h)).length, big: hs.filter(h => h.k === "big").length};
+  }).sort((a, b) => b.nov - a.nov || b.big - a.big || a.o.localeCompare(b.o));
+  document.getElementById("clubsCount").textContent = t("clubsCount")(cs.length);
+  document.getElementById("clubs").innerHTML = cs.map(c => `<a class="club" href="${c.ig ? "https://www.instagram.com/" + esc(c.ig) + "/" : "#"}" target="_blank" rel="noopener">
+    <b>${esc(c.o)}</b><span>${c.ig ? "@" + esc(c.ig) : ""}</span><span>${[c.nov ? t("clubNov")(c.nov) : "", c.big ? t("clubBig")(c.big) : ""].filter(Boolean).join(" · ")}</span></a>`).join("");
+}
+
+function renderAll(){ renderStatic(); renderDays(); renderList(); }
+
+document.addEventListener("click", e => {
+  const b = e.target.closest("button");
+  if(!b) return;
+  if(b.dataset.l){ lang = b.dataset.l; try{ localStorage.setItem("arahet-lang", lang); }catch(err){} renderAll(); drawTopo(); return; }
+  if(b.dataset.d !== undefined){ S.day = b.dataset.d; renderDays(); renderList(); return; }
+  if(b.dataset.df){ S.df.has(b.dataset.df) ? S.df.delete(b.dataset.df) : S.df.add(b.dataset.df); b.setAttribute("aria-pressed", S.df.has(b.dataset.df)); renderList(); return; }
+  if(b.id === "f-cheap"){ S.cheap = !S.cheap; b.setAttribute("aria-pressed", S.cheap); renderList(); return; }
+  if(b.id === "f-kids"){ S.kids = !S.kids; b.setAttribute("aria-pressed", S.kids); renderList(); return; }
+  if(b.id === "clear"){
+    Object.assign(S, {day:"", cheap:false, kids:false, club:"", q:""}); S.df.clear();
+    document.querySelectorAll(".row .chip[aria-pressed]").forEach(c => c.setAttribute("aria-pressed", "false"));
+    document.getElementById("f-q").value = ""; document.getElementById("f-club").value = "";
+    renderDays(); renderList();
+  }
+});
+document.getElementById("f-club").addEventListener("change", e => { S.club = e.target.value; renderList(); });
+document.getElementById("f-q").addEventListener("input", e => { S.q = e.target.value.trim(); renderList(); });
+
+/* contour-map hero: isolines of a few made-up peaks, drawn with marching squares */
+function drawTopo(){
+  const c = document.getElementById("topo"), box = c.getBoundingClientRect();
+  const dpr = Math.min(2, window.devicePixelRatio || 1);
+  c.width = box.width * dpr; c.height = box.height * dpr;
+  const g = c.getContext("2d"); g.setTransform(dpr, 0, 0, dpr, 0, 0);
+  const W = box.width, H = box.height;
+  const col = getComputedStyle(document.documentElement).getPropertyValue("--contour").trim();
+  const peaks = [[.78,.35,.32,1],[.62,.75,.22,.7],[.93,.8,.18,.55],[.45,.15,.2,.45]];
+  const f = (x, y) => {
+    let v = 0;
+    for(const [px, py, r, h] of peaks){ const dx = (x / W - px) * (W / H) * .6, dy = y / H - py; v += h * Math.exp(-(dx*dx + dy*dy) / (r*r)); }
+    return v + .04 * Math.sin(x / 37) * Math.cos(y / 29);
+  };
+  const step = 7, nx = Math.ceil(W / step) + 1, ny = Math.ceil(H / step) + 1, grid = [];
+  for(let j = 0; j < ny; j++){ grid[j] = []; for(let i = 0; i < nx; i++) grid[j][i] = f(i * step, j * step); }
+  g.clearRect(0, 0, W, H); g.strokeStyle = col;
+  for(let L = .08, n = 0; L < 1.4; L += .07, n++){
+    g.lineWidth = n % 5 === 0 ? 1.4 : .8; g.beginPath();
+    for(let j = 0; j < ny - 1; j++) for(let i = 0; i < nx - 1; i++){
+      const a = grid[j][i], b = grid[j][i+1], cc = grid[j+1][i+1], d = grid[j+1][i];
+      const idx = (a > L) | (b > L) << 1 | (cc > L) << 2 | (d > L) << 3;
+      if(idx === 0 || idx === 15) continue;
+      const x = i * step, y = j * step, lerp = (p, q) => (L - p) / (q - p);
+      const P = {t:[x + step * lerp(a, b), y], r:[x + step, y + step * lerp(b, cc)], b:[x + step * lerp(d, cc), y + step], l:[x, y + step * lerp(a, d)]};
+      const segs = {1:["l","t"],2:["t","r"],3:["l","r"],4:["r","b"],5:["l","t","r","b"],6:["t","b"],7:["l","b"],8:["l","b"],9:["t","b"],10:["t","r","l","b"],11:["r","b"],12:["l","r"],13:["t","r"],14:["l","t"]}[idx];
+      for(let s = 0; s < segs.length; s += 2){ g.moveTo(...P[segs[s]]); g.lineTo(...P[segs[s+1]]); }
+    }
+    g.stroke();
+  }
+}
+renderAll(); drawTopo();
+let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(drawTopo, 150); });
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", drawTopo);
+new MutationObserver(drawTopo).observe(document.documentElement, {attributes:true, attributeFilter:["data-theme"]});
+document.fonts && document.fonts.ready.then(drawTopo);
+</script>

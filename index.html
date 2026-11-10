@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Every group hike in Armenia, in one place.">
+<meta name="robots" content="noindex">
+<title>Arahet Hikes Armenia</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Golos+Text:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&family=Noto+Sans+Armenian:wdth,wght@75..100,400..700&display=swap">
+<style>
+/* Layout: trail-sign wordmark over a contour-map hero, a sticky filter strip, then a day-by-day trail log; difficulty shown as painted trail blazes. */
+:root{
+  --paper:#ECEFE7; --card:#F8FAF4; --ink:#1C221F; --muted:#5B675F; --line:#CBD2C8;
+  --accent:#B9412B; --accent-ink:#FFFFFF; --moss:#3D6A49; --contour:#B7C1B3;
+  --easy:#3E8A57; --moderate:#D0911B; --hard:#C23F2A; --blaze-top:#FFFFFF;
+  --chip:#E1E6DC;
+  --f-display:"Oswald","Noto Sans Armenian",Impact,"Arial Narrow",sans-serif;
+  --f-body:"Golos Text","Noto Sans Armenian",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-data:"IBM Plex Mono",ui-monospace,"Cascadia Mono",Consolas,monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#121614; --card:#1A1F1C; --ink:#E5EAE2; --muted:#98A49B; --line:#2C3530;
+  --accent:#E2654B; --accent-ink:#1A0A06; --moss:#7FB28A; --contour:#2D3832;
+  --easy:#5DB27A; --moderate:#E6AB3C; --hard:#E8664E; --blaze-top:#E9EDE6; --chip:#232A26; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#121614; --card:#1A1F1C; --ink:#E5EAE2; --muted:#98A49B; --line:#2C3530;
+  --accent:#E2654B; --accent-ink:#1A0A06; --moss:#7FB28A; --contour:#2D3832;
+  --easy:#5DB27A; --moderate:#E6AB3C; --hard:#E8664E; --blaze-top:#E9EDE6; --chip:#232A26; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:15px/1.5 var(--f-body);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+h1,h2{font-family:var(--f-display);text-wrap:balance;margin:0}
+.num{font-family:var(--f-data);font-variant-numeric:tabular-nums}
+
+/* hero */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+#topo{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hero .wrap{position:relative;padding-block:22px 34px;display:grid;gap:18px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.draft{font:600 11px/1 var(--f-data);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border:1px dashed var(--line);padding:6px 8px;border-radius:6px;background:var(--paper)}
+.langs{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--card)}
+.langs button{border:0;background:none;color:var(--muted);font:600 13px var(--f-body);padding:7px 13px;cursor:pointer}
+.langs button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.sign{display:inline-grid;gap:2px;justify-self:start;background:var(--moss);color:#fff;padding:14px 22px 12px;border-radius:8px;box-shadow:0 2px 0 rgba(0,0,0,.15)}
+.sign h1{font-size:clamp(44px,9vw,84px);line-height:.9;letter-spacing:.04em;text-transform:uppercase;font-weight:700}
+.sign small{font:500 13px/1.2 var(--f-body);opacity:.85;letter-spacing:.02em}
+.tag{font-size:clamp(19px,2.6vw,25px);line-height:1.3;max-width:28ch;font-weight:500;margin:0;text-wrap:balance}
+.stats{display:flex;flex-wrap:wrap;gap:8px 22px;margin:0;padding:0;list-style:none;font:500 13px var(--f-data);color:var(--muted)}
+.stats b{color:var(--ink);font-size:20px;font-weight:600;margin-right:6px}
+
+/* filters */
+.filters{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.filters .wrap{padding-block:10px;display:grid;gap:8px}
+.days{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.days::-webkit-scrollbar{display:none}
+.day{flex:0 0 auto;display:grid;justify-items:center;gap:1px;min-width:50px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);cursor:pointer;font:500 11px var(--f-body)}
+.day .dn{font:600 17px/1.1 var(--f-data)}
+.day .dc{font:500 10px var(--f-data);color:var(--muted)}
+.day.we{border-color:color-mix(in srgb,var(--moss) 50%,var(--line))}
+.day.we .dw{color:var(--moss);font-weight:700}
+.day[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.day[aria-pressed="true"] .dc,.day[aria-pressed="true"] .dw{color:var(--paper)}
+.day.all{min-width:64px;font-weight:600;align-content:center;font-size:12px}
+.row{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.chip{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:6px 12px;font:500 13px var(--f-body);cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+select.chip,input.chip{cursor:auto;appearance:none}
+select.chip{cursor:pointer;padding-right:26px;background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);background-position:calc(100% - 14px) 52%,calc(100% - 9px) 52%;background-size:5px 5px;background-repeat:no-repeat;max-width:200px}
+input.chip{flex:1 1 180px;min-width:0}
+input.chip::placeholder{color:var(--muted)}
+
+/* blaze */
+.blaze{display:inline-flex;align-items:center;gap:6px;font:600 12px var(--f-body);white-space:nowrap}
+.blaze i{width:9px;height:14px;border-radius:2px;background:linear-gradient(var(--blaze-top) 0 45%,var(--bc) 45% 100%);box-shadow:0 0 0 1px color-mix(in srgb,var(--ink) 25%,transparent)}
+.b-easy{--bc:var(--easy)} .b-moderate{--bc:var(--moderate)} .b-hard{--bc:var(--hard)}
+
+/* list */
+main .wrap{padding-block:26px 40px;display:grid;gap:44px}
+main .wrap > section{min-width:0}
+.legend > span:last-child{flex:1 1 220px;min-width:0}
+.sec-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;border-bottom:2px solid var(--ink);padding-bottom:8px}
+.sec-head h2{font-size:clamp(26px,4vw,34px);text-transform:uppercase;letter-spacing:.02em;font-weight:600}
+.sec-head p{margin:0;color:var(--muted);font-size:13px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;align-items:center;color:var(--muted);font-size:12.5px;margin-top:10px}
+.daygroup{display:grid;gap:10px;margin-top:22px}
+.daygroup h3{margin:0;font:600 13px var(--f-data);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;gap:10px;align-items:center}
+.daygroup h3::after{content:"";flex:1;height:1px;background:var(--line)}
+.daygroup h3 .we{color:var(--moss)}
+.hike{display:grid;grid-template-columns:76px minmax(0,1fr) auto;gap:6px 16px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px}
+.when{display:grid;align-content:start;gap:2px}
+.time{font:600 20px/1.1 var(--f-data)}
+.time.tbc{font:500 12px/1.3 var(--f-body);color:var(--muted)}
+.back{font:500 11px var(--f-data);color:var(--muted)}
+.mid{min-width:0;display:grid;gap:5px}
+.mid h4{margin:0;font-size:16.5px;line-height:1.3;font-weight:600}
+.by{margin:0;font-size:13px;color:var(--muted)}
+.by a{color:var(--muted);text-decoration-color:var(--line)}
+.meta{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center;font:500 12.5px var(--f-data);color:var(--ink)}
+.meta .k{font:600 11px var(--f-body);text-transform:uppercase;letter-spacing:.06em;color:var(--moss);border:1px solid currentColor;padding:1px 6px;border-radius:4px}
+.meet{margin:0;font-size:13px;color:var(--muted)}
+details{font-size:13.5px;color:var(--muted)}
+details summary{cursor:pointer;color:var(--ink);font-weight:500;width:max-content;list-style:none}
+details summary::before{content:"+ ";font-family:var(--f-data)}
+details[open] summary::before{content:"− "}
+details p{margin:6px 0 0;max-width:62ch}
+.buy{display:grid;justify-items:end;align-content:space-between;gap:10px}
+.price{font:600 16px var(--f-data);white-space:nowrap}
+.price.na{font:500 12px var(--f-body);color:var(--muted)}
+.book{display:inline-flex;align-items:center;gap:6px;background:var(--accent);color:var(--accent-ink);text-decoration:none;font:600 13.5px var(--f-body);padding:9px 14px;border-radius:8px;white-space:nowrap}
+.book:hover{filter:brightness(1.07)}
+.empty{padding:28px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:var(--r)}
+.empty button{margin-top:10px}
+
+/* ararat */
+.tbl{overflow-x:auto;margin-top:14px;border:1px solid var(--line);border-radius:var(--r);background:var(--card)}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:560px}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:600 11px var(--f-data);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+tr:last-child td{border-bottom:0}
+td .num{white-space:nowrap}
+td a.book{padding:6px 11px;font-size:12.5px}
+.trips{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;margin-top:14px}
+.trip{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:13px 15px;display:grid;gap:4px;align-content:start}
+.trip .when2{font:600 12px var(--f-data);color:var(--moss);letter-spacing:.04em}
+.trip h4{margin:0;font-size:15px;line-height:1.3}
+.trip p{margin:0;font-size:13px;color:var(--muted)}
+.trip a{font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;margin-top:4px}
+
+/* clubs */
+.clubs{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;margin-top:14px}
+.club{display:grid;gap:2px;padding:12px 14px;border:1px solid var(--line);border-radius:var(--r);background:var(--card);text-decoration:none}
+.club b{font-size:14.5px}
+.club span{font:500 12px var(--f-data);color:var(--muted)}
+.club:hover{border-color:var(--ink)}
+
+footer{border-top:1px solid var(--line)}
+footer .wrap{padding-block:22px 34px;color:var(--muted);font-size:13px;max-width:1040px}
+footer p{margin:0;max-width:70ch}
+
+@media (max-width:640px){
+  .hike{grid-template-columns:minmax(0,1fr) auto;padding:13px 14px}
+  .when{grid-column:1;display:flex;gap:10px;align-items:baseline}
+  .buy{grid-column:2;grid-row:1;justify-items:end}
+  .buy .book{display:none}
+  .mid{grid-column:1/-1}
+  .book-m{display:inline-flex!important;justify-self:start;margin-top:4px}
+}
+.book-m{display:none!important}
+@media (prefers-reduced-motion:no-preference){.hike{transition:border-color .15s}.hike:hover{border-color:color-mix(in srgb,var(--ink) 35%,var(--line))}}
+</style>
+
+<header class="hero">
+  <canvas id="topo" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="topbar">
+      <span class="draft" data-i="draft"></span>
+      <div class="langs" role="group" aria-label="Language">
+        <button type="button" id="l-en" data-l="en">EN</button>
+        <button type="button" id="l-hy" data-l="hy">ՀԱՅ</button>
+        <button type="button" id="l-ru" data-l="ru">РУ</button>
+      </div>
+    </div>
+    <div class="sign"><h1 id="brand">Arahet</h1><small data-i="brandSub"></small></div>
+    <p class="tag" data-i="tag"></p>
+    <ul class="stats" id="stats"></ul>
+  </div>
+</header>
+
+<nav class="filters" aria-label="Filters">
+  <div class="wrap">
+    <div class="days" id="days"></div>
+    <div class="row">
+      <button type="button" class="chip" id="f-easy" data-df="easy"><span class="blaze b-easy"><i></i></span><span data-i="easy"></span></button>
+      <button type="button" class="chip" id="f-moderate" data-df="moderate"><span class="blaze b-moderate"><i></i></span><span data-i="moderate"></span></button>
+      <button type="button" class="chip" id="f-hard" data-df="hard"><span class="blaze b-hard"><i></i></span><span data-i="hard"></span></button>
+      <button type="button" class="chip" id="f-cheap" data-i="cheap"></button>
+      <button type="button" class="chip" id="f-kids" data-i="kids"></button>
+      <select class="chip" id="f-club" aria-label="Club"></select>
+      <input class="chip" id="f-q" type="search" autocomplete="off">
+    </div>
+  </div>
+</nav>
+
+<main>
+  <div class="wrap">
+    <section id="nov">
+      <div class="sec-head"><h2 data-i="novTitle"></h2><p id="count"></p></div>
+      <div class="legend">
+        <span class="blaze b-easy"><i></i><span data-i="easy"></span></span>
+        <span class="blaze b-moderate"><i></i><span data-i="moderate"></span></span>
+        <span class="blaze b-hard"><i></i><span data-i="hard"></span></span>
+        <span data-i="legendEst"></span>
+      </div>
+      <div id="list"></div>
+    </section>
+
+    <section id="ararat">
+      <div class="sec-head"><h2 data-i="araratTitle"></h2><p data-i="araratSub"></p></div>
+      <div class="tbl"><table><thead><tr><th data-i="thClub"></th><th data-i="thTrip"></th><th data-i="thDates"></th><th data-i="thDays"></th><th data-i="thPrice"></th><th></th></tr></thead><tbody id="araratRows"></tbody></table></div>
+    </section>
+
+    <section id="abroad">
+      <div class="sec-head"><h2 data-i="bigTitle"></h2><p data-i="bigSub"></p></div>
+      <div class="trips" id="trips"></div>
+    </section>
+
+    <section id="clubsSec">
+      <div class="sec-head"><h2 data-i="clubsTitle"></h2><p id="clubsCount"></p></div>
+      <div class="clubs" id="clubs"></div>
+    </section>
+  </div>
+</main>
+
+<footer><div class="wrap"><p data-i="foot"></p></div></footer>
+
+<script>
+const HIKES = [{"n":{"en":"Khachardzan to Gosh Hike & Plech","hy":"Խաչարձան Գոշ քայլարշավ և պլեճ","ru":"Поход Хачардзан — Гош и плеч"},"d":"2026-11-10","t":"","e":"","o":"110 Places Hiking Club","ig":"110_places","p":10000,"c":"AMD","km":7.0,"g":600.0,"s":null,"df":"moderate","est":false,"k":"hike","back":"","m":"","ds":"Forest trails, scenic views, and plech.","b":"https://www.instagram.com/p/DfXnHTAkRCi/"},{"n":{"en":"Evening Run","hy":"Երեկոյան վազք","ru":"Вечерняя пробежка"},"d":"2026-11-10","t":"18:00","e":"","o":"TriClub Yerevan","ig":"triclubyerevan","p":0,"c":"AMD","km":null,"g":null,"s":null,"df":"","est":false,"k":"run","back":"","m":"","ds":"Free group training open to all levels.","b":"https://www.instagram.com/p/Dfh4dd7jecs/"},{"n":{"en":"Victory Park Run","hy":"Հաղթանակի զբոսայգու վազքարշավ","ru":"Пробежка в парке Победы"},"d":"2026-11-10","t":"20:00","e":"","o":"Yerevan Run","ig":"yerevanrun","p":0,"c":"AMD","km":5.0,"g":null,"s":null,"df":"easy","est":true,"k":"run","back":"","m":"lake bridge in Victory Park","ds":"Meeting point: lake bridge in Victory Park.","b":"https://www.instagram.com/p/DfhpOrNCA6w/"},{"n":{"en":"Daytime Herouni Tour","hy":"Ցերեկային Հերունի","ru":"Дневной Геруни"},"d":"2026-11-11","t":"","e":"","o":"Imagine Tour","ig":"tour_imagine","p":null,"c":"AMD","km":null,"g":null,"s":null,"df":"","est":false,"k":"trip","back":"","m":"","ds":"A trip to the world's first giant radio-optical telescope, set in the atmosphere of a research institute surrounded by mountain scenery, followed by a picnic.","b":"https://www.instagram.com/p/DfBzNpsoo2c/"},{"n":{"en":"Interval Run with TriClub Yerevan","hy":"Ինտերվալային վազք TriClub Yerevan-ի հետ","ru":"Интервальная пробежка с TriClub Yerevan"},"d":"2026-11-11","t":"07:00","e":"","o":"TriClub Yerevan","ig":"triclubyerevan","p":0,"c":"AMD","km":null,"g":null,"s":null,"df":"","est":false,"k":"run","back":"","m":"","ds":"Interval running workout open to all fitness levels. No prior registration needed—just show up.","b":"https://www.instagram.com/p/Dfh4dd7jecs/"},{"n":{"en":"Easy Wednesday Run","hy":"Easy Wednesday վազք","ru":"Пробежка Easy Wednesday"},"d":"2026-11-11","t":"07:30","e":"","o":"Yerevan Run","ig":"yerevanrun","p":0,"c":"AMD","km":5.0,"g":null,"s":null,"df":"easy","est":true,"k":"run","back":"","m":"Kond tunnel parking lot","ds":"Distance: 5 km.","b":"https://www.instagram.com/p/DfhpOrNCA6w/"},{"n":{"en":"Kruzhochki Run","hy":"Kruzhochki վազք","ru":"Пробежка «Кружочки»"},"d":"2026-11-12","t":"20:00","e":"","o":"Yerevan Run","ig":"yerevanrun","p":0,"c":"AMD","km":5.0,"g":null,"s":null,"df":"easy","est":true,"k":"run","back":"","m":"","ds":"Distance: 5–7 km.","b":"https://www.instagram.com/p/DfhpOrNCA6w/"},{"n":{"en":"Kalasar Hike","hy":"Արշավ դեպի Կալասար","ru":"Поход на гору Каласар"},"d":"2026-11-14","t":"","e":"","o":"110 Places Hiking Club","ig":"110_places","p":11000,"c":"AMD","km":null,"g":null,"s":null,"df":"","est":false,"k":"hike","back":"","m":"","ds":"Open horizons, scenic views, and the famous photo rock on Kalasar.","b":"https://www.instagram.com/p/Db0KdMIgAyS/"},{"n":{"en":"Hiking to Smbataberd","hy":"Քայլարշավ դեպի Սմբատաբերդ","ru":"Поход к крепости Смбатаберд"},"d":"2026-11-14","t":"","e":"","o":"ONE WAY Tour","ig":"onewaytour","p":8000,"c":"AMD","km":6.0,"g":null,"s":null,"df":"easy","est":true,"k":"hike","back":"","m":"","ds":"A hiking trip of medium difficulty covering about 6 km.","b":"https://www.instagram.com/p/De3zkWhCMt-/"},{"n":{"en":"Hiking in the Azat Gorge","hy":"Քայլարշավ Ազատի կիրճում","ru":"Хайкинг по ущелью Азат"},"d":"2026-11-14","t":"","e":"","o":"Imagine Tour","ig":"tour_imagine","p":null,"c":"AMD","km":null,"g":null,"s":null,"df":"","est":false,"k":"hike","back":"","m":"","ds":"An easy hike featuring views of the Azat Reservoir, an off-the-beaten-path perspective on Garni, and the Symphony of Stones.","b":"https://www.instagram.com/p/DYwLsYqsQaK/"},{"n":{"en":"Hiking Mount Ara","hy":"Արշավ դեպի Արա լեռ","ru":"Восхождение на гору Ара"},"d":"2026-11-14","t":"","e":"","o":"110 Places Hiking Club","ig":"110_places","p":10000,"c":"AMD","km":13.0,"g":800.0,"s":null,"df":"moderate","est":false,"k":"hike","back":"","m":"","ds":"Forest ascent to Mount Ara and the last colors of autumn.","b":"https://www.instagram.com/p/DfXnHTAkRCi/"},{"n":{"en":"Hike to Lake Tsover and Plech","hy":"Ծովեր լիճ և պլեճ","ru":"Поход к озеру Цовер и плеч"},"d":"2026-11-14","t":"","e":"","o":"110 Places Hiking Club","ig":"110_places","p":11000,"c":"AMD","km":6.0,"g":300.0,"s":null,"df":"easy","est":false,"k":"hike","back":"","m":"","ds":"An easy hike along a calm route leading to a lake hidden in nature, followed by plech (roasted potatoes).","b":"https://www.instagram.com/p/DfXnHTAkRCi/"},{"n":{"en":"Hiking in Mtnadzor","hy":"Քայլարշավ Մթնաձորում","ru":"Поход в Мтнадзор"},"d":"2026-11-14","t":"07:00","e":"","o":"Hamshen Tour","ig":"hamshen_tour","p":9000,"c":"AMD","km":15.0,"g":null,"s":null,"df":"moderate","est":true,"k":"hike","back":"21:00","m":"","ds":"A hiking trip through the forests and nature of Tavush to Mtnadzor.","b":"https://hamshen.am/hy/tours/mtnadzor?utm_source=esora.app&utm_medium=referral"},{"n":{"en":"Mount Yeghnakhaghats Hike","hy":"Քայլարշավ դեպի Եղնախաղաց լեռ","ru":"Поход на гору Ехнахахац"},"d":"2026-11-14","t":"07:00","e":"","o":"Werelk Hiking Club","ig":"werelk_hiking_club","p":9500,"c":"AMD","km":15.0,"g":1000.0,"s":1944.0,"df":"hard","est":true,"k":"hike","back":"23:00","m":"","ds":"A 15 km hike starting from the village of Karinzh to Mount Yeghnakhaghats (1944 m) in Lori Province, along autumn trails with an elevation gain of around 1000 m.","b":"https://www.instagram.com/p/DeFI8rMja3Y/"},{"n":{"en":"Hiking Mount Yeranos","hy":"Վերելք Երանոս լեռ","ru":"Восхождение на гору Еранос"},"d":"2026-11-14","t":"07:30","e":"","o":"Lavash Tour","ig":"lavashtour","p":8000,"c":"AMD","km":18.0,"g":900.0,"s":null,"df":"hard","est":true,"k":"hike","back":"","m":"near the Aram Manukyan statue by the Republic Square metro station. Please arrive 10 minutes early","ds":"A hike to Mount Yeranos (also known as Karmir Sar), the highest point of the Yeranos mountain range, offering views of Mount Ararat, Aragats, the Geghama mountains, and the Azat Reservoir.","b":"https://www.instagram.com/p/DfR1zz9DHoz/"},{"n":{"en":"Hike from Odzun to Kobayr through Debed Canyon","hy":"Քայլարշավ Օձունից Քոբայր Դեբեդի կիրճով","ru":"Поход из Одзуна в Кобайр по ущелью Дебед"},"d":"2026-11-14","t":"07:30","e":"","o":"HORIZONS","ig":"horizons_hiking_club","p":10000,"c":"AMD","km":10.0,"g":null,"s":null,"df":"easy","est":true,"k":"hike","back":"22:00","m":"7 Vazgen Sargsyan Street. Return by 22:00","ds":"A 10 km hike suitable for beginners. The route starts from Odzun village and follows the Debed Canyon to Kobayr. Along the way, participants will visit Horomayr Monastery, caves, and Kobayr Monastery at the end.","b":"https://www.instagram.com/p/DdiwEQUgIGD/"},{"n":{"en":"Mets Artavaz Hike","hy":"Մեծ Արտավազ","ru":"Восхождение на Мец Артаваз"},"d":"2026-11-14","t":"07:30","e":"","o":"Trichq Hiking Club","ig":"trichq_hiking_club_","p":9000,"c":"AMD","km":8.0,"g":950.0,"s":2929.0,"df":"moderate","est":false,"k":"hike","back":"","m":"","ds":"Hiking to Mount Mets Artavaz (2,929 m) in the Pambak Mountains.","b":"https://www.instagram.com/p/DfhJPUrCDuk/"},{"n":{"en":"Ascent to Mount Yeranos","hy":"Վերելք Երանոս լեռ","ru":"Восхождение на гору Еранос"},"d":"2026-11-14","t":"07:30","e":"","o":"Armenian Geographic","ig":"armenian_geographic","p":9000,"c":"AMD","km":18.0,"g":900.0,"s":1824.0,"df":"hard","est":true,"k":"hike","back":"","m":"","ds":"Hike to Mount Yeranos (1824 m) in the Yeranos mountains, starting from the Ararat region. The route offers views of Mount Ararat, the Yerakh mountains to the east, the Voghjaberd range to the west, and the Azat reservoir below.","b":"https://www.facebook.com/events/1075633662204309/"},{"n":{"en":"Hiking to Khojorni Church","hy":"Քայլարշավ դեպի Խոժոռնիի եկեղեցի","ru":"Поход к церкви Хожорни"},"d":"2026-11-14","t":"08:00","e":"","o":"Hamshen Tour","ig":"hamshen_tour","p":16000,"c":"AMD","km":3.0,"g":null,"s":null,"df":"easy","est":true,"k":"hike","back":"22:00","m":"","ds":"A light hike to the medieval St. Nshan Church, situated on a hill near the Armenian-inhabited village of Khojorni in Georgia, right by the Armenian-Georgian border. The site offers views of Mount Lalvar and surrounding dense forests. The route also includes distinctive chapels and khachkars of Khojo","b":"https://hamshen.am/hy/tours/goris?utm_source=esora.app&utm_medium=referral"},{"n":{"en":"Hiking Mount Arteni","hy":"1+1 արշավ դեպի Արտենի լեռ","ru":"Поход на гору Артени"},"d":"2026-11-14","t":"08:00","e":"","o":"Teach For Armenia","ig":"teachforarmenia","p":null,"c":"AMD","km":8.0,"g":null,"s":null,"df":"easy","est":true,"k":"hike","back":"18:00","m":"","ds":"An 8 km round-trip hike (medium difficulty, 500 m relative elevation gain) reaching an altitude of 2,047 m, with views of Ararat, Aragats, the Gegham mountains, and the Haykakan Par range.","b":"http://www.tfaforms.com/5216599?utm_source=esora.app&utm_medium=referral"},{"n":{"en":"Golden Autumn in Dilijan","hy":"Ոսկե աշունը Դիլիջանում","ru":"Золотая осень в Дилижане"},"d":"2026-11-14","t":"08:00","e":"","o":"We Hike Armenia","ig":"wehike.am","p":20000,"c":"AMD","km":12.0,"g":550.0,"s":null,"df":"easy","est":false,"k":"hike","back":"","m":"","ds":"A day hike through Dilijan National Park during peak autumn colors, visiting a mountain lake, autumn woods, and a medicinal mineral water spring.","b":"https://www.instagram.com/p/DfjwsU0jfV8/"},{"n":{"en":"Karmir Sar and Pink Canyon Hike","hy":"Կարմիր սար և Վարդագույն կիրճ","ru":"Поход: Кармир Сар и Розовый каньон"},"d":"2026-11-14","t":"08:00","e":"","o":"Kharuyk Hiking Club","ig":"kharuyk_hiking_club","p":8000,"c":"AMD","km":15.0,"g":700.0,"s":null,"df":"moderate","est":true,"k":"hike","back":"","m":"Yeritasardakan metro park, near the Hands monument","ds":"A hike through the heart of the Azat Reservoir and the Yeranos Mountains. The route ascends to the peak of Karmir Sar along a scenic crest trail, then descends through multicolored rocks into the Pink Canyon and returns to Lanjazat village, with panoramic views of Mount Yeranos, the Azat Reservoir, ","b":"https://www.instagram.com/p/Dfht6pCCAXq/"},{"n":{"en":"Hiking to Pink Canyon and Karmir Sar","hy":"Վարդագույն կիրճ և Կարմիր սար","ru":"Поход в Розовый каньон и на Кармир сар"},"d":"2026-11-14","t":"08:00","e":"","o":"Werelk Hiking Club","ig":"werelk_hiking_club","p":8500,"c":"AMD","km":16.0,"g":800.0,"s":null,"df":"moderate","est":true,"k":"hike","back":"","m":"","ds":"A round-trip hike of approximately 16 km with an elevation gain of around 800 m. Food break in the form of a picnic.","b":"https://www.instagram.com/p/DfiEbm-RpD0/"},{"n":{"en":"Ascent of Mount Kalasar","hy":"Վերելք Կալասար լեռ","ru":"Восхождение на гору Каласар"},"d":"2026-11-14","t":"08:00","e":"","o":"Aktiv Up","ig":"aktivup_hiking_club","p":9000,"c":"AMD","km":8.0,"g":600.0,"s":2230.0,"df":"moderate","est":false,"k":"hike","back":"","m":"","ds":"Hike to Mount Kalasar (2,230 m) in Vayots Dzor Province, offering views of the Teksar mountain range.","b":"https://www.instagram.com/p/DaQhYjvAWc9/"},{"n":{"en":"Hike to Mt. Kalasar and Hermonavank","hy":"Կալասար եւ Հերմոնավանք","ru":"Поход на гору Каласар и к монастырю Эрмонаванк"},"d":"2026-11-14","t":"08:00","e":"","o":"ARI Hiking Club","ig":"ari_hiking_club","p":11500,"c":"AMD","km":12.0,"g":680.0,"s":null,"df":"moderate","est":true,"k":"hike","back":"20:30","m":"Sakharov Square","ds":"• Distance: 12 km","b":"https://www.facebook.com/events/912016748298521/"},{"n":{"en":"Ascent of Mount Shunkar","hy":"Վերելք Շունքար լեռ","ru":"Восхождение на гору Шункар"},"d":"2026-11-14","t":"08:00","e":"","o":"Aktiv Up","ig":"aktivup_hiking_club","p":9500,"c":"AMD","km":15.0,"g":1000.0,"s":null,"df":"moderate","est":false,"k":"hike","back":"22:00","m":"","ds":"A hiking ascent to Mount Shunkar in Tavush Province along a forest trail overlooking the Ijevan mountains.","b":"https://www.instagram.com/p/DfNcog0gNXa/"},{"n":{"en":"Ascent of Mount Apakeqar","hy":"Վերելք Ապակեքար լեռ","ru":"Восхождение на гору Апакекар"},"d":"2026-11-14","t":"08:00","e":"","o":"ArmWay Hiking Club","ig":"armway_hiking_club","p":7500,"c":"AMD","km":8.0,"g":600.0,"s":null,"df":"moderate","est":true,"k":"hike","back":"","m":"","ds":"Hike to Mount Apakeqar starting from Hovk village. The route covers about 8 km with a relative elevation gain of 600 m (summit altitude: 1,651 m).","b":"https://www.instagram.com/p/DcupoWZivob/"},{"n":{"en":"Three Hawks' Trail","hy":"Երեք բազեների արահետ","ru":"Тропа трех ястребов"},"d":"2026-11-14","t":"08:30","e":"","o":"Armenian Geographic","ig":"armenian_geographic","p":9500,"c":"AMD","km":15.0,"g":650.0,"s":null,"df":"moderate","est":true,"k":"hike","back":"","m":"","ds":"Hike through the Ijevan mountains and forested Tavush along the Three Hawks' Trail. The route starts in Hovk village and concludes in Haghartsin village, with a stop at the Tsovagyugh food court along the way.","b":"https://www.facebook.com/events/2276644582909580/"},{"n":{"en":"Kids Hike: Arpa Protected Landscape","hy":"Խոխա արշավ. Արփա պահպանվող լանդշաֆտ","ru":"Детский поход: охраняемый ландшафт Арпа"},"d":"2026-11-14","t":"10:00","e":"","o":"ARI khokha hiking club","ig":"ari.khokha","p":8000,"c":"AMD","km":6.0,"g":null,"s":null,"df":"easy","est":true,"k":"kids","back":"17:30","m":"Sakharov Square","ds":"Kids hike for ages 3–6 to the Arpa protected landscape.","b":"https://www.instagram.com/p/DfjoMvPCoxA/"},{"n":{"en":"Kids Hike to Arpa Protected Landscape","hy":"Խոխա արշավ Արփա պահպանվող լանդշաֆտ","ru":"Детский поход по ландшафту Арпа"},"d":"2026-11-14","t":"10:00","e":"","o":"ARI Hiking Club","ig":"ari_hiking_club","p":8000,"c":"AMD","km":6.0,"g":null,"s":null,"df":"easy","est":true,"k":"kids","back":"17:30","m":"Sakharov Square","ds":"Kids hike (ages 3–6) to the Arpa protected landscape.","b":"https://www.instagram.com/p/Dfjotw8imux/"},{"n":{"en":"Mets Parakhadem: Sunset Hike","hy":"Մեծ Փարախադեմ. Մայրամուտ","ru":"Мец Парахадем: поход на закате"},"d":"2026-11-14","t":"11:00","e":"","o":"Trichq Hiking Club","ig":"trichq_hiking_club_","p":9000,"c":"AMD","km":12.0,"g":650.0,"s":null,"df":"moderate","est":false,"k":"hike","back":"","m":"","ds":"Sunset hike to Mets Parakhadem.","b":"https://www.instagram.com/p/DfjtUFHCJvJ/"},{"n":{"en":"Long Walk in Jrvezh","hy":"Երկար զբոսանք Ջրվեժում","ru":"Долгая прогулка в Джрвеже"},"d":"2026-11-14","t":"11:00","e":"","o":"TriClub Yerevan","ig":"triclubyerevan","p":0,"c":"AMD","km":null,"g":null,"s":null,"df":"","est":false,"k":"hike","back":"","m":"","ds":"A 2–3 hour walk suitable for all fitness levels.","b":"https://www.instagram.com/p/Dfh4dd7jecs/"},{"n":{"en":"Sunset at Mets Parakhadem","hy":"Մայրամուտը Մեծ Փարախադեմում","ru":"Закат на Мец Парахадеме"},"d":"2026-11-14","t":"12:00","e":"","o":"Lavash Tour","ig":"lavashtour","p":8500,"c":"AMD","km":14.0,"g":null,"s":null,"df":"moderate","est":true,"k":"hike","back":"","m":"","ds":"A sunset hike to Mets Parakhadem peak in the Urts mountain range with views of Mount Ararat and the Ararat plain.","b":"https://www.instagram.com/p/DfhSyYZjArE/"},{"n":{"en":"Gosh Lake and Plej","hy":"Գոշի լիճ + Պլեճ","ru":"Озеро Гош и плеч"},"d":"2026-11-15","t":"","e":"","o":"110 Places Hiking Club","ig":"110_places","p":10000,"c":"AMD","km":6.0,"g":400.0,"s":null,"df":"easy","est":false,"k":"hike","back":"","m":"","ds":"An easy hike through the Dilijan forests to Gosh Lake, followed by baked potatoes (plej).","b":"https://www.instagram.com/p/DfRlGxUEXzw/"},{"n":{"en":"Hike to Mount Mets Parakhadem","hy":"Քայլարշավ դեպի Մեծ Փարախադեմ","ru":"Поход на гору Мец Парахадем"},"d":"2026-11-15","t":"","e":"","o":"110 Places Hiking Club","ig":"110_places","p":11000,"c":"AMD","km":null,"g":null,"s":null,"df":"","est":false,"k":"hike","back":"","m":"","ds":"A long hike with mountain vistas and adventure.","b":"https://www.instagram.com/p/DWjiD47CDtf/"},{"n":{"en":"Sedvi Fortress and Khash","hy":"Սեդվի ամրոց և խաշ","ru":"Крепость Седви и хаш"},"d":"2026-11-15","t":"","e":"","o":"110 Places Hiking Club","ig":"110_places","p":13000,"c":"AMD","km":null,"g":null,"s":null,"df":"","est":false,"k":"hike","back":"","m":"","ds":"Forests, a historic fortress, and khash at the end of the trip.","b":"https://www.instagram.com/p/DZR8IzZgOg8/"},{"n":{"en":"Ascent to Kalasar","hy":"Վերելք Կալասար","ru":"Восхождение на Каласар"},"d":"2026-11-15","t":"","e":"","o":"ONE WAY Tour","ig":"onewaytour","p":8500,"c":"AMD","km":null,"g":null,"s":null,"df":"","est":false,"k":"hike","back":"","m":"","ds":"A hiking trip along mountain trails to the summit of Kalasar, with around one hour at the peak to rest, take photos, and take in the views.","b":"https://www.instagram.com/p/De3zkWhCMt-/"},{"n":{"en":"Hiking in Angels' Canyon","hy":"Հայքինգ Հրեշտակների կիրճում","ru":"Хайкинг в Ущелье ангелов"},"d":"2026-11-15","t":"","e":"","o":"Imagine Tour","ig":"tour_imagine","p":null,"c":"AMD","km":null,"g":null,"s":null,"df":"","est":false,"k":"hike","back":"","m":"","ds":"An adventure to the corner of Armenia home to Khor Virap.","b":"https://www.instagram.com/p/DfBzVbCIXxm/"},{"n":{"en":"Rope Jumping at Dragon’s Fly","hy":"Ռոուփ ջամփինգ Dragon’s Fly-ում","ru":"Роупджампинг в Dragon’s Fly"},"d":"2026-11-15","t":"","e":"","o":"Scream of Soul","ig":"scream_of_soul_team","p":40000,"c":"AMD","km":125.0,"g":null,"s":null,"df":"hard","est":true,"k":"adventure","back":"","m":"","ds":"Rope jumping and free fall from a height of 120 meters.","b":"https://www.instagram.com/p/DcB3CJYtIx6/"},{"n":{"en":"Hiking to Spitakavor and Proshaberd","hy":"Սպիտակավոր և Պռոշաբերդ․ քայլարշավ","ru":"Поход в Спитакавор и Прошаберд"},"d":"2026-11-15","t":"07:00","e":"","o":"Hamshen Tour","ig":"hamshen_tour","p":9000,"c":"AMD","km":16.0,"g":600.0,"s":null,"df":"moderate","est":true,"k":"hike","back":"21:00","m":"","ds":"A hiking trip in Vayots Dzor starting from Vernashen village to Spitakavor Monastery, where Garegin Nzhdeh's grave is located, and continuing up to medieval Proshaberd Fortress (Boloraberd).","b":"https://hamshen.am/hy/tours/proshaberd-fortress-spitakavor-church?utm_source=esora.app&utm_medium=referral"},{"n":{"en":"Hiking in Mtnadzor Gorge","hy":"Արշավ Մթնաձորի կիրճով","ru":"Поход по ущелью Мтнадзор"},"d":"2026-11-15","t":"07:00","e":"","o":"Our path","ig":"ourpath.hiking","p":10000,"c":"AMD","km":12.0,"g":200.0,"s":null,"df":"moderate","est":true,"k":"hike","back":"22:00","m":"","ds":"A 12 km hike through Mtnadzor Gorge in Tavush, following forest trails and rocky sections with a relative elevation gain of 200 m. The route includes difficult sections, requiring comfortable, sturdy hiking shoes and good physical fitness.","b":"https://www.instagram.com/p/De2EOJhiGDm/"},{"n":{"en":"Hike from Old Khot to Shinuhayr","hy":"Քայլարշավ Հին Խոտից Շինուհայր","ru":"Поход из Старого Хота в Шинуайр"},"d":"2026-11-15","t":"07:00","e":"","o":"Aktiv Up","ig":"aktivup_hiking_club","p":11000,"c":"AMD","km":10.0,"g":500.0,"s":null,"df":"moderate","est":false,"k":"hike","back":"","m":"near the SAS supermarket at Yeritasardakan","ds":"A 10 km hike through the Vorotan Gorge in Syunik, following a trail from the ancient village of Old Khot to Shinuhayr.","b":"https://www.instagram.com/p/DfeJPhFgLcA/"},{"n":{"en":"Khosrov Forest, Vahagn and Astghik Waterfalls","hy":"Խոսրովի անտառ, Վահագնի և Աստղիկի ջրվեժներ","ru":"Хосровский лес, водопады Ваагна и Астхик"},"d":"2026-11-15","t":"07:30","e":"","o":"Werelk Hiking Club","ig":"werelk_hiking_club","p":9500,"c":"AMD","km":17.0,"g":null,"s":null,"df":"hard","est":true,"k":"hike","back":"19:00","m":"","ds":"A 17 km hike suitable for beginners, visiting the Astghik and Vahagn waterfalls with a picnic stop.","b":"https://www.instagram.com/p/DfiE9qBRuXB/"},{"n":{"en":"Hiking Mount Shunkar","hy":"Վերելք Շունքար լեռ","ru":"Восхождение на гору Шункар"},"d":"2026-11-15","t":"07:30","e":"","o":"Lavash Tour","ig":"lavashtour","p":9000,"c":"AMD","km":15.0,"g":1000.0,"s":null,"df":"hard","est":true,"k":"hike","back":"","m":"Aram Manukyan statue near Republic Square metro station, departing at 7:30 (please arrive 10 minutes early)","ds":"A hike to Mount Shunkar in the Tavush Province, featuring a prominent rocky peak, forest trails, and views towards the Getik and Aghstev gorges, as well as the Ijevan and Areguni mountains.","b":"https://www.instagram.com/p/DXTdqK0DC6F/"},{"n":{"en":"Hiking to Mtnadzor Gorge","hy":"Արշավ դեպի Մթնաձորի կիրճ","ru":"Поход в ущелье Мтнадзор"},"d":"2026-11-15","t":"07:30","e":"","o":"ArmLand Adventure & Travel","ig":"armland_adventure","p":12000,"c":"AMD","km":12.0,"g":null,"s":null,"df":"moderate","est":true,"k":"hike","back":"","m":"Republic Square, at the start of Vazgen Sargsyan Street near Marriott Hotel","ds":"A 12 km hike along forest trails through Mtnadzor Gorge in the Tavush region. The route starts in Achajur village and ends in Lusadzor village.","b":"https://www.facebook.com/events/1651036629883004/"},{"n":{"en":"Autumn Hike in Dsegh","hy":"Աշնանային արշավ Դսեղում","ru":"Осенний поход в Дсех"},"d":"2026-11-15","t":"07:30","e":"","o":"Armenian Geographic","ig":"armenian_geographic","p":11000,"c":"AMD","km":9.0,"g":600.0,"s":null,"df":"moderate","est":true,"k":"hike","back":"","m":"","ds":"A circular autumn hike in Dsegh, exploring Lori’s seasonal scenery, forests, and historical sites. Starting from the village of Dsegh, the route heads to the 13th-century St. Grigor Church of Bardzrakash, continues through Marz Canyon, and passes the Sirun Khach cross-stone overlooking the landscape","b":"https://www.facebook.com/events/2039851983390766/"},{"n":{"en":"Gnishik Gorge Hike","hy":"Արշավ Գնիշիկի կիրճ","ru":"Поход в Гнишикское ущелье"},"d":"2026-11-15","t":"07:30","e":"","o":"Trichq Hiking Club","ig":"trichq_hiking_club_","p":9000,"c":"AMD","km":13.0,"g":null,"s":null,"df":"moderate","est":true,"k":"hike","back":"","m":"","ds":"A 13 km hike through Gnishik Gorge, suitable for beginners.","b":"https://www.instagram.com/p/DfhLy2xiLRf/"},{"n":{"en":"Hiking Mount Gayledzor","hy":"Վերելք Գայլեձոր լեռ","ru":"Восхождение на гору Гайледзор"},"d":"2026-11-15","t":"07:30","e":"","o":"Trichq Hiking Club","ig":"trichq_hiking_club_","p":10000,"c":"AMD","km":17.0,"g":1100.0,"s":2762.0,"df":"moderate","est":false,"k":"hike","back":"","m":"","ds":"Hike to Mount Gayledzor (2,762 m) in the Theksar mountain range in Vayots Dzor.","b":"https://www.instagram.com/p/DfhSLDdCJLK/"},{"n":{"en":"Three Falcons Trail Hike","hy":"Երեք բազեների արահետ","ru":"Поход по тропе Трех соколов"},"d":"2026-11-15","t":"07:45","e":"","o":"4 Peaks Alpine Club","ig":"4_peaks_alpine_club","p":9000,"c":"AMD","km":15.0,"g":650.0,"s":null,"df":"moderate","est":true,"k":"hike","back":"20:00","m":"below Matenadaran, Mashtots Avenue","ds":"A 15 km hike through Tavush Province along the Three Falcons Trail, passing through the forests of Dilijan National Park and the rocky slopes of the Ijevan Mountains with views of the Aghstev Valley. Along the way, children will learn nature orientation, hiking safety rules, and teamwork.","b":"https://4peaks.am/terms-and-conditions/?utm_source=esora.app&utm_medium=referral"},{"n":{"en":"Hiking in Gnishik Gorge","hy":"Գնիշիկի կիրճ․ քայլարշավ","ru":"Поход по ущелью Гнишик"},"d":"2026-11-15","t":"08:00","e":"","o":"Hamshen Tour","ig":"hamshen_tour","p":8500,"c":"AMD","km":11.0,"g":null,"s":null,"df":"moderate","est":true,"k":"hike","back":"20:00","m":"8 Tumanyan St","ds":"A scenic hike starting from Gnishik village and concluding at the deserted settlement of Amaghu.","b":"https://hamshen.am/hy/tours/gnishik-gorge?utm_source=esora.app&utm_medium=referral"},{"n":{"en":"Hiking to Gutanasar Volcano","hy":"Արշավ դեպի Գութանասար հրաբուխ","ru":"Восхождение на вулкан Гутанасар"},"d":"2026-11-15","t":"08:00","e":"","o":"We Hike Armenia","ig":"wehike.am","p":20000,"c":"AMD","km":10.0,"g":400.0,"s":null,"df":"easy","est":false,"k":"hike","back":"","m":"","ds":"A light hike to Gutanasar, an extinct volcano in Kotayk Province and the Geghama mountains. The route stops for photos by the Black Wall sheer cliff and black lava, leading up to summit views across the Geghama range and Ararat plain.","b":"https://www.instagram.com/p/DfjwsU0jfV8/"},{"n":{"en":"Hiking in Khosrov Forest State Reserve","hy":"Խոսրովի արգելոցի ջրվեժներ","ru":"Поход к водопадам Хосровского заповедника"},"d":"2026-11-15","t":"08:00","e":"","o":"Armenian Geographic","ig":"armenian_geographic","p":8500,"c":"AMD","km":18.0,"g":null,"s":null,"df":"hard","est":true,"k":"hike","back":"","m":"","ds":"A hike in Khosrov Forest State Reserve starting from the village of Garni, visiting the Symphony of Stones and walking to the Vahagn and Astghik waterfalls, named after Armenian pagan gods.","b":"https://www.facebook.com/events/1170151188786620/"},{"n":{"en":"Hiking from Semyonovka to Dilijan","hy":"Արշավ Սեմյոնովկայից դեպի Դիլիջան","ru":"Поход из Семёновки в Дилижан"},"d":"2026-11-15","t":"08:00","e":"","o":"ArmWay Hiking Club","ig":"armway_hiking_club","p":8500,"c":"AMD","km":14.0,"g":null,"s":null,"df":"moderate","est":true,"k":"hike","back":"","m":"Republic Square, in front of the former Ministry of Foreign Affairs building","ds":"An autumn hike of about 14 km along forest trails between Semyonovka and Dilijan.","b":"https://www.instagram.com/p/DfcSlsRqo6t/"},{"n":{"en":"Sunday Long Run","hy":"Կիրակնօրյա երկար վազք","ru":"Воскресная длинная пробежка"},"d":"2026-11-15","t":"08:00","e":"","o":"TriClub Yerevan","ig":"triclubyerevan","p":0,"c":"AMD","km":null,"g":null,"s":null,"df":"","est":false,"k":"run","back":"","m":"","ds":"All levels are welcome. Just show up.","b":"https://www.instagram.com/p/Dfh4dd7jecs/"},{"n":{"en":"Hike to Mount Yeranos","hy":"Քայլարշավ դեպի Երանոս լեռ","ru":"Поход на гору Еранос"},"d":"2026-11-15","t":"08:30","e":"","o":"Werelk Hiking Club","ig":"werelk_hiking_club","p":9000,"c":"AMD","km":18.0,"g":900.0,"s":null,"df":"hard","est":true,"k":"hike","back":"","m":"the intersection of Amiryan and Abovyan streets at Republic Square, arriving 15 minutes prior to departure","ds":"Hike to Mount Yeranos overlooking the Azat Reservoir. The total distance is approximately 18 km round trip, with an elevation gain of around 900 m. A picnic stop is planned for food.","b":"https://www.instagram.com/p/De_T9klEbbt/"},{"n":{"en":"From Goshavank to Khachardzan","hy":"Գոշավանքից Խաչարձան","ru":"От Гошаванка до Хачардзана"},"d":"2026-11-15","t":"08:30","e":"","o":"Armenian Geographic","ig":"armenian_geographic","p":9500,"c":"AMD","km":16.0,"g":500.0,"s":null,"df":"moderate","est":true,"k":"hike","back":"","m":"","ds":"A hike through the forests of Tavush. The route begins at the village of Gosh with a visit to Goshavank Monastery, followed by a forest trail up to Lake Gosh and continuing toward the village of Khachardzan.","b":"https://www.facebook.com/events/2176792113228929/"},{"n":{"en":"Book Hike to Ahnidzor","hy":"Գրքարշավ դեպի Ահնիձոր","ru":"Книжный поход в Ахнидзор"},"d":"2026-11-15","t":"08:45","e":"","o":"Grqarshav Club","ig":"grqarshav","p":7900,"c":"AMD","km":5.0,"g":null,"s":null,"df":"easy","est":true,"k":"hike","back":"22:00","m":"","ds":"A book hike to Hrant Matevosyan's birthplace, the village of Ahnidzor.","b":"https://www.instagram.com/p/DfCu6YMImYB/"},{"n":{"en":"Ascent of Mets Parakhadem","hy":"Վերելք Մեծ Փարախադեմ","ru":"Восхождение на Мец Парахадем"},"d":"2026-11-15","t":"09:00","e":"","o":"HORIZONS","ig":"horizons_hiking_club","p":9000,"c":"AMD","km":14.0,"g":700.0,"s":1955.0,"df":"moderate","est":true,"k":"hike","back":"21:00","m":"7 Vazgen Sargsyan St at 09:00. Return at 21:00","ds":"A hike to Mets Parakhadem (1955 m), one of the prominent peaks of the Urts Mountain Range in Ararat Province. If the weather permits, views of Mount Ararat will open up.","b":"https://www.instagram.com/p/Dfho7FigIOt/"},{"n":{"en":"Azat River Trail Run","hy":"Azat River թրեյլային վազք","ru":"Трейловый забег Azat River"},"d":"2026-11-15","t":"09:00","e":"","o":"Yerevan Run","ig":"yerevanrun","p":0,"c":"AMD","km":11.0,"g":null,"s":null,"df":"moderate","est":true,"k":"run","back":"","m":"Sakharov Square","ds":"Distance: 11 km with 350 m elevation gain.","b":"https://www.instagram.com/p/DfhpOrNCA6w/"},{"n":{"en":"Hiking to Meghradzor Waterfall","hy":"Արշավ դեպի Մեղրաձորի ջրվեժ","ru":"Хайкинг к водопаду Меградзор"},"d":"2026-11-17","t":"","e":"","o":"Imagine Tour","ig":"tour_imagine","p":null,"c":"AMD","km":null,"g":null,"s":null,"df":"","est":false,"k":"hike","back":"","m":"","ds":"- Murals in the art village and an ethno-museum","b":"https://www.instagram.com/p/DfBzgorIpyM/"},{"n":{"en":"Aghjkaberd and Plech","hy":"Աղջկա բերդ և պլեճ","ru":"Ахчкаберд и плеч"},"d":"2026-11-21","t":"","e":"","o":"110 Places Hiking Club","ig":"110_places","p":10000,"c":"AMD","km":null,"g":null,"s":null,"df":"","est":false,"k":"hike","back":"","m":"","ds":"A hike featuring historic ruins and Tavush scenery, followed by roasted potatoes (plech).","b":"https://www.instagram.com/p/DWjiD47CDtf/"},{"n":{"en":"Aghavnavank and Khash/Plejh","hy":"Աղավնավանք + Խաշ/Պլեճ","ru":"А Havnavank и хаш/пледж"},"d":"2026-11-21","t":"","e":"","o":"110 Places Hiking Club","ig":"110_places","p":13000,"c":"AMD","km":null,"g":null,"s":null,"df":"","est":false,"k":"hike","back":"","m":"","ds":"An easy forest trail leading to an old monastery, followed by khash or plejh.","b":"https://www.instagram.com/p/DbTqZ3LgHrS/"},{"n":{"en":"Koshaberd: 110 Escape","hy":"Կոշաբերդ. 110 Escape","ru":"Кошаберд: 110 Escape"},"d":"2026-11-21","t":"","e":"2026-11-22","o":"110 Places Hiking Club","ig":"110_places","p":33000,"c":"AMD","km":11.0,"g":600.0,"s":null,"df":"moderate","est":false,"k":"hike","back":"","m":"","ds":"A two-day mountain getaway.","b":"https://www.instagram.com/p/DfXnHTAkRCi/"},{"n":{"en":"Hiking Noravank","hy":"Քայլարշավ Նորավանքում","ru":"Хайкинг Нораванк"},"d":"2026-11-21","t":"","e":"","o":"Imagine Tour","ig":"tour_imagine","p":null,"c":"AMD","km":null,"g":null,"s":null,"df":"","est":false,"k":"hike","back":"","m":"","ds":"Gnishik Gorge is an open-air museum: unusual red cliffs, a unique monastery, wild nature, and scenic views.","b":"https://www.instagram.com/p/DdoafoUsD_Y/"},{"n":{"en":"In the Footsteps of Tumanyan: Dsegh Loop Trail","hy":"Թումանյանի հետքերով․ Դսեղի շրջանաձև արահետ","ru":"По следам Туманяна: круговая тропа Дсеха"},"d":"2026-11-21","t":"07:00","e":"","o":"Safaryan Hiking Tour","ig":"hike_with_safaryan","p":9000,"c":"AMD","km":10.0,"g":380.0,"s":null,"df":"easy","est":false,"k":"hike","back":"","m":"","ds":"An autumn hike along the forested trails of Lori, passing Bardzrakash Saint Gregory church, Gikor's spring, and local khachkars.","b":"https://www.instagram.com/p/DezNEviCN9h/"},{"n":{"en":"Eranos Mountains and Pink Canyon Hike","hy":"Երանոսի լեռներ և Վարդագույն կիրճ","ru":"Поход по горам Еранос и Розовому каньону"},"d":"2026-11-21","t":"07:30","e":"","o":"ArmLand Adventure & Travel","ig":"armland_adventure","p":6500,"c":"AMD","km":16.0,"g":null,"s":null,"df":"moderate","est":true,"k":"hike","back":"","m":"Republic Square, beginning of Vazgen Sargsyan Street, near the Marriott Hotel","ds":"A hike exploring the landscapes of the Eranos Mountains and Pink Canyon, known for its pink and reddish rock formations.","b":"https://www.facebook.com/events/1617820983145967/"},{"n":{"en":"Hiking in the Amberd Gorge","hy":"Արշավ Ամբերդի կիրճով","ru":"Хайкинг по ущелью реки Амберд"},"d":"2026-11-22","t":"","e":"","o":"Imagine Tour","ig":"tour_imagine","p":null,"c":"AMD","km":null,"g":null,"s":null,"df":"","est":false,"k":"hike","back":"","m":"","ds":"An easy hike along the Amberd River gorge.","b":"https://www.instagram.com/p/DfBzgorIpyM/"},{"n":{"en":"Tsaghkashat – Haghpat + Plech Hike","hy":"Ծաղկաշատ – Հաղպատ + Պլեճ","ru":"Поход Цахкашат – Ахпат + Плеч"},"d":"2026-11-22","t":"","e":"","o":"110 Places Hiking Club","ig":"110_places","p":11000,"c":"AMD","km":10.0,"g":700.0,"s":null,"df":"moderate","est":false,"k":"hike","back":"","m":"","ds":"A hike from the mountain landscapes of Lori to the centuries-old Haghpat Monastery through autumn forests, ending with plech.","b":"https://www.instagram.com/p/DWjiD47CDtf/"},{"n":{"en":"Hiking to Rapi Lake","hy":"Արշավ դեպի Ռապի լիճ","ru":"Поход к озеру Рапи"},"d":"2026-11-22","t":"","e":"","o":"110 Places Hiking Club","ig":"110_places","p":12500,"c":"AMD","km":null,"g":null,"s":null,"df":"","est":false,"k":"hike","back":"","m":"","ds":"A long, demanding winter adventure to a high-altitude mountain lake.","b":"https://www.instagram.com/p/DbEU5pfEdxC/"},{"n":{"en":"Hiking Mount Qharkatar","hy":"Վերելք Քարկատար լեռ","ru":"Восхождение на гору Каркатар"},"d":"2026-11-22","t":"","e":"","o":"110 Places Hiking Club","ig":"110_places","p":11000,"c":"AMD","km":17.0,"g":1300.0,"s":null,"df":"moderate","est":false,"k":"hike","back":"","m":"","ds":"A demanding ascent offering expansive mountain views.","b":"https://www.instagram.com/p/DfXnHTAkRCi/"},{"n":{"en":"Hike to Gevorg Marzpetuni Fortress and Angels' Canyon","hy":"Քայլարշավ դեպի Գևորգ Մարզպետունու բերդ և Հրեշտակների ձոր","ru":"Поход к крепости Геворга Марзпетуни и в Ущелье ангелов"},"d":"2026-11-22","t":"","e":"","o":"ONE WAY Tour","ig":"onewaytour","p":7000,"c":"AMD","km":11.0,"g":null,"s":null,"df":"moderate","est":false,"k":"hike","back":"","m":"","ds":"Route: Urtsadzor – Gevorg Marzpetuni Fortress – Angels' Canyon","b":"https://www.instagram.com/p/De3zkWhCMt-/"},{"n":{"en":"Hiking Mount Dimats","hy":"Վերելք Դիմաց լեռ","ru":"Восхождение на гору Димац"},"d":"2026-11-22","t":"07:30","e":"","o":"ArmLand Adventure & Travel","ig":"armland_adventure","p":9500,"c":"AMD","km":19.0,"g":1000.0,"s":2378.0,"df":"moderate","est":false,"k":"hike","back":"","m":"Republic Square, start of Vazgen Sargsyan Street, near the Marriott Hotel","ds":"Hike to Mount Dimats (2,378 m) in Tavush and visit the Hidden Waterfall at the beginning of the route.","b":"https://www.facebook.com/events/1954667708827101/"},{"n":{"en":"Hiking to Khoranashat and Tavush Fortress","hy":"Խորանաշատ և Տավուշի բերդ. քայլարշավ","ru":"Поход к Хоранашату и крепости Тавуш"},"d":"2026-11-22","t":"08:00","e":"","o":"Hamshen Tour","ig":"hamshen_tour","p":12000,"c":"AMD","km":6.0,"g":null,"s":null,"df":"easy","est":true,"k":"hike","back":"22:00","m":"","ds":"A light hike to Tavush Fortress (also known as Tslik Amram's Fortress) and Khoranashat Monastery, located right by the border and visited with special permission arranged for tour participants. The route passes along the renovated mountain road between Chambarak and Berd, with the hike starting from","b":"https://hamshen.am/hy/tours/khoranashat-nor-varagavank?utm_source=esora.app&utm_medium=referral"},{"n":{"en":"Group Tour to Khosrov Forest State Reserve","hy":"Խմբային տուր դեպի Խոսրովի արգելոց","ru":"Групповой тур в Хосровский заповедник"},"d":"2026-11-22","t":"08:00","e":"","o":"Trailo","ig":"trailo_tours","p":18000,"c":"AMD","km":12.0,"g":450.0,"s":null,"df":"moderate","est":true,"k":"hike","back":"","m":"","ds":"A hiking and off-road tour through Khosrov Forest State Reserve starting from the Garni entrance.","b":"https://www.instagram.com/p/DfjhrYagqMy/"},{"n":{"en":"Ascent to Mets Parakhadem","hy":"Վերելք Մեծ Փարախադեմ","ru":"Восхождение на Мец Парахадем"},"d":"2026-11-22","t":"08:00","e":"","o":"Our path","ig":"ourpath.hiking","p":8500,"c":"AMD","km":14.0,"g":650.0,"s":null,"df":"moderate","est":true,"k":"hike","back":"","m":"","ds":"A hike to Mets Parakhadem, one of the scenic heights of Vayots Dzor, with panoramic views of Mount Ararat in clear weather.","b":"https://www.instagram.com/p/De2EOJhiGDm/"},{"n":{"en":"Grav Gorge Hike","hy":"Գրավի կիրճ","ru":"Поход в ущелье Грави"},"d":"2026-11-24","t":"","e":"","o":"110 Places Hiking Club","ig":"110_places","p":11000,"c":"AMD","km":null,"g":null,"s":null,"df":"","est":false,"k":"hike","back":"","m":"","ds":"A world of cliffs and striking natural rock formations.","b":"https://www.instagram.com/p/DVluqdJCNws/"},{"n":{"en":"Hiking to Yeranos","hy":"Քայլարշավ Երանոս լեռ","ru":"Хайкинг на Еранос"},"d":"2026-11-28","t":"","e":"","o":"Imagine Tour","ig":"tour_imagine","p":null,"c":"AMD","km":null,"g":null,"s":null,"df":"","est":false,"k":"hike","back":"","m":"","ds":"Registration: message the organizer on Instagram.","b":"https://www.instagram.com/p/DfBznLNIZBU/"},{"n":{"en":"Spitak Berd and Plech","hy":"Սպիտակ բերդ և պլեճ","ru":"Спитак берд и плеч"},"d":"2026-11-28","t":"","e":"","o":"110 Places Hiking Club","ig":"110_places","p":11000,"c":"AMD","km":null,"g":null,"s":null,"df":"","est":false,"k":"hike","back":"","m":"","ds":"Ascent to the historic fortress.","b":"https://www.instagram.com/p/DWjiD47CDtf/"},{"n":{"en":"Hiking to Kobayr, Odzun, and Horomayr","hy":"Քայլարշավ դեպի Քոբայր, Օձուն և Հոռոմայր","ru":"Поход в Кобайр, Одзун и Оромайр"},"d":"2026-11-28","t":"","e":"","o":"ONE WAY Tour","ig":"onewaytour","p":8500,"c":"AMD","km":13.0,"g":null,"s":null,"df":"moderate","est":true,"k":"hike","back":"","m":"","ds":"An autumn hike of about 13 km through the Debed Canyon, visiting Odzun, Horomayr, and Kobayr.","b":"https://www.instagram.com/p/De3zkWhCMt-/"},{"n":{"en":"Teghut Waterfalls and Pleh","hy":"Թեղուտի ջրվեժներ և պլեճ","ru":"Водопады Тегута и плеч"},"d":"2026-11-28","t":"","e":"","o":"110 Places Hiking Club","ig":"110_places","p":11000,"c":"AMD","km":null,"g":null,"s":null,"df":"","est":false,"k":"hike","back":"","m":"","ds":"An easy hike to waterfalls hidden among the rocks, followed by traditional roasted potatoes (pleh).","b":"https://www.instagram.com/p/DZFNZTigOnc/"},{"n":{"en":"Hiking to Smbataberd and Tsaghats Kar","hy":"Արշավ դեպի Սմբատաբերդ և Ցաղաց Քար","ru":"Поход к Смбатаберду и Цахац Кару"},"d":"2026-11-28","t":"07:30","e":"","o":"ArmLand Adventure & Travel","ig":"armland_adventure","p":8000,"c":"AMD","km":10.0,"g":null,"s":null,"df":"easy","est":true,"k":"hike","back":"","m":"Republic Square, beginning of Vazgen Sargsyan Street near Armenia Marriott Hotel","ds":"A 10 km hike in Vayots Dzor starting from Artabuynk village, heading up to the 10th–11th century Smbataberd fortress, and continuing to the Tsaghats Kar monastery complex.","b":"https://www.facebook.com/events/1539706937923590/"},{"n":{"en":"Hiking to Tsaghkevank","hy":"Քայլարշավ դեպի Ծաղկեվանք","ru":"Хайкинг на Цахкеванк"},"d":"2026-11-29","t":"","e":"","o":"Imagine Tour","ig":"tour_imagine","p":null,"c":"AMD","km":null,"g":null,"s":null,"df":"","est":false,"k":"hike","back":"","m":"","ds":"A hike to the ancient \"Flower Monastery\" with views of Mount Aragats and the Ararat Valley.","b":"https://www.instagram.com/p/DfBznLNIZBU/"},{"n":{"en":"Hike to Azat Reservoir","hy":"Քայլարշավ դեպի Ազատի ջրամբար","ru":"Поход к Азатскому водохранилищу"},"d":"2026-11-29","t":"","e":"","o":"ONE WAY Tour","ig":"onewaytour","p":7000,"c":"AMD","km":10.0,"g":null,"s":null,"df":"easy","est":true,"k":"hike","back":"","m":"","ds":"A 10 km hike with views of rolling hills, Azat River gorge, and Azat Reservoir, combined with a visit to the Symphony of Stones.","b":"https://www.instagram.com/p/De3zkWhCMt-/"},{"n":{"en":"Mount Yeranos Hike","hy":"Երանոս լեռ","ru":"Восхождение на гору Еранос"},"d":"2026-11-29","t":"","e":"","o":"110 Places Hiking Club","ig":"110_places","p":11000,"c":"AMD","km":17.0,"g":900.0,"s":null,"df":"moderate","est":false,"k":"hike","back":"","m":"","ds":"Hiking trip to Mount Yeranos with views of Mount Ararat.","b":"https://www.instagram.com/p/DfXnHTAkRCi/"},{"n":{"en":"Gnishik Gorge Hike","hy":"Քայլարշավ Գնիշիկի կիրճում","ru":"Поход по ущелью Гнишик"},"d":"2026-11-29","t":"","e":"","o":"110 Places Hiking Club","ig":"110_places","p":10000,"c":"AMD","km":11.0,"g":600.0,"s":null,"df":"moderate","est":false,"k":"hike","back":"","m":"","ds":"A hike along rocky trails through the wild nature of Vayots Dzor.","b":"https://www.instagram.com/p/DfXnHTAkRCi/"},{"n":{"en":"Bgavor Monastery and Plech","hy":"Բգավորի վանք և պլեճ","ru":"Монастырь Бгавор и плеч"},"d":"2026-11-29","t":"","e":"","o":"110 Places Hiking Club","ig":"110_places","p":11000,"c":"AMD","km":null,"g":null,"s":null,"df":"","est":false,"k":"hike","back":"","m":"","ds":"A trip to the historic Bgavor Monastery surrounded by nature, followed by plech.","b":"https://www.instagram.com/p/DdtNl0_AD6d/"},{"n":{"en":"Ascent of Mount Kalasar","hy":"Վերելք Կալասար լեռ","ru":"Восхождение на гору Каласар"},"d":"2026-11-29","t":"07:30","e":"","o":"Our path","ig":"ourpath.hiking","p":9500,"c":"AMD","km":10.0,"g":550.0,"s":null,"df":"moderate","est":true,"k":"hike","back":"21:00","m":"","ds":"A hike to the famous rock of Mount Kalasar with views of the Teksar mountains.","b":"https://www.instagram.com/p/De2EOJhiGDm/"},{"n":{"en":"Tsaghkunyats Mountains: Tsaghkadzor to Bjni","hy":"Ծաղկունյաց լեռներ․ Ծաղկաձորից դեպի Բջնի","ru":"Цахкуняцские горы: от Цахкадзора до Бжни"},"d":"2026-11-29","t":"07:30","e":"","o":"ArmLand Adventure & Travel","ig":"armland_adventure","p":8500,"c":"AMD","km":15.0,"g":null,"s":null,"df":"moderate","est":true,"k":"hike","back":"","m":"Republic Square, beginning of Vazgen Sargsyan Street, near the Marriott Hotel","ds":"A point-to-point hike across the Tsaghkunyats mountain range, leading through pine forests and alpine meadows from Tsaghkadzor to historic Bjni. The route finishes at the clifftop Bjni Fortress.","b":"https://www.facebook.com/events/1648015437046344/"},{"n":{"en":"Ojos del Salado Expedition","hy":"Վերելք Օխոս դել Սալադո","ru":"Восхождение на Охос-дель-Саладо"},"d":"2027-01-03","t":"","e":"2027-01-15","o":"We Hike Armenia","ig":"wehike.am","p":4600,"c":"USD","km":null,"g":null,"s":6893.0,"df":"","est":false,"k":"big","back":"","m":"","ds":"An expedition to Ojos del Salado (6,893 m), the world's highest volcano, located in the Andes on the border of Chile and Argentina.","b":"https://www.instagram.com/p/DfRdSN9FMOC/"},{"n":{"en":"Chimborazo","hy":"Չիմբորասո","ru":"Чимборасо"},"d":"2027-01-15","t":"04:00","e":"2027-01-24","o":"Armenian Geographic","ig":"armenian_geographic","p":null,"c":"AMD","km":null,"g":null,"s":6263.0,"df":"","est":false,"k":"big","back":"","m":"","ds":"An expedition to tropical Ecuador to climb Mount Chimborazo (6,263 m), the highest point in Ecuador and the farthest point on the Earth's surface from the Earth's center.","b":"https://www.armgeo.am/outgoing-tours/?utm_source=esora.app&utm_medium=referral"},{"n":{"en":"Ski Trip to Gudauri","hy":"Դահուկային տուր դեպի Գուդաուրի","ru":"Лыжный тур в Гудаури"},"d":"2027-01-27","t":"","e":"2027-01-31","o":"Chill Trail","ig":"chilltrail_","p":590,"c":"USD","km":null,"g":null,"s":null,"df":"","est":false,"k":"big","back":"","m":"","ds":"A ski and snowboard trip to Gudauri.","b":"https://www.instagram.com/p/De1UAxYiukv/"},{"n":{"en":"Climbing Mount Kilimanjaro","hy":"Վերելք Կիլիմանջարո լեռ","ru":"Восхождение на гору Килиманджаро"},"d":"2027-02-02","t":"10:00","e":"2027-02-10","o":"ArmLand Adventure & Travel","ig":"armland_adventure","p":null,"c":"AMD","km":null,"g":null,"s":5895.0,"df":"","est":false,"k":"big","back":"","m":"","ds":"Climbing Mount Kilimanjaro (5,895 m), the highest peak in Africa, via the Marangu Route.","b":"https://www.facebook.com/events/2260014954761867/"},{"n":{"en":"Kilimanjaro Expedition via Lemosho Route","hy":"Կիլիմանջարո արշավախումբ Լեմոշո երթուղով","ru":"Экспедиция на Килиманджаро по маршруту Лемошо"},"d":"2027-02-03","t":"","e":"2027-02-10","o":"Trichq Hiking Club","ig":"trichq_hiking_club_","p":2500,"c":"USD","km":null,"g":null,"s":5895.0,"df":"hard","est":true,"k":"big","back":"","m":"","ds":"A 10-day expedition covering 67.5 km along the Lemosho Route to Uhuru Peak (5,895 m), followed by a safari tour in Tarangire National Park and a visit to a Maasai village.","b":"https://www.instagram.com/p/DffNQ1iiAwT/"},{"n":{"en":"Kilimanjaro 5895 m: Machame Route","hy":"Կիլիմանջարո 5895 մ․ Machame Route","ru":"Килиманджаро 5895 м: Machame Route"},"d":"2027-02-06","t":"09:00","e":"","o":"North Peak Mountain Club","ig":"northpeakmc","p":null,"c":"AMD","km":null,"g":null,"s":5895.0,"df":"","est":false,"k":"big","back":"","m":"","ds":"Climbing Mount Kilimanjaro (5895 m) via the Machame Route, led by Samvel Manukyan. The route crosses tropical rainforest, the Shira plateau, Lava Tower, the Barranco Wall, and alpine desert up to Uhuru Peak.","b":"https://www.facebook.com/events/2063799577581626/"},{"n":{"en":"Ascent to Kilimanjaro","hy":"Վերելք Կիլիմանջարո","ru":"Восхождение на Килиманджаро"},"d":"2027-02-06","t":"12:00","e":"2027-02-14","o":"Armenian Geographic","ig":"armenian_geographic","p":null,"c":"AMD","km":null,"g":null,"s":5895.0,"df":"","est":false,"k":"big","back":"","m":"","ds":"A 6-day ascent along the Marangu route to Africa's highest point, Mount Kilimanjaro (5,895 m), with overnight stays in mountain huts.","b":"https://www.armgeo.am/outgoing-tours/?utm_source=esora.app&utm_medium=referral"},{"n":{"en":"Lycian Way: Central Section Trek","hy":"Լիկիական արահետ․ կենտրոնական հատված","ru":"Ликийская тропа: центральная часть"},"d":"2027-03-22","t":"07:15","e":"","o":"Hamshen Tour","ig":"hamshen_tour","p":850,"c":"USD","km":null,"g":null,"s":null,"df":"hard","est":true,"k":"big","back":"","m":"","ds":"A 7-day trekking tour across the central Lycian Way, covering over 100 km across five hiking days from Kalkan to Demre. The route requires good physical fitness and endurance for long-distance hikes.","b":"https://hamshen.am/hy/tours/costandnupolis-stambul?utm_source=esora.app&utm_medium=referral"},{"n":{"en":"Annapurna Base Camp Trekking","hy":"Անապուրնայի բազային ճամբար","ru":"Треккинг к базовому лагерю Аннапурны"},"d":"2027-04-01","t":"","e":"2027-04-13","o":"Aktiv Up","ig":"aktivup_hiking_club","p":null,"c":"AMD","km":null,"g":null,"s":null,"df":"","est":false,"k":"big","back":"","m":"","ds":"A 13-day trek into the heart of the Himalayas to Annapurna Base Camp.","b":"https://www.instagram.com/p/DfZKWFBAHB8/"},{"n":{"en":"Everest Base Camp Trek","hy":"Էվերեստի բազային ճամբար","ru":"Треккинг к базовому лагерю Эвереста"},"d":"2027-04-10","t":"06:30","e":"2027-04-24","o":"Armenian Geographic","ig":"armenian_geographic","p":null,"c":"AMD","km":null,"g":null,"s":null,"df":"","est":false,"k":"big","back":"","m":"","ds":"Trek to Everest Base Camp in Nepal: an opportunity to be closer to the world's highest peak, experience the mountaineering environment, learn about the daily life of the Sherpa people, and take in panoramic mountain views.","b":"https://www.facebook.com/events/1442235717974284/"},{"n":{"en":"Everest Base Camp Trek","hy":"Էվերեստի բազային ճամբար","ru":"Трек к базовому лагерю Эвереста"},"d":"2027-04-15","t":"21:15","e":"2027-04-30","o":"ArmLand Adventure & Travel","ig":"armland_adventure","p":null,"c":"AMD","km":null,"g":null,"s":5364.0,"df":"","est":false,"k":"big","back":"","m":"","ds":"A 15-day trek in Nepal to Mount Everest Base Camp (5,364 m).","b":"https://armland.am/hy/arm-everest-base-camp-trek/?utm_source=esora.app&utm_medium=referral"},{"n":{"en":"Everest Base Camp Trek","hy":"Թրեքինգ դեպի Էվերեստի բազային ճամբար","ru":"Треккинг к базовому лагерю Эвереста"},"d":"2027-04-21","t":"07:15","e":"","o":"North Peak Mountain Club","ig":"northpeakmc","p":1950,"c":"USD","km":null,"g":null,"s":5364.0,"df":"","est":false,"k":"big","back":"","m":"","ds":"A 15-day mountain expedition in the Himalayas along one of the world's most iconic trekking routes to Everest Base Camp, through the valleys and high-altitude villages of Sagarmatha National Park.","b":"https://www.facebook.com/events/2973957479456202/"},{"n":{"en":"Everest Base Camp & Island Peak","hy":"Էվերեստի բազային ճամբար և Այլենդ Փիկ","ru":"Базовый лагерь Эвереста и Айленд-пик"},"d":"2027-04-21","t":"07:15","e":"","o":"North Peak Mountain Club","ig":"northpeakmc","p":2950,"c":"USD","km":null,"g":null,"s":5364.0,"df":"","est":false,"k":"big","back":"","m":"","ds":"An 18-day expedition in Nepal combining classic trekking with high-altitude mountaineering.","b":"https://www.facebook.com/events/1392002869750948/"},{"n":{"en":"The Lycian Way: Central Section","hy":"Լիկիական արահետ․ Կենտրոնական հատված","ru":"Ликийская тропа: Центральная часть"},"d":"2027-04-23","t":"","e":"2027-04-30","o":"Aktiv Up","ig":"aktivup_hiking_club","p":null,"c":"AMD","km":null,"g":null,"s":null,"df":"","est":false,"k":"big","back":"","m":"","ds":"An 8-day hiking journey along the Mediterranean coast, following the trails, forests, and rocky shores of the Lycian Way.","b":"https://www.instagram.com/p/DfaGZzWgOoZ/"},{"n":{"en":"Elbrus 2027: May Ascent","hy":"Էլբրուս 2027․ Մայիսյան վերելք","ru":"Эльбрус 2027: майское восхождение"},"d":"2027-05-14","t":"21:00","e":"","o":"North Peak Mountain Club","ig":"northpeakmc","p":1150,"c":"USD","km":null,"g":null,"s":5642.0,"df":"","est":false,"k":"big","back":"","m":"","ds":"An expedition to the western summit of Mount Elbrus (5642 m) via the southern route for hikers with mountain experience and good physical fitness. The ascent is done entirely on foot from the mountain hut (~4050 m) without snowcats on summit day.","b":"https://www.facebook.com/events/1418351979957898/"},{"n":{"en":"Four Peaks of Lake Van","hy":"Վանա լճի 4 գագաթ","ru":"Четыре вершины озера Ван"},"d":"2027-05-26","t":"","e":"2027-05-31","o":"Kharuyk Hiking Club","ig":"kharuyk_hiking_club","p":770,"c":"USD","km":null,"g":null,"s":4058.0,"df":"moderate","est":true,"k":"big","back":"","m":"","ds":"A six-day mountain trek around Lake Van to climb four peaks: Sipan (4058 m), Artos (3537 m), Varag (3181 m), and Nemrut (2948 m).","b":"https://www.instagram.com/p/Dfg6kVziO4p/"},{"n":{"en":"Svaneti: From Towers to Glaciers","hy":"Սվանեթ. աշտարակներից մինչև սառցադաշտեր","ru":"Сванетия: от башен до ледников"},"d":"2027-06-30","t":"06:00","e":"2027-07-04","o":"Armenian Geographic","ig":"armenian_geographic","p":null,"c":"AMD","km":null,"g":null,"s":null,"df":"","est":false,"k":"big","back":"","m":"","ds":"A journey to Svaneti, the highest region in Georgia, where defensive towers have stood among the Caucasus Mountains for centuries.","b":"https://www.armgeo.am/outgoing-tours/?utm_source=esora.app&utm_medium=referral"},{"n":{"en":"Hiking to Machu Picchu","hy":"Արշավ դեպի Մաչու-Պիկչու","ru":"Поход к Мачу-Пикчу"},"d":"2027-07-03","t":"08:30","e":"2027-07-12","o":"ArmLand Adventure & Travel","ig":"armland_adventure","p":2980,"c":"USD","km":null,"g":null,"s":5020.0,"df":"","est":false,"k":"big","back":"","m":"","ds":"A 10-day, 9-night journey along the Inca trails in Peru.","b":"https://www.facebook.com/events/961010569412832/"},{"n":{"en":"Balkans: Three Highest Peaks of Three Countries","hy":"Բալկաններ․ 3 երկրի 3 ամենաբարձր գագաթները","ru":"Балканы: три высочайшие вершины трех стран"},"d":"2027-07-09","t":"07:30","e":"2027-07-18","o":"Armenian Geographic","ig":"armenian_geographic","p":null,"c":"AMD","km":null,"g":null,"s":2764.0,"df":"","est":false,"k":"big","back":"","m":"","ds":"• Korab (2,764 m) in Albania","b":"https://www.facebook.com/events/2078481996127644/"},{"n":{"en":"Mount Ararat: Sis and Masis","hy":"Արարատ․ Սիս և Մասիս","ru":"Арарат: Сис и Масис"},"d":"2027-07-19","t":"","e":"2027-07-24","o":"Trichq Hiking Club","ig":"trichq_hiking_club_","p":1100,"c":"USD","km":null,"g":null,"s":null,"df":"","est":false,"k":"big","back":"","m":"","ds":"A 6-day ascent of Mount Ararat's peaks, Sis and Masis, with up to 20 participants per group.","b":"https://www.facebook.com/events/1265888828994639/"},{"n":{"en":"Ascent of Sis and Masis","hy":"Վերելք Սիս և Մասիս","ru":"Восхождение на Сис и Масис"},"d":"2027-07-21","t":"","e":"2027-07-26","o":"Armenian Geographic","ig":"armenian_geographic","p":null,"c":"AMD","km":null,"g":null,"s":null,"df":"","est":false,"k":"big","back":"","m":"","ds":"An ascent to the two symbolic peaks of the Armenian Highlands: Sis and Masis.","b":"https://www.facebook.com/events/1495973152387875/"},{"n":{"en":"Sis and Masis","hy":"Սիս և Մասիս","ru":"Сис и Масис"},"d":"2027-07-21","t":"","e":"2027-07-26","o":"Armenian Geographic","ig":"armenian_geographic","p":null,"c":"AMD","km":null,"g":null,"s":null,"df":"","est":false,"k":"big","back":"","m":"","ds":"Details and registration: message the organizer or call 043 00 5165.","b":"https://www.instagram.com/p/De_8zLSAjca/"},{"n":{"en":"Trekking to Mount Ararat (5,137 m)","hy":"Վերելք Արարատ լեռ (5137 մ)","ru":"Восхождение на гору Арарат (5137 м)"},"d":"2027-07-22","t":"19:00","e":"","o":"ArmLand Adventure & Travel","ig":"armland_adventure","p":null,"c":"AMD","km":null,"g":null,"s":5137.0,"df":"","est":false,"k":"big","back":"","m":"","ds":"Ascent to the highest peak of the Armenian Highlands, Mount Ararat (5,137 m).","b":"https://armland.am/hy/verelq-ararat-2026/?utm_source=esora.app&utm_medium=referral"},{"n":{"en":"Ararat in 5 Days: Ani, Kars, Bayazet","hy":"Արարատ 5 օրում․ Անի, Կարս, Բայազետ","ru":"Арарат за 5 дней: Ани, Карс, Баязет"},"d":"2027-07-26","t":"","e":"2027-07-30","o":"Werelk Hiking Club","ig":"werelk_hiking_club","p":800,"c":"USD","km":null,"g":null,"s":4200.0,"df":"easy","est":true,"k":"big","back":"","m":"","ds":"• Day 1: Early morning departure by off-road vehicles through the Armenian-Georgian and Georgian-Turkish border checkpoints, a visit to the ruins of the historic city of Ani, and an overnight hotel stay in Bayazet.","b":"https://www.instagram.com/p/DfAZbgkjaCn/"},{"n":{"en":"Mount Kazbek Ascent","hy":"Վերելք Կազբեկ լեռ","ru":"Восхождение на Казбек"},"d":"2027-07-26","t":"","e":"2027-07-30","o":"Armenian Geographic","ig":"armenian_geographic","p":null,"c":"AMD","km":null,"g":null,"s":5047.0,"df":"","est":false,"k":"big","back":"","m":"","ds":"Ascent of Mount Kazbek (5,047 m) from the Georgia side.","b":"https://www.instagram.com/p/De_8zLSAjca/"},{"n":{"en":"Mount Ararat Trekking Tour","hy":"Վերելք Արարատ լեռ","ru":"Восхождение на гору Арарат"},"d":"2027-07-26","t":"","e":"2027-08-01","o":"Armenian Geographic","ig":"armenian_geographic","p":null,"c":"AMD","km":null,"g":null,"s":null,"df":"","est":false,"k":"big","back":"","m":"","ds":"Trekking tour to Mount Ararat.","b":"https://www.facebook.com/events/1801296107714972/"},{"n":{"en":"Mount Ararat, Van, Bayazet, Kars, Ani","hy":"Արարատ, Վան, Բայազետ, Կարս, Անի","ru":"Арарат, Ван, Баязет, Карс, Ани"},"d":"2027-07-27","t":"","e":"2027-08-01","o":"Trichq Hiking Club","ig":"trichq_hiking_club_","p":950,"c":"USD","km":null,"g":null,"s":5165.0,"df":"","est":false,"k":"big","back":"","m":"","ds":"A 6-day expedition ascending Mount Ararat (5,165 m) combined with visits to historical and cultural sites across Western Armenia: Ani, Bayazet, Lake Van, and Kars.","b":"https://www.facebook.com/events/1651384756002245/"},{"n":{"en":"Ararat, Van, Ani, Kars and Bayazet","hy":"Արարատ, Վան, Անի, Կարս, Բայազետ","ru":"Арарат, Ван, Ани, Карс и Баязет"},"d":"2027-08-02","t":"","e":"2027-08-07","o":"Werelk Hiking Club","ig":"werelk_hiking_club","p":null,"c":"AMD","km":null,"g":null,"s":4200.0,"df":"easy","est":true,"k":"big","back":"","m":"","ds":"A 5- to 6-day program with ascent of Mount Ararat and visits to historic sites, preceded by preparatory hikes, meetings, and consultations.","b":"https://www.instagram.com/p/DfAZbgkjaCn/"},{"n":{"en":"Mount Ararat, Ani, Bayazet, and Kars","hy":"Արարատ, Անի, Բայազետ և Կարս","ru":"Арарат, Ани, Баязет и Карс"},"d":"2027-08-04","t":"","e":"2027-08-08","o":"Trichq Hiking Club","ig":"trichq_hiking_club_","p":750,"c":"USD","km":null,"g":null,"s":null,"df":"","est":false,"k":"big","back":"","m":"","ds":"A 5-day expedition to Mount Ararat with visits to Ani, Bayazet, and Kars.","b":"https://www.facebook.com/events/1333733978746850/"},{"n":{"en":"Climbing Mount Ararat (5137 m)","hy":"Վերելք Արարատ լեռ (5137 մ)","ru":"Восхождение на гору Арарат (5137 м)"},"d":"2027-08-05","t":"19:00","e":"2027-08-11","o":"ArmLand Adventure & Travel","ig":"armland_adventure","p":950,"c":"USD","km":null,"g":null,"s":5137.0,"df":"","est":false,"k":"big","back":"","m":"","ds":"High-altitude ascent to the highest peak of the Armenian Highlands (5137 m) with gradual acclimatization and overnights at high-altitude camps (3200 m and 4100 m). The summit push starts at night around 01:00–02:00, followed by descent to the camps and the return journey. The 6-day program also incl","b":"https://armland.am/hy/verelq-ararat-2026/?utm_source=esora.app&utm_medium=referral"},{"n":{"en":"Kazbek Ascent 2027","hy":"Վերելք Կազբեկ 2027","ru":"Восхождение на Казбек 2027"},"d":"2027-08-07","t":"07:00","e":"","o":"North Peak Mountain Club","ig":"northpeakmc","p":950,"c":"USD","km":null,"g":null,"s":5033.0,"df":"easy","est":true,"k":"big","back":"","m":"","ds":"Classic southern route to the summit of Mount Kazbek (5033 m) via Georgia, covering 6 days plus 1 reserve day. Heavy gear is transported to the high-altitude camp by horses.","b":"https://www.facebook.com/events/1146378264480900/"},{"n":{"en":"Ararat: Sis and Masis, Van, Ani, Kars, Bayazet","hy":"Արարատ. Սիս և Մասիս, Վան, Անի, Կարս, Բայազետ","ru":"Арарат: Сис и Масис, Ван, Ани, Карс, Баязет"},"d":"2027-08-09","t":"","e":"2027-08-15","o":"Werelk Hiking Club","ig":"werelk_hiking_club","p":null,"c":"AMD","km":null,"g":null,"s":null,"df":"","est":false,"k":"big","back":"","m":"","ds":"7-day expedition to Mount Ararat covering Sis and Masis, with visits to Van, Ani, Kars, and Bayazet.","b":"https://www.instagram.com/p/DfAZbgkjaCn/"},{"n":{"en":"Ascent of Mount Kaçkar","hy":"Վերելք Քաջքար լեռ","ru":"Восхождение на гору Качкар"},"d":"2027-08-26","t":"","e":"2027-08-29","o":"Aktiv Up","ig":"aktivup_hiking_club","p":null,"c":"AMD","km":null,"g":null,"s":null,"df":"","est":false,"k":"big","back":"","m":"","ds":"A four-day trip to Hamshen to climb Mount Kaçkar, the highest peak of the Pontic Mountains and one of the \"7 Highest Peaks of the Armenian Highlands\" program.","b":"https://www.instagram.com/p/DfVCpvngKRN/"},{"n":{"en":"Ascent to Mount Jilo","hy":"Վերելք Ջիլո լեռ","ru":"Восхождение на гору Джило"},"d":"2027-09-04","t":"06:00","e":"","o":"Armenian Geographic","ig":"armenian_geographic","p":null,"c":"AMD","km":null,"g":null,"s":4135.0,"df":"","est":false,"k":"big","back":"","m":"","ds":"Ascent to Mount Jilo (4,135 m), the third-highest peak of the Armenian Highlands and the highest point of the Korduk Mountains.","b":"https://www.facebook.com/events/1848143326176781/"},{"n":{"en":"Climbing Mount Kazbek (5033 m)","hy":"Վերելք Կազբեկ լեռ (5033 մ)","ru":"Восхождение на гору Казбек (5033 м)"},"d":"2027-09-07","t":"17:00","e":"2027-09-12","o":"ArmLand Adventure & Travel","ig":"armland_adventure","p":null,"c":"AMD","km":null,"g":null,"s":5033.0,"df":"","est":false,"k":"big","back":"","m":"","ds":"A 5-day mountaineering ascent to Mount Kazbek (5033 m) in Georgia, combining glacier sections, high-altitude challenges, and Caucasus mountain views.","b":"https://www.facebook.com/events/1492308852706451/"},{"n":{"en":"Climbing Mount Kazbek","hy":"Վերելք Կազբեկ լեռ","ru":"Восхождение на гору Казбек"},"d":"2027-09-08","t":"","e":"2027-09-12","o":"Aktiv Up","ig":"aktivup_hiking_club","p":null,"c":"AMD","km":null,"g":null,"s":null,"df":"","est":false,"k":"big","back":"","m":"","ds":"Five-day climbing expedition to Mount Kazbek (5,047 m, or 5,054 m by recent measurements) in a small group.","b":"https://www.instagram.com/p/DffdjPPADVF/"},{"n":{"en":"Ascent to Mount Kazbek","hy":"Վերելք Կազբեկ","ru":"Восхождение на Казбек"},"d":"2027-09-11","t":"07:00","e":"","o":"North Peak Mountain Club","ig":"northpeakmc","p":950,"c":"USD","km":null,"g":null,"s":5033.0,"df":"easy","est":true,"k":"big","back":"","m":"","ds":"A 6-day expedition (plus 1 reserve day) climbing Mount Kazbek (5033 m) along the classic southern route via Georgia.","b":"https://www.facebook.com/events/2162082667734886/"},{"n":{"en":"Ascent of Mount Kaçkar 2027","hy":"Վերելք Քաջքար 2027","ru":"Восхождение на гору Качкар 2027"},"d":"2027-09-18","t":"06:00","e":"","o":"Armenian Geographic","ig":"armenian_geographic","p":null,"c":"AMD","km":null,"g":null,"s":3937.0,"df":"","est":false,"k":"big","back":"","m":"","ds":"An ascent to Mount Kaçkar (3,937 m), the highest peak of the Eastern Pontic Mountains.","b":"https://www.facebook.com/events/1592332506241781/"},{"n":{"en":"Ascent of Mount Sis","hy":"Վերելք Սիս լեռ","ru":"Восхождение на гору Сис"},"d":"2027-09-19","t":"","e":"2027-09-21","o":"Aktiv Up","ig":"aktivup_hiking_club","p":null,"c":"AMD","km":null,"g":null,"s":null,"df":"","est":false,"k":"big","back":"","m":"","ds":"Three-day ascent of Mount Sis (Lesser Ararat) in the Armenian Highlands.","b":"https://www.instagram.com/p/DfVGmp-AIfH/"},{"n":{"en":"Mount Toubkal, Morocco","hy":"Թուբկալ լեռ, Մարոկկո","ru":"Гора Тубкаль, Марокко"},"d":"2027-09-21","t":"18:30","e":"2027-09-28","o":"ArmLand Adventure & Travel","ig":"armland_adventure","p":null,"c":"AMD","km":null,"g":null,"s":4167.0,"df":"","est":false,"k":"big","back":"","m":"","ds":"Expedition to the highest peak in North Africa and the Atlas Mountains — Mount Toubkal (4,167 m).","b":"https://www.instagram.com/p/DfXTfXBDY9t/"},{"n":{"en":"Nepal 2027: Sunrise on Everest","hy":"Նեպալ 2027․ Էվերեստի լուսաբացը","ru":"Непал 2027: Рассвет на Эвересте"},"d":"2027-10-23","t":"12:00","e":"","o":"Armenian Geographic","ig":"armenian_geographic","p":null,"c":"AMD","km":null,"g":null,"s":null,"df":"","est":false,"k":"big","back":"","m":"","ds":"A trek along the Pikey Peak route in Nepal. The main highlight of this route is a unique view of Everest, where the world's highest peak is visible in a way not seen even from Everest Base Camp.","b":"https://www.facebook.com/events/1446593193585378/"}];
+
+const T = {
+  en:{draft:"Draft preview",brandSub:"“Arahet” means trail in Armenian",tag:"Every group hike in Armenia, in one place.",
+    sHikes:"upcoming hikes",sClubs:"clubs",sFrom:"cheapest day hike",
+    all:"All days",today:"Today",tomorrow:"Tomorrow",easy:"Easy",moderate:"Moderate",hard:"Hard",cheap:"Under 10,000 ֏",kids:"With kids",
+    allClubs:"All clubs",q:"Mountain, gorge, monastery…",novTitle:"Upcoming hikes",
+    count:n=>`${n} hikes`,legendEst:"~ means we estimated the level from distance and climb.",
+    tbc:"Time TBC",back:"back",summit:"summit",meet:"Meet:",more:"About this hike",book:"Book with club",onReq:"Price on request",
+    kKids:"Kids",kRun:"Trail run",kAdv:"Adventure",kTrip:"Day trip",days:n=>`${n} days`,
+    none:"No hikes match these filters.",clear:"Clear filters",
+    araratTitle:"Ararat",araratSub:"Every club’s Ararat trip side by side",thClub:"Club",thTrip:"Trip",thDates:"Dates",thDays:"Days",thPrice:"Price",view:"Details",
+    bigTitle:"Big trips abroad",bigSub:"Expeditions clubs are already booking for 2027",
+    clubsTitle:"The clubs",clubsCount:n=>`${n} clubs with upcoming hikes`,clubNov:n=>`${n} upcoming`,clubBig:n=>`${n} big trips`,
+    foot:"Draft for partner conversations. Listings come from the clubs’ public announcements, gathered on {date}. Booking always happens directly with the club."},
+  hy:{draft:"Սևագիր",brandSub:"Հայաստանի արահետները",tag:"Հայաստանի բոլոր խմբային արշավները՝ մեկ տեղում։",
+    sHikes:"առաջիկա արշավ",sClubs:"ակումբ",sFrom:"ամենամատչելի արշավը",
+    all:"Բոլոր օրերը",today:"Այսօր",tomorrow:"Վաղը",easy:"Հեշտ",moderate:"Միջին",hard:"Բարդ",cheap:"Մինչև 10 000 ֏",kids:"Երեխաների հետ",
+    allClubs:"Բոլոր ակումբները",q:"Լեռ, կիրճ, վանք…",novTitle:"Առաջիկա արշավներ",
+    count:n=>`${n} արշավ`,legendEst:"~ նշանը նշանակում է, որ մակարդակը գնահատել ենք ըստ երկարության և բարձրության։",
+    tbc:"Ժամը ճշտվում է",back:"վերադարձ",summit:"գագաթ",meet:"Հանդիպում՝",more:"Արշավի մասին",book:"Գրանցվել",onReq:"Գինը՝ հարցմամբ",
+    kKids:"Մանկական",kRun:"Վազք",kAdv:"Արկած",kTrip:"Էքսկուրսիա",days:n=>`${n} օր`,
+    none:"Այս ֆիլտրերով արշավ չկա։",clear:"Մաքրել ֆիլտրերը",
+    araratTitle:"Արարատ",araratSub:"Բոլոր ակումբների Արարատյան արշավները կողք կողքի",thClub:"Ակումբ",thTrip:"Արշավ",thDates:"Ամսաթվեր",thDays:"Օր",thPrice:"Գին",view:"Մանրամասներ",
+    bigTitle:"Մեծ արշավներ արտերկրում",bigSub:"Արշավախմբեր, որոնց գրանցումն արդեն բաց է 2027-ի համար",
+    clubsTitle:"Ակումբները",clubsCount:n=>`${n} ակումբ առաջիկա արշավներով`,clubNov:n=>`${n} առաջիկա`,clubBig:n=>`${n} մեծ արշավ`,
+    foot:"Սևագիր՝ գործընկերների հետ քննարկման համար։ Տվյալները վերցված են ակումբների հրապարակային հայտարարություններից ({date})։ Գրանցումը միշտ անմիջապես ակումբի մոտ է։"},
+  ru:{draft:"Черновик",brandSub:"«Арахет» по-армянски значит «тропа»",tag:"Все групповые походы по Армении в одном месте.",
+    sHikes:"ближайших походов",sClubs:"клубов",sFrom:"самый доступный поход",
+    all:"Все дни",today:"Сегодня",tomorrow:"Завтра",easy:"Лёгкий",moderate:"Средний",hard:"Сложный",cheap:"До 10 000 ֏",kids:"С детьми",
+    allClubs:"Все клубы",q:"Гора, ущелье, монастырь…",novTitle:"Ближайшие походы",
+    count:n=>`Найдено: ${n}`,legendEst:"~ значит, что уровень мы оценили по длине и набору высоты.",
+    tbc:"Время уточняется",back:"возврат",summit:"вершина",meet:"Сбор:",more:"О походе",book:"Записаться",onReq:"Цена по запросу",
+    kKids:"Детский",kRun:"Забег",kAdv:"Экстрим",kTrip:"Поездка",days:n=>`Дней: ${n}`,
+    none:"По этим фильтрам походов нет.",clear:"Сбросить фильтры",
+    araratTitle:"Арарат",araratSub:"Туры всех клубов на Арарат рядом",thClub:"Клуб",thTrip:"Тур",thDates:"Даты",thDays:"Дней",thPrice:"Цена",view:"Подробнее",
+    bigTitle:"Большие поездки за рубеж",bigSub:"Экспедиции, на которые клубы уже записывают на 2027",
+    clubsTitle:"Клубы",clubsCount:n=>`Клубов с ближайшими походами: ${n}`,clubNov:n=>`Ближайших: ${n}`,clubBig:n=>`Больших поездок: ${n}`,
+    foot:"Черновик для разговоров с партнёрами. Данные взяты из открытых анонсов клубов ({date}). Запись всегда напрямую у клуба."}
+};
+const LOC = {en:"en-GB",hy:"hy-AM",ru:"ru-RU"};
+const BRAND = {en:"Arahet",hy:"Արահետ",ru:"Арахет"};
+const TODAY = new Date().toLocaleDateString("en-CA", {timeZone:"Asia/Yerevan"});
+const UPDATED = "2026-11-10";
+
+let lang = "en";
+try { lang = localStorage.getItem("arahet-lang") || "en"; } catch(e){}
+if(!T[lang]) lang = "en";
+const S = {day:"", df:new Set(), cheap:false, kids:false, club:"", q:""};
+
+const t = k => T[lang][k];
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const name = h => h.n[lang] || h.n.en;
+const dt = d => new Date(d + "T12:00:00+04:00");
+/* Many browsers ship no Armenian date names, so Armenian dates are built by hand. */
+const HY_WD = ["Կիրակի","Երկուշաբթի","Երեքշաբթի","Չորեքշաբթի","Հինգշաբթի","Ուրբաթ","Շաբաթ"];
+const HY_WS = ["Կիր","Երկ","Երք","Չրք","Հնգ","Ուր","Շբթ"];
+const HY_M = ["հունվարի","փետրվարի","մարտի","ապրիլի","մայիսի","հունիսի","հուլիսի","օգոստոսի","սեպտեմբերի","հոկտեմբերի","նոյեմբերի","դեկտեմբերի"];
+function fmtDate(d, o){
+  if(lang !== "hy") return dt(d).toLocaleDateString(LOC[lang], {timeZone:"Asia/Yerevan", ...o});
+  const x = dt(d), wd = x.getUTCDay(), day = x.getUTCDate(), m = HY_M[x.getUTCMonth()];
+  if(o.weekday && !o.day) return o.weekday === "short" ? HY_WS[wd] : HY_WD[wd];
+  const ms = ["հնվ","փտվ","մրտ","ապր","մյս","հնս","հլս","օգս","սեպ","հոկ","նոյ","դեկ"][x.getUTCMonth()];
+  const dm = o.month === "short" ? `${ms}. ${day}` : `${m} ${day}`;
+  return o.weekday ? `${HY_WD[wd]}, ${dm}` : dm;
+}
+const isWE = d => [0,6].includes(dt(d).getUTCDay());
+const nf = n => Number(n).toLocaleString(LOC[lang] === "hy-AM" ? "ru-RU" : LOC[lang]).replace(/ /g," ");
+function price(h){
+  if(!h.p) return `<span class="price na">${t("onReq")}</span>`;
+  return `<span class="price">${h.c === "USD" ? "$" + nf(h.p) : nf(h.p) + " ֏"}</span>`;
+}
+const priceText = h => !h.p ? t("onReq") : (h.c === "USD" ? "$" + nf(h.p) : nf(h.p) + " ֏");
+const daysLen = h => h.e ? Math.round((dt(h.e) - dt(h.d)) / 864e5) + 1 : 1;
+
+const NOV = HIKES.filter(h => h.k !== "big" && (h.e || h.d) >= TODAY);
+const BIG = HIKES.filter(h => h.k === "big" && (h.e || h.d) >= TODAY);
+const isArarat = h => /ararat|masis/i.test(h.n.en);
+
+function blaze(h){
+  if(!h.df) return "";
+  return `<span class="blaze b-${h.df}"><i></i>${h.est ? "~" : ""}${t(h.df)}</span>`;
+}
+function kindTag(h){
+  const m = {kids:"kKids", run:"kRun", adventure:"kAdv", trip:"kTrip"}[h.k];
+  return m ? `<span class="k">${t(m)}</span>` : "";
+}
+function card(h){
+  const meta = [kindTag(h), blaze(h),
+    h.km ? `<span>${nf(h.km)} km</span>` : "",
+    h.g ? `<span>↑ ${nf(h.g)} m</span>` : "",
+    h.s ? `<span>${t("summit")} ${nf(h.s)} m</span>` : "",
+    h.e ? `<span>${t("days")(daysLen(h))}</span>` : ""].filter(Boolean).join("");
+  const book = `<a class="book" href="${esc(h.b)}" target="_blank" rel="noopener">${t("book")} ↗</a>`;
+  return `<article class="hike">
+    <div class="when">${h.t ? `<span class="time">${h.t}</span>` : `<span class="time tbc">${t("tbc")}</span>`}${h.back ? `<span class="back">${t("back")} ~${h.back}</span>` : ""}</div>
+    <div class="mid">
+      <h4>${esc(name(h))}</h4>
+      <p class="by">${h.ig ? `<a href="https://www.instagram.com/${esc(h.ig)}/" target="_blank" rel="noopener">${esc(h.o)}</a>` : esc(h.o)}</p>
+      ${meta ? `<div class="meta">${meta}</div>` : ""}
+      ${h.m ? `<p class="meet">${t("meet")} ${esc(h.m)}</p>` : ""}
+      ${h.ds ? `<details><summary>${t("more")}</summary><p>${esc(h.ds)}</p></details>` : ""}
+      ${book.replace('class="book"','class="book book-m"')}
+    </div>
+    <div class="buy">${price(h)}${book}</div>
+  </article>`;
+}
+
+function match(h){
+  if(S.day && h.d !== S.day) return false;
+  if(S.df.size && !S.df.has(h.df)) return false;
+  if(S.cheap && !(h.p && h.c === "AMD" && h.p < 10000)) return false;
+  if(S.kids && h.k !== "kids" && !/kid|child|famil|beginner/i.test(h.ds + h.n.en)) return false;
+  if(S.club && h.o !== S.club) return false;
+  if(S.q){
+    const hay = [h.n.en, h.n.hy, h.n.ru, h.o, h.m, h.ds].join(" ").toLowerCase();
+    if(!S.q.toLowerCase().split(/\s+/).every(w => hay.includes(w))) return false;
+  }
+  return true;
+}
+
+function renderDays(){
+  const counts = {};
+  NOV.forEach(h => counts[h.d] = (counts[h.d] || 0) + 1);
+  const days = Object.keys(counts).sort();
+  document.getElementById("days").innerHTML =
+    `<button type="button" class="day all" id="d-all" data-d="" aria-pressed="${!S.day}">${t("all")}</button>` +
+    days.map(d => `<button type="button" class="day${isWE(d) ? " we" : ""}" id="d-${d}" data-d="${d}" aria-pressed="${S.day === d}">
+      <span class="dw">${fmtDate(d, {weekday:"short"})}</span><span class="dn">${dt(d).getUTCDate()}</span><span class="dc">${counts[d]}</span></button>`).join("");
+}
+
+function renderList(){
+  const rows = NOV.filter(match).sort((a, b) => (a.d + (a.t || "99")).localeCompare(b.d + (b.t || "99")));
+  document.getElementById("count").textContent = t("count")(rows.length);
+  if(!rows.length){
+    document.getElementById("list").innerHTML = `<div class="empty daygroup">${t("none")}<br><button type="button" class="chip" id="clear">${t("clear")}</button></div>`;
+    return;
+  }
+  const by = {};
+  rows.forEach(h => (by[h.d] = by[h.d] || []).push(h));
+  document.getElementById("list").innerHTML = Object.entries(by).map(([d, hs]) => {
+    const rel = d === TODAY ? t("today") + " · " : (dt(d) - dt(TODAY) === 864e5 ? t("tomorrow") + " · " : "");
+    const label = fmtDate(d, {weekday:"long", day:"numeric", month:"long"});
+    return `<div class="daygroup"><h3><span class="${isWE(d) ? "we" : ""}">${rel}${label}</span></h3>${hs.map(card).join("")}</div>`;
+  }).join("");
+}
+
+function renderStatic(){
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-i]").forEach(el => {
+    const v = T[lang][el.dataset.i];
+    if(typeof v === "string") el.textContent = v;
+  });
+  document.getElementById("brand").textContent = BRAND[lang];
+  document.getElementById("f-q").placeholder = t("q");
+  document.querySelector("[data-i=foot]").textContent = t("foot").replace("{date}", fmtDate(UPDATED, {day:"numeric", month:"long"}) + " " + UPDATED.slice(0,4));
+  const ar = BIG.filter(isArarat).map(h => h.d.slice(0,4)).sort()[0];
+  if(ar) document.querySelector("[data-i=araratTitle]").textContent = t("araratTitle") + " " + ar;
+  document.getElementById("ararat").hidden = !ar;
+  document.querySelectorAll(".langs button").forEach(b => b.setAttribute("aria-pressed", b.dataset.l === lang));
+
+  const clubs = [...new Set(HIKES.map(h => h.o))];
+  const cheapest = Math.min(...NOV.filter(h => h.p && h.c === "AMD" && h.k === "hike").map(h => h.p));
+  document.getElementById("stats").innerHTML =
+    `<li><b>${NOV.length}</b>${t("sHikes")}</li><li><b>${clubs.length}</b>${t("sClubs")}</li><li><b>${nf(cheapest)} ֏</b>${t("sFrom")}</li>`;
+
+  const sel = document.getElementById("f-club");
+  const novClubs = [...new Set(NOV.map(h => h.o))].sort((a, b) => a.localeCompare(b));
+  sel.innerHTML = `<option value="">${t("allClubs")}</option>` + novClubs.map(c => `<option value="${esc(c)}"${S.club === c ? " selected" : ""}>${esc(c)}</option>`).join("");
+
+  const range = h => fmtDate(h.d, {day:"numeric", month:"short"}) + (h.e ? " – " + fmtDate(h.e, {day:"numeric", month:"short"}) : "");
+  document.getElementById("araratRows").innerHTML = BIG.filter(isArarat).sort((a, b) => a.d.localeCompare(b.d)).map(h => `<tr>
+    <td><b>${esc(h.o)}</b></td><td>${esc(name(h))}</td><td class="num">${range(h)}</td><td class="num">${h.e ? daysLen(h) : "—"}</td>
+    <td class="num">${priceText(h)}</td><td><a class="book" href="${esc(h.b)}" target="_blank" rel="noopener">${t("view")} ↗</a></td></tr>`).join("");
+
+  document.getElementById("trips").innerHTML = BIG.filter(h => !isArarat(h)).sort((a, b) => a.d.localeCompare(b.d)).map(h => `<div class="trip">
+    <span class="when2">${range(h)}${h.d.slice(0,4) !== TODAY.slice(0,4) ? " " + h.d.slice(0,4) : ""}</span><h4>${esc(name(h))}</h4>
+    <p>${esc(h.o)} · ${priceText(h)}</p><a href="${esc(h.b)}" target="_blank" rel="noopener">${t("view")} ↗</a></div>`).join("");
+
+  const cs = clubs.map(o => {
+    const hs = HIKES.filter(h => h.o === o);
+    return {o, ig: hs[0].ig, nov: hs.filter(h => NOV.includes(h)).length, big: hs.filter(h => h.k === "big").length};
+  }).sort((a, b) => b.nov - a.nov || b.big - a.big || a.o.localeCompare(b.o));
+  document.getElementById("clubsCount").textContent = t("clubsCount")(cs.length);
+  document.getElementById("clubs").innerHTML = cs.map(c => `<a class="club" href="${c.ig ? "https://www.instagram.com/" + esc(c.ig) + "/" : "#"}" target="_blank" rel="noopener">
+    <b>${esc(c.o)}</b><span>${c.ig ? "@" + esc(c.ig) : ""}</span><span>${[c.nov ? t("clubNov")(c.nov) : "", c.big ? t("clubBig")(c.big) : ""].filter(Boolean).join(" · ")}</span></a>`).join("");
+}
+
+function renderAll(){ renderStatic(); renderDays(); renderList(); }
+
+document.addEventListener("click", e => {
+  const b = e.target.closest("button");
+  if(!b) return;
+  if(b.dataset.l){ lang = b.dataset.l; try{ localStorage.setItem("arahet-lang", lang); }catch(err){} renderAll(); drawTopo(); return; }
+  if(b.dataset.d !== undefined){ S.day = b.dataset.d; renderDays(); renderList(); return; }
+  if(b.dataset.df){ S.df.has(b.dataset.df) ? S.df.delete(b.dataset.df) : S.df.add(b.dataset.df); b.setAttribute("aria-pressed", S.df.has(b.dataset.df)); renderList(); return; }
+  if(b.id === "f-cheap"){ S.cheap = !S.cheap; b.setAttribute("aria-pressed", S.cheap); renderList(); return; }
+  if(b.id === "f-kids"){ S.kids = !S.kids; b.setAttribute("aria-pressed", S.kids); renderList(); return; }
+  if(b.id === "clear"){
+    Object.assign(S, {day:"", cheap:false, kids:false, club:"", q:""}); S.df.clear();
+    document.querySelectorAll(".row .chip[aria-pressed]").forEach(c => c.setAttribute("aria-pressed", "false"));
+    document.getElementById("f-q").value = ""; document.getElementById("f-club").value = "";
+    renderDays(); renderList();
+  }
+});
+document.getElementById("f-club").addEventListener("change", e => { S.club = e.target.value; renderList(); });
+document.getElementById("f-q").addEventListener("input", e => { S.q = e.target.value.trim(); renderList(); });
+
+/* contour-map hero: isolines of a few made-up peaks, drawn with marching squares */
+function drawTopo(){
+  const c = document.getElementById("topo"), box = c.getBoundingClientRect();
+  const dpr = Math.min(2, window.devicePixelRatio || 1);
+  c.width = box.width * dpr; c.height = box.height * dpr;
+  const g = c.getContext("2d"); g.setTransform(dpr, 0, 0, dpr, 0, 0);
+  const W = box.width, H = box.height;
+  const col = getComputedStyle(document.documentElement).getPropertyValue("--contour").trim();
+  const peaks = [[.78,.35,.32,1],[.62,.75,.22,.7],[.93,.8,.18,.55],[.45,.15,.2,.45]];
+  const f = (x, y) => {
+    let v = 0;
+    for(const [px, py, r, h] of peaks){ const dx = (x / W - px) * (W / H) * .6, dy = y / H - py; v += h * Math.exp(-(dx*dx + dy*dy) / (r*r)); }
+    return v + .04 * Math.sin(x / 37) * Math.cos(y / 29);
+  };
+  const step = 7, nx = Math.ceil(W / step) + 1, ny = Math.ceil(H / step) + 1, grid = [];
+  for(let j = 0; j < ny; j++){ grid[j] = []; for(let i = 0; i < nx; i++) grid[j][i] = f(i * step, j * step); }
+  g.clearRect(0, 0, W, H); g.strokeStyle = col;
+  for(let L = .08, n = 0; L < 1.4; L += .07, n++){
+    g.lineWidth = n % 5 === 0 ? 1.4 : .8; g.beginPath();
+    for(let j = 0; j < ny - 1; j++) for(let i = 0; i < nx - 1; i++){
+      const a = grid[j][i], b = grid[j][i+1], cc = grid[j+1][i+1], d = grid[j+1][i];
+      const idx = (a > L) | (b > L) << 1 | (cc > L) << 2 | (d > L) << 3;
+      if(idx === 0 || idx === 15) continue;
+      const x = i * step, y = j * step, lerp = (p, q) => (L - p) / (q - p);
+      const P = {t:[x + step * lerp(a, b), y], r:[x + step, y + step * lerp(b, cc)], b:[x + step * lerp(d, cc), y + step], l:[x, y + step * lerp(a, d)]};
+      const segs = {1:["l","t"],2:["t","r"],3:["l","r"],4:["r","b"],5:["l","t","r","b"],6:["t","b"],7:["l","b"],8:["l","b"],9:["t","b"],10:["t","r","l","b"],11:["r","b"],12:["l","r"],13:["t","r"],14:["l","t"]}[idx];
+      for(let s = 0; s < segs.length; s += 2){ g.moveTo(...P[segs[s]]); g.lineTo(...P[segs[s+1]]); }
+    }
+    g.stroke();
+  }
+}
+renderAll(); drawTopo();
+let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(drawTopo, 150); });
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", drawTopo);
+new MutationObserver(drawTopo).observe(document.documentElement, {attributes:true, attributeFilter:["data-theme"]});
+document.fonts && document.fonts.ready.then(drawTopo);
+</script>
+
+</html>
