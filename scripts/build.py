@@ -10,6 +10,14 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 raw = json.loads((ROOT / "data" / "hikes-raw.json").read_text(encoding="utf8"))
+# Hikes found on the clubs' own Instagram (scripts/ig_collect.py). Esora wins when both
+# have the same club on the same day, since its listing is usually more complete.
+ig_file = ROOT / "data" / "hikes-ig.json"
+if ig_file.exists():
+    have = {((x.get("ig") or "").lower(), (x.get("start") or "")[:10]) for x in raw}
+    extra = [x for x in json.loads(ig_file.read_text(encoding="utf8"))
+             if ((x.get("ig") or "").lower(), (x.get("start") or "")[:10]) not in have]
+    raw = raw + extra
 tpl = (ROOT / "src" / "template.html").read_text(encoding="utf8")
 today = dt.datetime.now(dt.timezone(dt.timedelta(hours=4))).date()  # Yerevan time
 

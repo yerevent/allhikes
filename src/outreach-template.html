@@ -1,0 +1,177 @@
+<title>Arahet Partner Outreach</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Golos+Text:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&family=Noto+Sans+Armenian:wght@400..700&display=swap">
+<style>
+/* Layout: a working desk. Club list on the left, the letter for the selected club on the right; stacks on a phone. Same palette as the Arahet site. */
+:root{
+  --paper:#ECEFE7; --card:#F8FAF4; --ink:#1C221F; --muted:#5B675F; --line:#CBD2C8;
+  --accent:#B9412B; --accent-ink:#FFFFFF; --moss:#3D6A49; --sel:#DCE6D6;
+  --ok:#3E8A57; --wait:#D0911B; --no:#9A9F9A;
+  --f-display:"Oswald","Noto Sans Armenian",Impact,"Arial Narrow",sans-serif;
+  --f-body:"Golos Text","Noto Sans Armenian",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-data:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#121614; --card:#1A1F1C; --ink:#E5EAE2; --muted:#98A49B; --line:#2C3530;
+  --accent:#E2654B; --accent-ink:#1A0A06; --moss:#7FB28A; --sel:#25332A;
+  --ok:#5DB27A; --wait:#E6AB3C; --no:#6E756F; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#121614; --card:#1A1F1C; --ink:#E5EAE2; --muted:#98A49B; --line:#2C3530;
+  --accent:#E2654B; --accent-ink:#1A0A06; --moss:#7FB28A; --sel:#25332A;
+  --ok:#5DB27A; --wait:#E6AB3C; --no:#6E756F; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:14.5px/1.5 var(--f-body)}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:22px 40px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+header{display:grid;gap:8px;margin-bottom:18px}
+header .eyebrow{font:600 11px var(--f-data);letter-spacing:.12em;text-transform:uppercase;color:var(--moss)}
+h1{font:600 clamp(30px,5vw,44px)/1 var(--f-display);text-transform:uppercase;letter-spacing:.02em;margin:0}
+header p{margin:0;color:var(--muted);max-width:70ch}
+.stats{display:flex;flex-wrap:wrap;gap:6px 20px;font:500 13px var(--f-data);color:var(--muted)}
+.stats b{color:var(--ink);font-size:18px;margin-right:5px}
+.desk{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:18px;align-items:start}
+@media (max-width:860px){.desk{grid-template-columns:minmax(0,1fr)}}
+.tools{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.chip{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:6px 12px;font:500 13px var(--f-body);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.list{display:grid;gap:6px}
+.club{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 13px;cursor:pointer;text-align:left;color:inherit;font:inherit;width:100%}
+.club[aria-current="true"]{background:var(--sel);border-color:var(--moss)}
+.club b{font-size:15px}
+.club .sub{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:4px 12px;font:500 12px var(--f-data);color:var(--muted)}
+.club .st{font:600 11px var(--f-body);text-transform:uppercase;letter-spacing:.05em;padding:2px 7px;border-radius:999px;border:1px solid currentColor;align-self:start;white-space:nowrap}
+.st-new{color:var(--muted)} .st-sent{color:var(--wait)} .st-yes{color:var(--ok)} .st-no{color:var(--no)}
+.panel{position:sticky;top:max(12px,env(safe-area-inset-top,0px));background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:12px}
+@media (max-width:860px){.panel{position:static}}
+.panel h2{font:600 24px/1.1 var(--f-display);margin:0;text-transform:uppercase}
+.reach{display:flex;flex-wrap:wrap;gap:6px}
+.reach a{display:inline-flex;align-items:center;gap:6px;text-decoration:none;font:600 13px var(--f-body);padding:7px 11px;border-radius:8px;border:1px solid var(--line);color:var(--ink);background:var(--paper)}
+.reach a.main{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.facts{display:grid;grid-template-columns:auto minmax(0,1fr);gap:3px 12px;font-size:13px}
+.facts dt{color:var(--muted)} .facts dd{margin:0;overflow-wrap:anywhere;font-family:var(--f-data);font-size:12.5px}
+.seg{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;width:max-content;max-width:100%}
+.seg button{border:0;background:none;color:var(--muted);font:600 13px var(--f-body);padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.subject{font:500 13px var(--f-body);color:var(--muted)}
+.subject b{color:var(--ink)}
+textarea{width:100%;min-height:300px;resize:vertical;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink);font:14px/1.55 var(--f-body);padding:12px}
+.copy{background:var(--ink);color:var(--paper);border:0;border-radius:8px;padding:9px 14px;font:600 13.5px var(--f-body);cursor:pointer}
+.status{display:flex;gap:6px;flex-wrap:wrap}
+.note{font-size:12.5px;color:var(--muted);margin:0}
+#toast{font:500 12.5px var(--f-body);color:var(--ok)}
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Arahet · private</span>
+    <h1>Partner outreach</h1>
+    <p>Every hiking club and tour operator we found, how to reach them, and a letter ready to send. Pick a club: the letter fills in its name and one of its real upcoming hikes, in its own language.</p>
+    <div class="stats" id="stats"></div>
+  </header>
+
+  <div class="desk">
+    <section aria-label="Clubs">
+      <div class="tools" id="filters">
+        <button type="button" class="chip" id="f-all" data-f="all" aria-pressed="true">All</button>
+        <button type="button" class="chip" id="f-new" data-f="new" aria-pressed="false">Not contacted</button>
+        <button type="button" class="chip" id="f-sent" data-f="sent" aria-pressed="false">Waiting</button>
+        <button type="button" class="chip" id="f-yes" data-f="yes" aria-pressed="false">Said yes</button>
+      </div>
+      <div class="list" id="list"></div>
+    </section>
+
+    <section class="panel" id="panel" aria-live="polite"></section>
+  </div>
+</div>
+
+<script>
+const CLUBS = /*__CLUBS__*/[];
+const LETTERS = /*__LETTERS__*/{};
+const STATUS = {new:"Not contacted", sent:"Messaged", yes:"Said yes", no:"Declined"};
+const TYPE = {"hiking club":"Hiking club","tour operator":"Tour operator","kids club":"Kids club","outdoor":"Outdoor"};
+
+let state = {};
+try { state = JSON.parse(localStorage.getItem("arahet-outreach") || "{}"); } catch(e){}
+const save = () => { try { localStorage.setItem("arahet-outreach", JSON.stringify(state)); } catch(e){} };
+const st = ig => (state[ig] && state[ig].s) || "new";
+let filter = "all", cur = CLUBS[0] && CLUBS[0].ig, lang = CLUBS[0] ? CLUBS[0].lang : "en", kind = "short";
+
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const tel = p => "+374" + p.replace(/\D/g, "").replace(/^(374|0)/, "");
+
+function stats(){
+  const n = k => CLUBS.filter(c => st(c.ig) === k).length;
+  document.getElementById("stats").innerHTML =
+    `<span><b>${CLUBS.length}</b>companies</span><span><b>${CLUBS.filter(c => c.upcoming).length}</b>with upcoming hikes</span>` +
+    `<span><b>${n("sent")}</b>messaged</span><span><b>${n("yes")}</b>said yes</span>`;
+}
+
+function list(){
+  document.getElementById("list").innerHTML = CLUBS.filter(c => filter === "all" || st(c.ig) === filter).map(c => `
+    <button type="button" class="club" id="c-${esc(c.ig)}" data-ig="${esc(c.ig)}" aria-current="${c.ig === cur}">
+      <b>${esc(c.name)}</b><span class="st st-${st(c.ig)}">${STATUS[st(c.ig)]}</span>
+      <span class="sub"><span>@${esc(c.ig)}</span><span>${esc(c.followers)} followers</span><span>${TYPE[c.type] || c.type}</span>
+      <span>${c.upcoming ? c.upcoming + " upcoming" : "no hikes listed now"}</span><span>writes in ${c.lang.toUpperCase()}</span></span>
+    </button>`).join("") || `<p class="note">No clubs in this group yet.</p>`;
+}
+
+function letter(c){
+  const L = LETTERS[lang], hike = c.example[lang] || c.example.en || (lang === "ru" ? "ваш ближайший поход" : lang === "hy" ? "ձեր առաջիկա արշավը" : "your next hike");
+  const fill = s => s.replaceAll("{club}", c.name.replace(/ \(.*\)$/, "")).replaceAll("{hike}", hike);
+  return {subject: fill(L.subject), body: fill(kind === "short" ? L.short : L.email)};
+}
+
+function panel(){
+  const c = CLUBS.find(x => x.ig === cur);
+  if(!c){ document.getElementById("panel").innerHTML = ""; return; }
+  const links = [`<a class="main" href="https://ig.me/m/${esc(c.ig)}" target="_blank" rel="noopener">Instagram DM ↗</a>`]
+    .concat(c.telegram.map(t => `<a href="https://${esc(t)}" target="_blank" rel="noopener">Telegram ${esc(t.replace("t.me/","@"))} ↗</a>`))
+    .concat(c.whatsapp ? [`<a href="https://${esc(c.whatsapp)}" target="_blank" rel="noopener">WhatsApp ↗</a>`] : [])
+    .concat(c.web ? [`<a href="${esc(c.web)}" target="_blank" rel="noopener">Website ↗</a>`] : []);
+  const L = letter(c);
+  document.getElementById("panel").innerHTML = `
+    <h2>${esc(c.name)}</h2>
+    <div class="reach">${links.join("")}</div>
+    <dl class="facts">
+      ${c.phone.length ? `<dt>Phone</dt><dd>${c.phone.map(p => esc(tel(p))).join(" · ")}</dd>` : ""}
+      ${c.email ? `<dt>Email</dt><dd>${esc(c.email)}</dd>` : ""}
+      <dt>Next hike</dt><dd>${c.next ? esc(c.next) + " · " + esc(c.example.en) : "none listed right now"}</dd>
+      <dt>On Esora</dt><dd>${c.esora ? "yes" : "no, only on their own channels"}</dd>
+    </dl>
+    <div class="row">
+      <div class="seg" role="group" aria-label="Language">
+        ${["en","ru","hy"].map(l => `<button type="button" id="l-${l}" data-l="${l}" aria-pressed="${l === lang}">${{en:"English",ru:"Русский",hy:"Հայերեն"}[l]}</button>`).join("")}
+      </div>
+      <div class="seg" role="group" aria-label="Format">
+        <button type="button" id="k-short" data-k="short" aria-pressed="${kind === "short"}">Message</button>
+        <button type="button" id="k-email" data-k="email" aria-pressed="${kind === "email"}">Email</button>
+      </div>
+    </div>
+    ${kind === "email" ? `<p class="subject">Subject: <b id="subj">${esc(L.subject)}</b></p>` : ""}
+    <label for="txt" class="note">You can edit the text before copying.</label>
+    <textarea id="txt">${esc(L.body)}</textarea>
+    <div class="row"><button type="button" class="copy" id="copy">Copy ${kind === "email" ? "email" : "message"}</button>${kind === "email" ? `<button type="button" class="chip" id="copysubj">Copy subject</button>` : ""}<span id="toast"></span></div>
+    <div><p class="note">Status (saved in this browser)</p>
+      <div class="status">${Object.entries(STATUS).map(([k, v]) => `<button type="button" class="chip" id="s-${k}" data-s="${k}" aria-pressed="${st(c.ig) === k}">${v}</button>`).join("")}</div></div>`;
+}
+
+function copyText(t, label){
+  const done = () => { document.getElementById("toast").textContent = label + " copied"; };
+  if(navigator.clipboard) navigator.clipboard.writeText(t).then(done, () => { const a = document.getElementById("txt"); a.select(); document.getElementById("toast").textContent = "Selected: press Ctrl+C"; });
+}
+
+document.addEventListener("click", e => {
+  const b = e.target.closest("button"); if(!b) return;
+  if(b.dataset.ig){ cur = b.dataset.ig; lang = CLUBS.find(c => c.ig === cur).lang; list(); panel(); if(innerWidth < 860) document.getElementById("panel").scrollIntoView({behavior:"smooth"}); return; }
+  if(b.dataset.f){ filter = b.dataset.f; document.querySelectorAll("#filters .chip").forEach(x => x.setAttribute("aria-pressed", x === b)); list(); return; }
+  if(b.dataset.l){ lang = b.dataset.l; panel(); return; }
+  if(b.dataset.k){ kind = b.dataset.k; panel(); return; }
+  if(b.dataset.s){ state[cur] = {s:b.dataset.s, at:new Date().toISOString().slice(0,10)}; save(); stats(); list(); panel(); return; }
+  if(b.id === "copy") copyText(document.getElementById("txt").value, kind === "email" ? "Email" : "Message");
+  if(b.id === "copysubj") copyText(document.getElementById("subj").textContent, "Subject");
+});
+stats(); list(); panel();
+</script>
