@@ -2,21 +2,33 @@
 
 One place for every group hike in Armenia, for locals and tourists, in English, Armenian and Russian.
 
-**Status:** draft. The site is not public yet: we're talking to hiking clubs first.
+**Status:** live preview on GitHub Pages, hidden from search engines (`noindex`) while we talk
+to the hiking clubs.
 
-## How it works
+## Pages
 
-1. `scripts/fetch_esora.py` reads the public hiking listings on esora.app into `data/hikes-raw.json`.
-2. `scripts/build.py` turns that into `index.html` (the whole site, data included).
-3. A GitHub Action (`.github/workflows/update.yml`) runs both every morning at 07:00 Yerevan time
-   and saves the result. You can also run it by hand from the **Actions** tab ("Run workflow").
+- Home: every upcoming hike, as a list or on a map, plus the Ararat comparison and big trips.
+- `clubs/`: all hiking clubs and tour operators, with logos.
+- `clubs/<club>/`: one page per club with contacts, its hikes and a map of them.
 
-4. A second GitHub Action (`.github/workflows/instagram.yml`) runs every Monday: `scripts/ig_collect.py`
-   asks Bright Data for the clubs' new Instagram posts (clubs listed in `data/clubs.json`), Claude reads
-   each caption and saves any upcoming hikes to `data/hikes-ig.json`. The build adds those hikes when
-   Esora doesn't already have that club on that day. It stops itself once Bright Data use for the month
-   reaches 600 records (`data/brightdata-usage.json`). It needs two repo secrets: `BRIGHTDATA_TOKEN`
-   and `ANTHROPIC_API_KEY`.
+## Where the data comes from
+
+1. **Esora** (daily, `.github/workflows/update.yml`): `scripts/fetch_esora.py` reads the public
+   hiking listings on esora.app into `data/hikes-raw.json`.
+2. **The clubs' Instagram** (Mondays, `instagram.yml`): `scripts/ig_collect.py` asks Bright Data
+   for new posts by the clubs in `data/clubs.json`, Claude reads each caption, and upcoming hikes
+   go to `data/hikes-ig.json`. Esora wins when both have the same club on the same day. Capped at
+   600 Bright Data records a month. Needs repo secrets `BRIGHTDATA_TOKEN` and `ANTHROPIC_API_KEY`.
+3. **OpenStreetMap** (monthly, `trails.yml`): `scripts/fetch_trails.py` downloads marked hiking
+   trails and named places. The build pins each hike on the map by its destination's name and draws
+   trails nearby. Map data © OpenStreetMap contributors (ODbL).
+4. **Logos**: `scripts/fetch_logos.py` saves each club's logo into `assets/logos/`.
+
+`scripts/build.py` turns all of it into `assets/data.js` and the page files. The look and
+behaviour live in `assets/style.css` and `assets/app.js`.
+
+AllTrails and HIKEArmenia don't allow reuse of their trails without permission; the requests to
+send them are in `outreach/trail-partners.md`.
 
 ## Partner outreach
 

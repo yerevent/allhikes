@@ -12,7 +12,7 @@ import json, math, sys, time, urllib.parse, urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SERVERS = ["https://overpass-api.de/api/interpreter", "https://overpass.private.coffee/api/interpreter"]
+SERVERS = ["https://overpass-api.de/api/interpreter"]
 AREA = 'area["ISO3166-1"="AM"][admin_level=2]->.a;'
 
 
@@ -22,7 +22,7 @@ def overpass(q):
         for url in SERVERS:
             try:
                 req = urllib.request.Request(url, data=body, headers={"User-Agent": "allhikes/0.1 (hiking aggregator)"})
-                with urllib.request.urlopen(req, timeout=300) as r:
+                with urllib.request.urlopen(req, timeout=200) as r:
                     return json.loads(r.read().decode("utf8"))["elements"]
             except Exception as e:
                 print("  retry:", url, str(e)[:80])
@@ -57,8 +57,18 @@ def thin(pts, step=60):
 
 
 print("Trails...")
+# Which trails are in Armenia (a light query), then their shapes in four smaller boxes,
+# because one big "everything with shapes" request times out on the public servers.
+in_armenia = {e["id"] for e in overpass('relation["route"="hiking"](area.a);out ids;')}
+print(" ", len(in_armenia), "trails in Armenia")
+rels = {}
+for box in ["38.8,43.4,40.05,45.05", "38.8,45.05,40.05,46.7", "40.05,43.4,41.35,45.05", "40.05,45.05,41.35,46.7"]:
+    for r in overpass(f'relation["route"="hiking"]({box});out geom;'):
+        if r["id"] in in_armenia:
+            rels[r["id"]] = r
+    print("  box done,", len(rels), "so far")
 trails = []
-for r in overpass('relation["route"="hiking"](area.a);out geom;'):
+for r in rels.values():
     t = r.get("tags", {})
     lines = []
     for m in r.get("members", []):

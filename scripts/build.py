@@ -75,7 +75,11 @@ GENERIC = {"peak": r"\b(mount|mountain|mt|peak|summit|гора|вершина|л
            "valley": r"\b(gorge|canyon|valley|cave|ущелье|каньон|пещера)\b|կիրճ|ձոր|քարանձավ",
            "village": r"(?!)"}
 BONUS = {"peak": 6, "water": 5, "waterfall": 5, "site": 4, "valley": 4, "village": 0}
-STOP = {"armenia", "yerevan", "hayastan", "ереван", "армения", "երևան", "հայաստան", "lake", "mount", "river"}
+STOP = {"armenia", "yerevan", "hayastan", "ереван", "армения", "երևան", "հայաստան", "lake", "mount", "river",
+        # everyday words that are also place names ("Three Lakes", the village "Vank" = monastery)
+        "three", "two", "big", "small", "white", "black", "red", "green", "blue", "long", "old", "new",
+        "upper", "lower", "great", "little", "sunset", "autumn", "hike", "hiking", "trail", "kids", "saint",
+        "holy", "vank", "berd", "kar", "sar", "dzor", "gyugh", "aghbyur", "forest", "canyon", "gorge"}
 
 
 def norm(s):
@@ -94,7 +98,7 @@ index = []
 for p in places:
     for n in p["n"]:
         full = norm(n).strip()
-        if len(full) >= 4 and full not in STOP:
+        if len(full) >= (5 if p["k"] == "village" else 4) and full not in STOP:
             index.append((full, p, False))
         core = re.sub(r"\s+", " ", re.sub(GENERIC[p["k"]], " ", full)).strip()
         if core != full and len(core) >= 3 and core not in STOP:
