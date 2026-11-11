@@ -1,4 +1,4 @@
-<title>Arahet Hikes Armenia</title>
+<title>AllHikes Armenia</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,7 +43,7 @@ h1,h2{font-family:var(--f-display);text-wrap:balance;margin:0}
 .langs button{border:0;background:none;color:var(--muted);font:600 13px var(--f-body);padding:7px 13px;cursor:pointer}
 .langs button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
 .sign{display:inline-grid;gap:2px;justify-self:start;background:var(--moss);color:#fff;padding:14px 22px 12px;border-radius:8px;box-shadow:0 2px 0 rgba(0,0,0,.15)}
-.sign h1{font-size:clamp(44px,9vw,84px);line-height:.9;letter-spacing:.04em;text-transform:uppercase;font-weight:700}
+.sign h1{font-size:clamp(44px,9vw,84px);line-height:.9;letter-spacing:.01em;font-weight:700}
 .sign small{font:500 13px/1.2 var(--f-body);opacity:.85;letter-spacing:.02em}
 .tag{font-size:clamp(19px,2.6vw,25px);line-height:1.3;max-width:28ch;font-weight:500;margin:0;text-wrap:balance}
 .stats{display:flex;flex-wrap:wrap;gap:8px 22px;margin:0;padding:0;list-style:none;font:500 13px var(--f-data);color:var(--muted)}
@@ -161,7 +161,7 @@ footer p{margin:0;max-width:70ch}
         <button type="button" id="l-ru" data-l="ru">РУ</button>
       </div>
     </div>
-    <div class="sign"><h1 id="brand">Arahet</h1><small data-i="brandSub"></small></div>
+    <div class="sign"><h1 id="brand">AllHikes</h1><small data-i="brandSub"></small></div>
     <p class="tag" data-i="tag"></p>
     <ul class="stats" id="stats"></ul>
   </div>
@@ -218,7 +218,7 @@ footer p{margin:0;max-width:70ch}
 const HIKES = /*__DATA__*/[];
 
 const T = {
-  en:{draft:"Draft preview",brandSub:"“Arahet” means trail in Armenian",tag:"Every group hike in Armenia, in one place.",
+  en:{draft:"Draft preview",brandSub:"Hikes in Armenia",tag:"Every group hike in Armenia, in one place.",
     sHikes:"upcoming hikes",sClubs:"clubs",sFrom:"cheapest day hike",
     all:"All days",today:"Today",tomorrow:"Tomorrow",easy:"Easy",moderate:"Moderate",hard:"Hard",cheap:"Under 10,000 ֏",kids:"With kids",
     allClubs:"All clubs",q:"Mountain, gorge, monastery…",novTitle:"Upcoming hikes",
@@ -230,7 +230,7 @@ const T = {
     bigTitle:"Big trips abroad",bigSub:"Expeditions clubs are already booking for 2027",
     clubsTitle:"The clubs",clubsCount:n=>`${n} clubs with upcoming hikes`,clubNov:n=>`${n} upcoming`,clubBig:n=>`${n} big trips`,
     foot:"Draft for partner conversations. Listings come from the clubs’ public announcements, gathered on {date}. Booking always happens directly with the club."},
-  hy:{draft:"Սևագիր",brandSub:"Հայաստանի արահետները",tag:"Հայաստանի բոլոր խմբային արշավները՝ մեկ տեղում։",
+  hy:{draft:"Սևագիր",brandSub:"Արշավներ Հայաստանում",tag:"Հայաստանի բոլոր խմբային արշավները՝ մեկ տեղում։",
     sHikes:"առաջիկա արշավ",sClubs:"ակումբ",sFrom:"ամենամատչելի արշավը",
     all:"Բոլոր օրերը",today:"Այսօր",tomorrow:"Վաղը",easy:"Հեշտ",moderate:"Միջին",hard:"Բարդ",cheap:"Մինչև 10 000 ֏",kids:"Երեխաների հետ",
     allClubs:"Բոլոր ակումբները",q:"Լեռ, կիրճ, վանք…",novTitle:"Առաջիկա արշավներ",
@@ -242,7 +242,7 @@ const T = {
     bigTitle:"Մեծ արշավներ արտերկրում",bigSub:"Արշավախմբեր, որոնց գրանցումն արդեն բաց է 2027-ի համար",
     clubsTitle:"Ակումբները",clubsCount:n=>`${n} ակումբ առաջիկա արշավներով`,clubNov:n=>`${n} առաջիկա`,clubBig:n=>`${n} մեծ արշավ`,
     foot:"Սևագիր՝ գործընկերների հետ քննարկման համար։ Տվյալները վերցված են ակումբների հրապարակային հայտարարություններից ({date})։ Գրանցումը միշտ անմիջապես ակումբի մոտ է։"},
-  ru:{draft:"Черновик",brandSub:"«Арахет» по-армянски значит «тропа»",tag:"Все групповые походы по Армении в одном месте.",
+  ru:{draft:"Черновик",brandSub:"Походы по Армении",tag:"Все групповые походы по Армении в одном месте.",
     sHikes:"ближайших походов",sClubs:"клубов",sFrom:"самый доступный поход",
     all:"Все дни",today:"Сегодня",tomorrow:"Завтра",easy:"Лёгкий",moderate:"Средний",hard:"Сложный",cheap:"До 10 000 ֏",kids:"С детьми",
     allClubs:"Все клубы",q:"Гора, ущелье, монастырь…",novTitle:"Ближайшие походы",
@@ -256,12 +256,12 @@ const T = {
     foot:"Черновик для разговоров с партнёрами. Данные взяты из открытых анонсов клубов ({date}). Запись всегда напрямую у клуба."}
 };
 const LOC = {en:"en-GB",hy:"hy-AM",ru:"ru-RU"};
-const BRAND = {en:"Arahet",hy:"Արահետ",ru:"Арахет"};
+const BRAND = {en:"AllHikes",hy:"AllHikes",ru:"AllHikes"};
 const TODAY = new Date().toLocaleDateString("en-CA", {timeZone:"Asia/Yerevan"});
 const UPDATED = "__UPDATED__";
 
 let lang = "en";
-try { lang = localStorage.getItem("arahet-lang") || "en"; } catch(e){}
+try { lang = localStorage.getItem("allhikes-lang") || "en"; } catch(e){}
 if(!T[lang]) lang = "en";
 const S = {day:"", df:new Set(), cheap:false, kids:false, club:"", q:""};
 
@@ -408,7 +408,7 @@ function renderAll(){ renderStatic(); renderDays(); renderList(); }
 document.addEventListener("click", e => {
   const b = e.target.closest("button");
   if(!b) return;
-  if(b.dataset.l){ lang = b.dataset.l; try{ localStorage.setItem("arahet-lang", lang); }catch(err){} renderAll(); drawTopo(); return; }
+  if(b.dataset.l){ lang = b.dataset.l; try{ localStorage.setItem("allhikes-lang", lang); }catch(err){} renderAll(); drawTopo(); return; }
   if(b.dataset.d !== undefined){ S.day = b.dataset.d; renderDays(); renderList(); return; }
   if(b.dataset.df){ S.df.has(b.dataset.df) ? S.df.delete(b.dataset.df) : S.df.add(b.dataset.df); b.setAttribute("aria-pressed", S.df.has(b.dataset.df)); renderList(); return; }
   if(b.id === "f-cheap"){ S.cheap = !S.cheap; b.setAttribute("aria-pressed", S.cheap); renderList(); return; }

@@ -1,7 +1,6 @@
-# Arahet
+# AllHikes
 
 One place for every group hike in Armenia, for locals and tourists, in English, Armenian and Russian.
-"Arahet" (Արահետ, "trail") is a working name.
 
 **Status:** draft. The site is not public yet: we're talking to hiking clubs first.
 

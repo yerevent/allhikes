@@ -1,10 +1,10 @@
-<title>Arahet Partner Outreach</title>
+<title>AllHikes Partner Outreach</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Golos+Text:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&family=Noto+Sans+Armenian:wght@400..700&display=swap">
 <style>
-/* Layout: a working desk. Club list on the left, the letter for the selected club on the right; stacks on a phone. Same palette as the Arahet site. */
+/* Layout: a working desk. Club list on the left, the letter for the selected club on the right; stacks on a phone. Same palette as the AllHikes site. */
 :root{
   --paper:#ECEFE7; --card:#F8FAF4; --ink:#1C221F; --muted:#5B675F; --line:#CBD2C8;
   --accent:#B9412B; --accent-ink:#FFFFFF; --moss:#3D6A49; --sel:#DCE6D6;
@@ -66,7 +66,7 @@ textarea{width:100%;min-height:300px;resize:vertical;border:1px solid var(--line
 
 <div class="wrap">
   <header>
-    <span class="eyebrow">Arahet · private</span>
+    <span class="eyebrow">AllHikes · private</span>
     <h1>Partner outreach</h1>
     <p>Every hiking club and tour operator we found, how to reach them, and a letter ready to send. Pick a club: the letter fills in its name and one of its real upcoming hikes, in its own language.</p>
     <div class="stats" id="stats"></div>
@@ -94,8 +94,8 @@ const STATUS = {new:"Not contacted", sent:"Messaged", yes:"Said yes", no:"Declin
 const TYPE = {"hiking club":"Hiking club","tour operator":"Tour operator","kids club":"Kids club","outdoor":"Outdoor"};
 
 let state = {};
-try { state = JSON.parse(localStorage.getItem("arahet-outreach") || "{}"); } catch(e){}
-const save = () => { try { localStorage.setItem("arahet-outreach", JSON.stringify(state)); } catch(e){} };
+try { state = JSON.parse(localStorage.getItem("allhikes-outreach") || "{}"); } catch(e){}
+const save = () => { try { localStorage.setItem("allhikes-outreach", JSON.stringify(state)); } catch(e){} };
 const st = ig => (state[ig] && state[ig].s) || "new";
 let filter = "all", cur = CLUBS[0] && CLUBS[0].ig, lang = CLUBS[0] ? CLUBS[0].lang : "en", kind = "short";
 

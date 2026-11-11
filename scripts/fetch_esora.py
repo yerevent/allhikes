@@ -8,7 +8,7 @@ so a daily run stays light on Esora.
 import json, os, re, sys, urllib.request
 from concurrent.futures import ThreadPoolExecutor
 
-UA = {"User-Agent": "Mozilla/5.0 (compatible; arahet-hikes/0.1)"}
+UA = {"User-Agent": "Mozilla/5.0 (compatible; allhikes/0.1)"}
 BASE = "https://esora.app"
 OUT = sys.argv[1]
 OLD = {}

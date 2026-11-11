@@ -24,7 +24,7 @@ jobs:
         run: python scripts/build.py
       - name: Save changes
         run: |
-          git config user.name "arahet-bot"
+          git config user.name "allhikes-bot"
           git config user.email "actions@github.com"
           git add data/hikes-raw.json index.html
           git diff --cached --quiet || git commit -m "Update hikes $(date -u +%F)"

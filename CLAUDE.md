@@ -1,4 +1,4 @@
-# Arahet
+# AllHikes
 
 Hiking-tour aggregator for Armenia: a separate brand from yerevent. The owner (Anna) is
 non-technical, so explain things in plain words.
