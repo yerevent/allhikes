@@ -1,80 +1,5 @@
 [
  {
-  "slug": "khachardzan-gosh-plech-01c3cfc6",
-  "name": {
-   "en": "Khachardzan to Gosh Hike & Plech",
-   "hy": "Խաչարձան Գոշ քայլարշավ և պլեճ",
-   "ru": "Поход Хачардзан — Гош и плеч"
-  },
-  "start": "2026-11-10",
-  "end": null,
-  "org": "110 Places Hiking Club",
-  "ig": "110_places",
-  "place": "Yerevan",
-  "lat": null,
-  "lng": null,
-  "price": 10000,
-  "book": "https://www.instagram.com/p/DfXnHTAkRCi/",
-  "km": 7.0,
-  "gain": 600.0,
-  "summit": null,
-  "diffText": "moderate",
-  "back": null,
-  "meet": null,
-  "desc": "Forest trails, scenic views, and plech.",
-  "esora": "https://esora.app/en/events/khachardzan-gosh-plech-01c3cfc6"
- },
- {
-  "slug": "evening-run-cf60c5f6",
-  "name": {
-   "en": "Evening Run",
-   "hy": "Երեկոյան վազք",
-   "ru": "Вечерняя пробежка"
-  },
-  "start": "2026-11-10T18:00:00+04:00",
-  "end": null,
-  "org": "TriClub Yerevan",
-  "ig": "triclubyerevan",
-  "place": "Yerevan Botanical Garden",
-  "lat": 40.2110317,
-  "lng": 44.5572357,
-  "price": 0,
-  "book": "https://www.instagram.com/p/Dfh4dd7jecs/",
-  "km": null,
-  "gain": null,
-  "summit": null,
-  "diffText": null,
-  "back": null,
-  "meet": null,
-  "desc": "Free group training open to all levels.",
-  "esora": "https://esora.app/en/events/evening-run-cf60c5f6"
- },
- {
-  "slug": "victory-park-run-41e16a30",
-  "name": {
-   "en": "Victory Park Run",
-   "hy": "Հաղթանակի զբոսայգու վազքարշավ",
-   "ru": "Пробежка в парке Победы"
-  },
-  "start": "2026-11-10T20:00:00+04:00",
-  "end": null,
-  "org": "Yerevan Run",
-  "ig": "yerevanrun",
-  "place": "Victory Park",
-  "lat": 40.195669599999995,
-  "lng": 44.5202987,
-  "price": 0,
-  "book": "https://www.instagram.com/p/DfhpOrNCA6w/",
-  "km": 5.0,
-  "gain": null,
-  "summit": null,
-  "diffText": null,
-  "back": null,
-  "meet": "lake bridge in Victory Park.",
-  "desc": "Meeting point: lake bridge in Victory Park.",
-  "esora": "https://esora.app/en/events/victory-park-run-41e16a30"
- },
- {
   "slug": "day-tour-to-the-herouni-telescope-ff22f46e",
   "name": {
    "en": "Daytime Herouni Tour",
@@ -100,13 +25,13 @@
   "esora": "https://esora.app/en/events/day-tour-to-the-herouni-telescope-ff22f46e"
  },
  {
-  "slug": "interval-run-01ae75cc",
+  "slug": "evening-run-cf60c5f6",
   "name": {
-   "en": "Interval Run with TriClub Yerevan",
-   "hy": "Ինտերվալային վազք TriClub Yerevan-ի հետ",
-   "ru": "Интервальная пробежка с TriClub Yerevan"
+   "en": "Evening Run",
+   "hy": "Երեկոյան վազք",
+   "ru": "Вечерняя пробежка"
   },
-  "start": "2026-11-11T07:00:00+04:00",
+  "start": "2026-11-12T18:00:00+04:00",
   "end": null,
   "org": "TriClub Yerevan",
   "ig": "triclubyerevan",
@@ -121,33 +46,8 @@
   "diffText": null,
   "back": null,
   "meet": null,
-  "desc": "Interval running workout open to all fitness levels. No prior registration needed—just show up.",
-  "esora": "https://esora.app/en/events/interval-run-01ae75cc"
- },
- {
-  "slug": "easy-wednesday-d7ce7faf",
-  "name": {
-   "en": "Easy Wednesday Run",
-   "hy": "Easy Wednesday վազք",
-   "ru": "Пробежка Easy Wednesday"
-  },
-  "start": "2026-11-11T07:30:00+04:00",
-  "end": null,
-  "org": "Yerevan Run",
-  "ig": "yerevanrun",
-  "place": "Kond Pedestrian Tunnel",
-  "lat": 40.186583399999996,
-  "lng": 44.502825699999995,
-  "price": 0,
-  "book": "https://www.instagram.com/p/DfhpOrNCA6w/",
-  "km": 5.0,
-  "gain": null,
-  "summit": null,
-  "diffText": null,
-  "back": null,
-  "meet": "Kond tunnel parking lot.",
-  "desc": "Distance: 5 km.",
-  "esora": "https://esora.app/en/events/easy-wednesday-d7ce7faf"
+  "desc": "Free group training open to all levels.",
+  "esora": "https://esora.app/en/events/evening-run-cf60c5f6"
  },
  {
   "slug": "kruzhochki-run-f36a3a14",
@@ -320,8 +220,8 @@
   "summit": null,
   "diffText": null,
   "back": "21:00",
-  "meet": null,
-  "desc": "A hiking trip through the forests and nature of Tavush to Mtnadzor.",
+  "meet": "8 Tumanyan St",
+  "desc": "A hike through the wild forests of Tavush.",
   "esora": "https://esora.app/en/events/mtnadzor-kaylarshav-hiking-in-mtnadzor-03f84d97"
  },
  {
@@ -602,7 +502,7 @@
  {
   "slug": "ascent-of-mt-kalasar-and-hermonavank-bf5d8662",
   "name": {
-   "en": "Hike to Mt. Kalasar and Hermonavank",
+   "en": "Ascent of Mt. Kalasar and Hermonavank",
    "hy": "Կալասար եւ Հերմոնավանք",
    "ru": "Поход на гору Каласар и к монастырю Эрмонаванк"
   },
@@ -620,8 +520,8 @@
   "summit": null,
   "diffText": null,
   "back": "20:30",
-  "meet": "Sakharov Square",
-  "desc": "• Distance: 12 km",
+  "meet": "Sakharov Square, at the corner of Nalbandyan and Pushkin streets near the former fire station. Please arrive 10 minutes early.",
+  "desc": "Hike to Mount Kalasar in Vayots Dzor, located northwest of Hermon village, where remnants of fortress walls remain on the summit. The route also includes a visit to the 10th-century Hermonavank monastery, with views over the Teqsar and Vardenis mountains.",
   "esora": "https://esora.app/en/events/ascent-of-mt-kalasar-and-hermonavank-bf5d8662"
  },
  {
@@ -650,6 +550,31 @@
   "esora": "https://esora.app/en/events/shunkar-ler-23c881ec"
  },
  {
+  "slug": "shreshti-kirch-7ae2f0ce",
+  "name": {
+   "en": "Hiking in Shresht Gorge",
+   "hy": "Քայլարշավ Շրեշտի կիրճում",
+   "ru": "Поход по ущелью Шрешт"
+  },
+  "start": "2026-11-14T08:00:00+04:00",
+  "end": null,
+  "org": "That Trail Hikes",
+  "ig": "that_trail_",
+  "place": "Yerevan",
+  "lat": null,
+  "lng": null,
+  "price": 16000,
+  "book": "https://www.instagram.com/p/Dfka2Y8CKTp/",
+  "km": 12.0,
+  "gain": 500.0,
+  "summit": 2098.0,
+  "diffText": null,
+  "back": null,
+  "meet": null,
+  "desc": "A hike along the slopes of Mount Shreshtasar (2098 m) in the Vayots Dzor region.",
+  "esora": "https://esora.app/en/events/shreshti-kirch-7ae2f0ce"
+ },
+ {
   "slug": "hiking-mount-apakekar-f2ba704f",
   "name": {
    "en": "Ascent of Mount Apakeqar",
@@ -673,6 +598,31 @@
   "meet": null,
   "desc": "Hike to Mount Apakeqar starting from Hovk village. The route covers about 8 km with a relative elevation gain of 600 m (summit altitude: 1,651 m).",
   "esora": "https://esora.app/en/events/hiking-mount-apakekar-f2ba704f"
+ },
+ {
+  "slug": "arshav-depi-shunkar-ler-2480f09a",
+  "name": {
+   "en": "Hiking to Mount Shunkar",
+   "hy": "Արշավ դեպի Շունքար լեռ",
+   "ru": "Поход на гору Шункар"
+  },
+  "start": "2026-11-14T08:00:00+04:00",
+  "end": null,
+  "org": "Sari Anin",
+  "ig": "sarimardik.hikingclub",
+  "place": "Republic Square",
+  "lat": 40.178529,
+  "lng": 44.515632,
+  "price": 10000,
+  "book": "https://www.instagram.com/p/Dfkkk0ODp-_/",
+  "km": 15.0,
+  "gain": null,
+  "summit": null,
+  "diffText": null,
+  "back": null,
+  "meet": "near Republic Square metro station.",
+  "desc": "A mountain hike to Mount Shunkar covering approximately 15 km of trails.",
+  "esora": "https://esora.app/en/events/arshav-depi-shunkar-ler-2480f09a"
  },
  {
   "slug": "yerek-bazeneri-arahet-three-hawks-trail-a7a201a1",
@@ -996,7 +946,7 @@
   "diffText": null,
   "back": "21:00",
   "meet": null,
-  "desc": "A hiking trip in Vayots Dzor starting from Vernashen village to Spitakavor Monastery, where Garegin Nzhdeh's grave is located, and continuing up to medieval Proshaberd Fortress (Boloraberd).",
+  "desc": "A hike in Vayots Dzor starting from Vernashen village to Spitakavor Monastery, where the grave of Garegin Nzhdeh is located, and continuing to the heights of Proshaberd (Boloraberd) Fortress overlooking the Vayots Dzor mountains and Mount Masis.",
   "esora": "https://esora.app/en/events/spitakavor-proshaberd-kaylarshav-hiking-to-proshaberd-fortress-and-spitakavor-ed274c91"
  },
  {
@@ -1210,9 +1160,9 @@
   "end": null,
   "org": "4 Peaks Alpine Club",
   "ig": "4_peaks_alpine_club",
-  "place": "Yerevan",
-  "lat": null,
-  "lng": null,
+  "place": "4 Peaks Alpine Club",
+  "lat": 40.154162400000004,
+  "lng": 44.510469,
   "price": 9000,
   "book": "https://4peaks.am/terms-and-conditions/?utm_source=esora.app&utm_medium=referral",
   "km": 15.0,
@@ -1298,6 +1248,31 @@
   "meet": null,
   "desc": "A hike in Khosrov Forest State Reserve starting from the village of Garni, visiting the Symphony of Stones and walking to the Vahagn and Astghik waterfalls, named after Armenian pagan gods.",
   "esora": "https://esora.app/en/events/khosrovi-argelotsi-jrvezhner-hiking-in-khosrov-forest-state-reserve-28b51aa1"
+ },
+ {
+  "slug": "varagi-lernerov-depi-srveghi-vank-c27da7f2",
+  "name": {
+   "en": "Through Varag Mountains to Srvegh",
+   "hy": "Վարագի լեռներով դեպի Սրվեղի վանք",
+   "ru": "По горам Вараг к монастырю Срвег"
+  },
+  "start": "2026-11-15T08:00:00+04:00",
+  "end": null,
+  "org": "ARI Hiking Club",
+  "ig": "ari_hiking_club",
+  "place": "Yerevan",
+  "lat": null,
+  "lng": null,
+  "price": 12000,
+  "book": "https://www.instagram.com/p/Dfj_YkCEZ61/",
+  "km": 20.0,
+  "gain": 210.0,
+  "summit": null,
+  "diffText": null,
+  "back": "21:00",
+  "meet": "Sakharov Square, at the corner of Nalbandyan and Pushkin streets near the former fire station. Please arrive 10 minutes early.",
+  "desc": "A 20 km hike through Tavush province starting from the Gandzakar–Itsakar road, crossing the Varag mountains with views of the Miapor and Ijevan ranges, and ending in Aygehovit village at the 13th-century brick monastery of Srvegh.",
+  "esora": "https://esora.app/en/events/varagi-lernerov-depi-srveghi-vank-c27da7f2"
  },
  {
   "slug": "semyonovkayits-depi-dilijan-87b1c20a",
@@ -1423,6 +1398,56 @@
   "meet": null,
   "desc": "A book hike to Hrant Matevosyan's birthplace, the village of Ahnidzor.",
   "esora": "https://esora.app/en/events/grkarshav-depi-ahnidzor-6c00cf12"
+ },
+ {
+  "slug": "kids-hike-to-smbataberd-fortress-7ac36013",
+  "name": {
+   "en": "Kids Hike to Smbataberd Fortress",
+   "hy": "Խոխա արշավ դեպի Սմբատաբերդ",
+   "ru": "Детский поход к крепости Смбатаберд"
+  },
+  "start": "2026-11-15T09:00:00+04:00",
+  "end": null,
+  "org": "ARI Hiking Club",
+  "ig": "ari_hiking_club",
+  "place": "Yerevan",
+  "lat": null,
+  "lng": null,
+  "price": 8500,
+  "book": "https://www.instagram.com/p/DY1k4DRE_e6/",
+  "km": 6.0,
+  "gain": null,
+  "summit": null,
+  "diffText": null,
+  "back": "18:30",
+  "meet": "Sakharov Square.",
+  "desc": "A 6 km hike for children aged 6–14.",
+  "esora": "https://esora.app/en/events/kids-hike-to-smbataberd-fortress-7ac36013"
+ },
+ {
+  "slug": "kids-hike-to-smbataberd-fortress-fb200eb8",
+  "name": {
+   "en": "Kids Hike to Smbataberd Fortress",
+   "hy": "Խոխա արշավ Սմբատաբերդ",
+   "ru": "Детский поход к крепости Смбатаберд"
+  },
+  "start": "2026-11-15T09:00:00+04:00",
+  "end": null,
+  "org": "ARI khokha hiking club",
+  "ig": "ari.khokha",
+  "place": "Yerevan",
+  "lat": null,
+  "lng": null,
+  "price": 8500,
+  "book": "https://www.instagram.com/p/DY1XND3CXg5/",
+  "km": 6.0,
+  "gain": null,
+  "summit": null,
+  "diffText": null,
+  "back": "18:30",
+  "meet": null,
+  "desc": "Kids hike for ages 6–14.",
+  "esora": "https://esora.app/en/events/kids-hike-to-smbataberd-fortress-fb200eb8"
  },
  {
   "slug": "verelk-mets-parakhadem-1da7ee3e",
@@ -1820,8 +1845,8 @@
   "summit": null,
   "diffText": null,
   "back": "22:00",
-  "meet": null,
-  "desc": "A light hike to Tavush Fortress (also known as Tslik Amram's Fortress) and Khoranashat Monastery, located right by the border and visited with special permission arranged for tour participants. The route passes along the renovated mountain road between Chambarak and Berd, with the hike starting from",
+  "meet": "8 Tumanyan St",
+  "desc": "A trip to Tavush featuring Tavush (Tslik Amram) Fortress and the border monastery of Khoranashat, accessible with special permission provided for the group. The route passes along the scenic mountain road connecting Chambarak and Berd. The walk to Khoranashat starts from Chinari village along easy t",
   "esora": "https://esora.app/en/events/khoranashat-ev-tavushi-berd-batsarik-tetev-kaylarshav-hiking-to-khoranashat-8dccaf46"
  },
  {
