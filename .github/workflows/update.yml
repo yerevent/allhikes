@@ -26,6 +26,6 @@ jobs:
         run: |
           git config user.name "allhikes-bot"
           git config user.email "actions@github.com"
-          git add data/hikes-raw.json index.html
+          git add data index.html clubs assets/data.js
           git diff --cached --quiet || git commit -m "Update hikes $(date -u +%F)"
           git pull --rebase -q && git push

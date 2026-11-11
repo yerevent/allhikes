@@ -1,0 +1,32 @@
+name: Trails from OpenStreetMap
+
+on:
+  schedule:
+    - cron: "0 2 1 * *"   # 1st of every month, 06:00 Yerevan time
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency: data-update
+
+jobs:
+  trails:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Download trails and places
+        run: python scripts/fetch_trails.py
+      - name: Build the site
+        run: python scripts/build.py
+      - name: Save changes
+        run: |
+          git config user.name "allhikes-bot"
+          git config user.email "actions@github.com"
+          git add data index.html clubs assets/data.js
+          git diff --cached --quiet || git commit -m "Trails from OpenStreetMap $(date -u +%F)"
+          git pull --rebase -q && git push
