@@ -1,30 +1,5 @@
 [
  {
-  "slug": "day-tour-to-the-herouni-telescope-ff22f46e",
-  "name": {
-   "en": "Daytime Herouni Tour",
-   "hy": "Ցերեկային Հերունի",
-   "ru": "Дневной Геруни"
-  },
-  "start": "2026-11-11",
-  "end": null,
-  "org": "Imagine Tour",
-  "ig": "tour_imagine",
-  "place": "Radio Optical Observatory ROT-54",
-  "lat": 40.3508569,
-  "lng": 44.241792,
-  "price": null,
-  "book": "https://www.instagram.com/p/DfBzNpsoo2c/",
-  "km": null,
-  "gain": null,
-  "summit": null,
-  "diffText": null,
-  "back": null,
-  "meet": null,
-  "desc": "A trip to the world's first giant radio-optical telescope, set in the atmosphere of a research institute surrounded by mountain scenery, followed by a picnic.",
-  "esora": "https://esora.app/en/events/day-tour-to-the-herouni-telescope-ff22f46e"
- },
- {
   "slug": "evening-run-cf60c5f6",
   "name": {
    "en": "Evening Run",
@@ -650,6 +625,31 @@
   "esora": "https://esora.app/en/events/yerek-bazeneri-arahet-three-hawks-trail-a7a201a1"
  },
  {
+  "slug": "detskiy-pokhod-po-okhranyaemomu-landshaftu-arpa-f8931586",
+  "name": {
+   "en": "Kids Hike Across Arpa Protected Landscape",
+   "hy": "Մանկական արշավ Արփա պահպանվող լանդշաֆտում",
+   "ru": "Детский поход по охраняемому ландшафту Арпа"
+  },
+  "start": "2026-11-14T10:00:00+04:00",
+  "end": null,
+  "org": null,
+  "ig": "",
+  "place": "Yerevan",
+  "lat": null,
+  "lng": null,
+  "price": 8000,
+  "book": "https://www.instagram.com/p/DfnLHwiCEU3/",
+  "km": 6.0,
+  "gain": null,
+  "summit": null,
+  "diffText": null,
+  "back": "17:30",
+  "meet": "Sakharov Square.",
+  "desc": "A 6 km hike designed for children aged 3–6.",
+  "esora": "https://esora.app/en/events/detskiy-pokhod-po-okhranyaemomu-landshaftu-arpa-f8931586"
+ },
+ {
   "slug": "3-6-t-khokha-arshav-arpa-pahpanvogh-landshaft-e6a1f25d",
   "name": {
    "en": "Kids Hike: Arpa Protected Landscape",
@@ -998,6 +998,31 @@
   "meet": "near the SAS supermarket at Yeritasardakan.",
   "desc": "A 10 km hike through the Vorotan Gorge in Syunik, following a trail from the ancient village of Old Khot to Shinuhayr.",
   "esora": "https://esora.app/en/events/hin-khotits-shinuhayr-haykakan-machu-pikchu-2e2e7daf"
+ },
+ {
+  "slug": "verelk-geghmaghan-c6aa3f5f",
+  "name": {
+   "en": "Ascent of Mount Geghmaghan",
+   "hy": "Վերելք Գեղմաղան լեռ",
+   "ru": "Восхождение на гору Гегмаган"
+  },
+  "start": "2026-11-15T07:00:00+04:00",
+  "end": null,
+  "org": "North Peak Mountain Club",
+  "ig": "northpeakmc",
+  "place": "Yerevan",
+  "lat": null,
+  "lng": null,
+  "price": 10000,
+  "book": "https://www.facebook.com/events/2145261082754678/",
+  "km": 16.0,
+  "gain": 1200.0,
+  "summit": 3319.0,
+  "diffText": "moderately difficult",
+  "back": null,
+  "meet": "near SAS on 35 Isahakyan St. Please arrive 10 minutes early.",
+  "desc": "A hike to Mount Geghmaghan (3,319 m) in the Kotayk Province. In clear weather, the summit offers views of Lake Sevan, Azhdahak, Ararat, Aragats, and other peaks. This ascent is part of the \"10+1\" club member quest.",
+  "esora": "https://esora.app/en/events/verelk-geghmaghan-c6aa3f5f"
  },
  {
   "slug": "khosrov-reserve-vahagn-and-astghik-waterfalls-e9dfeaad",
@@ -1400,6 +1425,31 @@
   "esora": "https://esora.app/en/events/grkarshav-depi-ahnidzor-6c00cf12"
  },
  {
+  "slug": "detskiy-pokhod-k-kreposti-smbataberd-509146dd",
+  "name": {
+   "en": "Kids Hike to Smbataberd Fortress",
+   "hy": "Մանկական արշավ դեպի Սմբատաբերդ",
+   "ru": "Детский поход к крепости Смбатаберд"
+  },
+  "start": "2026-11-15T09:00:00+04:00",
+  "end": null,
+  "org": null,
+  "ig": "",
+  "place": "Yerevan",
+  "lat": null,
+  "lng": null,
+  "price": 8500,
+  "book": "https://www.instagram.com/p/DfnLHwiCEU3/",
+  "km": 6.0,
+  "gain": null,
+  "summit": null,
+  "diffText": null,
+  "back": "18:30",
+  "meet": "Sakharov Square.",
+  "desc": "Hike to Smbataberd Fortress for teenagers and kids aged 6–14.",
+  "esora": "https://esora.app/en/events/detskiy-pokhod-k-kreposti-smbataberd-509146dd"
+ },
+ {
   "slug": "kids-hike-to-smbataberd-fortress-7ac36013",
   "name": {
    "en": "Kids Hike to Smbataberd Fortress",
@@ -1450,6 +1500,31 @@
   "esora": "https://esora.app/en/events/kids-hike-to-smbataberd-fortress-fb200eb8"
  },
  {
+  "slug": "azat-river-trail-run-60a35a84",
+  "name": {
+   "en": "Azat River Trail Run",
+   "hy": "Azat River թրեյլային վազք",
+   "ru": "Трейловый забег Azat River"
+  },
+  "start": "2026-11-15T09:00:00+04:00",
+  "end": null,
+  "org": "Yerevan Run",
+  "ig": "yerevanrun",
+  "place": "Symphony of Stones",
+  "lat": 40.1159132,
+  "lng": 44.741394500000006,
+  "price": 0,
+  "book": "https://www.instagram.com/p/DfhpOrNCA6w/",
+  "km": 9.5,
+  "gain": null,
+  "summit": null,
+  "diffText": null,
+  "back": null,
+  "meet": null,
+  "desc": "A trail run from Azat Reservoir to the Symphony of Stones, suitable for beginners.",
+  "esora": "https://esora.app/en/events/azat-river-trail-run-60a35a84"
+ },
+ {
   "slug": "verelk-mets-parakhadem-1da7ee3e",
   "name": {
    "en": "Ascent of Mets Parakhadem",
@@ -1473,31 +1548,6 @@
   "meet": "7 Vazgen Sargsyan St at 09:00. Return at 21:00.",
   "desc": "A hike to Mets Parakhadem (1955 m), one of the prominent peaks of the Urts Mountain Range in Ararat Province. If the weather permits, views of Mount Ararat will open up.",
   "esora": "https://esora.app/en/events/verelk-mets-parakhadem-1da7ee3e"
- },
- {
-  "slug": "azat-river-trail-run-60a35a84",
-  "name": {
-   "en": "Azat River Trail Run",
-   "hy": "Azat River թրեյլային վազք",
-   "ru": "Трейловый забег Azat River"
-  },
-  "start": "2026-11-15T09:00:00+04:00",
-  "end": null,
-  "org": "Yerevan Run",
-  "ig": "yerevanrun",
-  "place": "Yerevan",
-  "lat": null,
-  "lng": null,
-  "price": 0,
-  "book": "https://www.instagram.com/p/DfhpOrNCA6w/",
-  "km": 11.0,
-  "gain": null,
-  "summit": null,
-  "diffText": null,
-  "back": null,
-  "meet": "Sakharov Square.",
-  "desc": "Distance: 11 km with 350 m elevation gain.",
-  "esora": "https://esora.app/en/events/azat-river-trail-run-60a35a84"
  },
  {
   "slug": "hike-to-meghradzor-waterfall-440b3471",
@@ -1627,7 +1677,7 @@
  {
   "slug": "tumanyani-hetkerov-dseghi-shrjanadzev-arahet-3b4efe0d",
   "name": {
-   "en": "In the Footsteps of Tumanyan: Dsegh Loop Trail",
+   "en": "In the Footsteps of Tumanyan: Dsegh Circular Trail",
    "hy": "Թումանյանի հետքերով․ Դսեղի շրջանաձև արահետ",
    "ru": "По следам Туманяна: круговая тропа Дсеха"
   },
@@ -1645,8 +1695,8 @@
   "summit": null,
   "diffText": "suitable for beginners",
   "back": null,
-  "meet": null,
-  "desc": "An autumn hike along the forested trails of Lori, passing Bardzrakash Saint Gregory church, Gikor's spring, and local khachkars.",
+  "meet": "near Matenadaran.",
+  "desc": "A 10 km circular hike through the autumn forest trails of Dsegh in Lori. The route includes Bardzrakash Saint Gregory Monastery, Gikor's Spring, and the khachkar where Hovhannes Tumanyan was photographed.",
   "esora": "https://esora.app/en/events/tumanyani-hetkerov-dseghi-shrjanadzev-arahet-3b4efe0d"
  },
  {
@@ -1673,6 +1723,31 @@
   "meet": "Republic Square, beginning of Vazgen Sargsyan Street, near the Marriott Hotel.",
   "desc": "A hike exploring the landscapes of the Eranos Mountains and Pink Canyon, known for its pink and reddish rock formations.",
   "esora": "https://esora.app/en/events/vardaguyn-kirch-vardaguyn-canyon-7299a59b"
+ },
+ {
+  "slug": "day-tour-to-the-herouni-telescope-ff22f46e",
+  "name": {
+   "en": "Daytime Herouni Tour",
+   "hy": "Ցերեկային Հերունի",
+   "ru": "Дневной Геруни"
+  },
+  "start": "2026-11-22",
+  "end": null,
+  "org": "Imagine Tour",
+  "ig": "tour_imagine",
+  "place": "Radio Optical Observatory ROT-54",
+  "lat": 40.3508569,
+  "lng": 44.241792,
+  "price": null,
+  "book": "https://www.instagram.com/p/DfBzNpsoo2c/",
+  "km": null,
+  "gain": null,
+  "summit": null,
+  "diffText": null,
+  "back": null,
+  "meet": null,
+  "desc": "A trip to the world's first giant radio-optical telescope, set in the atmosphere of a research institute surrounded by mountain scenery, followed by a picnic.",
+  "esora": "https://esora.app/en/events/day-tour-to-the-herouni-telescope-ff22f46e"
  },
  {
   "slug": "khayking-amberd-1a431455",
@@ -1871,7 +1946,7 @@
   "diffText": null,
   "back": null,
   "meet": null,
-  "desc": "A hiking and off-road tour through Khosrov Forest State Reserve starting from the Garni entrance.",
+  "desc": "A hiking and off-road trip starting from the Garni entrance of Khosrov Forest State Reserve.",
   "esora": "https://esora.app/en/events/khmbayin-tur-depi-khosrovi-argelots-3a1beed7"
  },
  {
@@ -2775,6 +2850,31 @@
   "esora": "https://esora.app/en/events/sis-ev-masis-4710aabb"
  },
  {
+  "slug": "climbing-mount-ararat-40ddc3fa",
+  "name": {
+   "en": "Climbing Mount Ararat",
+   "hy": "Վերելք Արարատ լեռ (5137 մ)",
+   "ru": "Восхождение на гору Арарат (5137 м)"
+  },
+  "start": "2027-07-22T18:00:00+04:00",
+  "end": "2027-07-26",
+  "org": "ArmLand Adventure & Travel",
+  "ig": "armland_adventure",
+  "place": "Mount Ararat",
+  "lat": 39.7024393,
+  "lng": 44.2990761,
+  "price": 950,
+  "book": "https://www.facebook.com/events/1085573663881941/",
+  "km": null,
+  "gain": null,
+  "summit": 5137.0,
+  "diffText": null,
+  "back": null,
+  "meet": null,
+  "desc": "High-altitude ascent to Mount Ararat (5137 m) with gradual acclimatization, stays at camps at 3,200 m and 4,100 m, and a summit push starting at night around 01:00–02:00. The August 5–11 expedition also includes visits to Kars, Van, Akhtamar Island, and the ruins of Ani. Appropriate physical fitness",
+  "esora": "https://esora.app/en/events/climbing-mount-ararat-40ddc3fa"
+ },
+ {
   "slug": "verelk-ararat-ler-5-6-or-trekking-to-mount-ararat-055eba74",
   "name": {
    "en": "Trekking to Mount Ararat (5,137 m)",
@@ -2948,31 +3048,6 @@
   "meet": null,
   "desc": "A 5-day expedition to Mount Ararat with visits to Ani, Bayazet, and Kars.",
   "esora": "https://esora.app/en/events/ararat-ascent-5-days-kars-ani-bayazet-ac7751e9"
- },
- {
-  "slug": "climbing-mount-ararat-40ddc3fa",
-  "name": {
-   "en": "Climbing Mount Ararat (5137 m)",
-   "hy": "Վերելք Արարատ լեռ (5137 մ)",
-   "ru": "Восхождение на гору Арарат (5137 м)"
-  },
-  "start": "2027-08-05T19:00:00+04:00",
-  "end": "2027-08-11",
-  "org": "ArmLand Adventure & Travel",
-  "ig": "armland_adventure",
-  "place": "Mount Ararat",
-  "lat": 39.7024393,
-  "lng": 44.2990761,
-  "price": 950,
-  "book": "https://armland.am/hy/verelq-ararat-2026/?utm_source=esora.app&utm_medium=referral",
-  "km": null,
-  "gain": null,
-  "summit": 5137.0,
-  "diffText": null,
-  "back": null,
-  "meet": null,
-  "desc": "High-altitude ascent to the highest peak of the Armenian Highlands (5137 m) with gradual acclimatization and overnights at high-altitude camps (3200 m and 4100 m). The summit push starts at night around 01:00–02:00, followed by descent to the camps and the return journey. The 6-day program also incl",
-  "esora": "https://esora.app/en/events/climbing-mount-ararat-40ddc3fa"
  },
  {
   "slug": "verelk-kazbek-2027-8531fd7b",
@@ -3352,7 +3427,7 @@
  {
   "slug": "tubkal-ler-marokko-1e368f52",
   "name": {
-   "en": "Mount Toubkal, Morocco",
+   "en": "Morocco: Mount Toubkal",
    "hy": "Թուբկալ լեռ, Մարոկկո",
    "ru": "Гора Тубкаль, Марокко"
   },
@@ -3371,7 +3446,7 @@
   "diffText": null,
   "back": null,
   "meet": null,
-  "desc": "Expedition to the highest peak in North Africa and the Atlas Mountains — Mount Toubkal (4,167 m).",
+  "desc": "Ascent of Mount Toubkal (4,167 m), the highest peak in North Africa.",
   "esora": "https://esora.app/en/events/tubkal-ler-marokko-1e368f52"
  },
  {
