@@ -1,80 +1,5 @@
 [
  {
-  "slug": "evening-run-cf60c5f6",
-  "name": {
-   "en": "Evening Run",
-   "hy": "Երեկոյան վազք",
-   "ru": "Вечерняя пробежка"
-  },
-  "start": "2026-11-12T18:00:00+04:00",
-  "end": null,
-  "org": "TriClub Yerevan",
-  "ig": "triclubyerevan",
-  "place": "Yerevan Botanical Garden",
-  "lat": 40.2110317,
-  "lng": 44.5572357,
-  "price": 0,
-  "book": "https://www.instagram.com/p/Dfh4dd7jecs/",
-  "km": null,
-  "gain": null,
-  "summit": null,
-  "diffText": null,
-  "back": null,
-  "meet": null,
-  "desc": "Free group training open to all levels.",
-  "esora": "https://esora.app/en/events/evening-run-cf60c5f6"
- },
- {
-  "slug": "kruzhochki-run-f36a3a14",
-  "name": {
-   "en": "Kruzhochki Run",
-   "hy": "Kruzhochki վազք",
-   "ru": "Пробежка «Кружочки»"
-  },
-  "start": "2026-11-12T20:00:00+04:00",
-  "end": null,
-  "org": "Yerevan Run",
-  "ig": "yerevanrun",
-  "place": "Karen Demirchyan Sports and Concerts Complex",
-  "lat": 40.188302,
-  "lng": 44.483193,
-  "price": 0,
-  "book": "https://www.instagram.com/p/DfhpOrNCA6w/",
-  "km": 5.0,
-  "gain": null,
-  "summit": null,
-  "diffText": null,
-  "back": null,
-  "meet": null,
-  "desc": "Distance: 5–7 km.",
-  "esora": "https://esora.app/en/events/kruzhochki-run-f36a3a14"
- },
- {
-  "slug": "kalasar-hike-92bf0946",
-  "name": {
-   "en": "Kalasar Hike",
-   "hy": "Արշավ դեպի Կալասար",
-   "ru": "Поход на гору Каласар"
-  },
-  "start": "2026-11-14",
-  "end": null,
-  "org": "110 Places Hiking Club",
-  "ig": "110_places",
-  "place": "Yerevan",
-  "lat": null,
-  "lng": null,
-  "price": 11000,
-  "book": "https://www.instagram.com/p/Db0KdMIgAyS/",
-  "km": null,
-  "gain": null,
-  "summit": null,
-  "diffText": null,
-  "back": null,
-  "meet": null,
-  "desc": "Open horizons, scenic views, and the famous photo rock on Kalasar.",
-  "esora": "https://esora.app/en/events/kalasar-hike-92bf0946"
- },
- {
   "slug": "kaylarshav-depi-smbataberd-d815997e",
   "name": {
    "en": "Hiking to Smbataberd",
@@ -125,44 +50,19 @@
   "esora": "https://esora.app/en/events/hiking-the-azat-river-gorge-f281575d"
  },
  {
-  "slug": "ara-ler-34fd3937",
-  "name": {
-   "en": "Hiking Mount Ara",
-   "hy": "Արշավ դեպի Արա լեռ",
-   "ru": "Восхождение на гору Ара"
-  },
-  "start": "2026-11-14",
-  "end": null,
-  "org": "110 Places Hiking Club",
-  "ig": "110_places",
-  "place": "Mount Ara",
-  "lat": 40.399158299999996,
-  "lng": 44.457013599999996,
-  "price": 10000,
-  "book": "https://www.instagram.com/p/DfXnHTAkRCi/",
-  "km": 13.0,
-  "gain": 800.0,
-  "summit": null,
-  "diffText": "moderate",
-  "back": null,
-  "meet": null,
-  "desc": "Forest ascent to Mount Ara and the last colors of autumn.",
-  "esora": "https://esora.app/en/events/ara-ler-34fd3937"
- },
- {
   "slug": "tsover-lich-plech-7b171bf1",
   "name": {
-   "en": "Hike to Lake Tsover and Plech",
+   "en": "Tsover Lake & Plech",
    "hy": "Ծովեր լիճ և պլեճ",
    "ru": "Поход к озеру Цовер и плеч"
   },
-  "start": "2026-11-14",
+  "start": "2026-11-14T06:45:00+04:00",
   "end": null,
   "org": "110 Places Hiking Club",
   "ig": "110_places",
-  "place": "Tsover Lake",
-  "lat": 40.9504035,
-  "lng": 44.6833897,
+  "place": "Yerevan State University",
+  "lat": 40.1817833,
+  "lng": 44.5262361,
   "price": 11000,
   "book": "https://www.instagram.com/p/DfXnHTAkRCi/",
   "km": 6.0,
@@ -171,7 +71,7 @@
   "diffText": "easy",
   "back": null,
   "meet": null,
-  "desc": "An easy hike along a calm route leading to a lake hidden in nature, followed by plech (roasted potatoes).",
+  "desc": "An easy and relaxed hike to Tsover Lake, followed by time spent at camp.",
   "esora": "https://esora.app/en/events/tsover-lich-plech-7b171bf1"
  },
  {
@@ -323,6 +223,56 @@
   "meet": null,
   "desc": "Hike to Mount Yeranos (1824 m) in the Yeranos mountains, starting from the Ararat region. The route offers views of Mount Ararat, the Yerakh mountains to the east, the Voghjaberd range to the west, and the Azat reservoir below.",
   "esora": "https://esora.app/en/events/verelk-yeranos-ascent-to-mt-yeranos-3536e176"
+ },
+ {
+  "slug": "kalasar-hike-92bf0946",
+  "name": {
+   "en": "Kalasar Hiking",
+   "hy": "Արշավ դեպի Կալասար",
+   "ru": "Поход на гору Каласар"
+  },
+  "start": "2026-11-14T07:45:00+04:00",
+  "end": null,
+  "org": "110 Places Hiking Club",
+  "ig": "110_places",
+  "place": "Yerevan State University",
+  "lat": 40.1817833,
+  "lng": 44.5262361,
+  "price": 11000,
+  "book": "https://www.instagram.com/p/Db0KdMIgAyS/",
+  "km": 8.0,
+  "gain": 400.0,
+  "summit": null,
+  "diffText": "easy",
+  "back": null,
+  "meet": null,
+  "desc": "An easy mountain hike featuring open views and Kalasar’s famous rock formation. Suitable for those looking to summit a mountain without an overly strenuous trek.",
+  "esora": "https://esora.app/en/events/kalasar-hike-92bf0946"
+ },
+ {
+  "slug": "ara-ler-34fd3937",
+  "name": {
+   "en": "Mount Ara Forest Hike",
+   "hy": "Արշավ դեպի Արա լեռ",
+   "ru": "Восхождение на гору Ара"
+  },
+  "start": "2026-11-14T07:45:00+04:00",
+  "end": null,
+  "org": "110 Places Hiking Club",
+  "ig": "110_places",
+  "place": "Yerevan State University",
+  "lat": 40.1817833,
+  "lng": 44.5262361,
+  "price": 10000,
+  "book": "https://www.instagram.com/p/DfXnHTAkRCi/",
+  "km": 13.0,
+  "gain": 800.0,
+  "summit": null,
+  "diffText": "medium",
+  "back": null,
+  "meet": null,
+  "desc": "A long forest trail and active ascent up Mount Ara, with changing landscapes along the way.",
+  "esora": "https://esora.app/en/events/ara-ler-34fd3937"
  },
  {
   "slug": "khozhornii-yekeghetsi-gerbatsarik-hiking-to-khojorni-church-18e62086",
@@ -775,81 +725,6 @@
   "esora": "https://esora.app/en/events/hiking-to-mount-mets-parakhadem-69fae9fe"
  },
  {
-  "slug": "lake-gosh-and-plech-74e9b357",
-  "name": {
-   "en": "Gosh Lake and Plej",
-   "hy": "Գոշի լիճ + Պլեճ",
-   "ru": "Озеро Гош и плеч"
-  },
-  "start": "2026-11-15",
-  "end": null,
-  "org": "110 Places Hiking Club",
-  "ig": "110_places",
-  "place": "Yerevan",
-  "lat": null,
-  "lng": null,
-  "price": 10000,
-  "book": "https://www.instagram.com/p/DfRlGxUEXzw/",
-  "km": 6.0,
-  "gain": 400.0,
-  "summit": null,
-  "diffText": "easy",
-  "back": null,
-  "meet": null,
-  "desc": "An easy hike through the Dilijan forests to Gosh Lake, followed by baked potatoes (plej).",
-  "esora": "https://esora.app/en/events/lake-gosh-and-plech-74e9b357"
- },
- {
-  "slug": "mets-parakhadem-563be866",
-  "name": {
-   "en": "Hike to Mount Mets Parakhadem",
-   "hy": "Քայլարշավ դեպի Մեծ Փարախադեմ",
-   "ru": "Поход на гору Мец Парахадем"
-  },
-  "start": "2026-11-15",
-  "end": null,
-  "org": "110 Places Hiking Club",
-  "ig": "110_places",
-  "place": "Mount Mets Parakhadem",
-  "lat": 39.824806699999996,
-  "lng": 44.8620721,
-  "price": 11000,
-  "book": "https://www.instagram.com/p/DWjiD47CDtf/",
-  "km": null,
-  "gain": null,
-  "summit": null,
-  "diffText": null,
-  "back": null,
-  "meet": null,
-  "desc": "A long hike with mountain vistas and adventure.",
-  "esora": "https://esora.app/en/events/mets-parakhadem-563be866"
- },
- {
-  "slug": "sedvi-fortress-plech-81026467",
-  "name": {
-   "en": "Sedvi Fortress and Khash",
-   "hy": "Սեդվի ամրոց և խաշ",
-   "ru": "Крепость Седви и хаш"
-  },
-  "start": "2026-11-15",
-  "end": null,
-  "org": "110 Places Hiking Club",
-  "ig": "110_places",
-  "place": "Yerevan",
-  "lat": null,
-  "lng": null,
-  "price": 13000,
-  "book": "https://www.instagram.com/p/DZR8IzZgOg8/",
-  "km": null,
-  "gain": null,
-  "summit": null,
-  "diffText": null,
-  "back": null,
-  "meet": null,
-  "desc": "Forests, a historic fortress, and khash at the end of the trip.",
-  "esora": "https://esora.app/en/events/sedvi-fortress-plech-81026467"
- },
- {
   "slug": "verelk-kalasar-22a3dbd8",
   "name": {
    "en": "Ascent to Kalasar",
@@ -902,7 +777,7 @@
  {
   "slug": "halloween-rope-jumping-6ced2661",
   "name": {
-   "en": "Rope Jumping at Dragon’s Fly",
+   "en": "Rope Jumping: Dragon's Fly 120m",
    "hy": "Ռոուփ ջամփինգ Dragon’s Fly-ում",
    "ru": "Роупджампинг в Dragon’s Fly"
   },
@@ -921,8 +796,33 @@
   "diffText": null,
   "back": null,
   "meet": null,
-  "desc": "Rope jumping and free fall from a height of 120 meters.",
+  "desc": "Free-fall rope jumping from a height of 120 meters.",
   "esora": "https://esora.app/en/events/halloween-rope-jumping-6ced2661"
+ },
+ {
+  "slug": "sedvi-fortress-plech-81026467",
+  "name": {
+   "en": "Hike to Sedvi Fortress and Khash",
+   "hy": "Սեդվի ամրոց և խաշ",
+   "ru": "Крепость Седви и хаш"
+  },
+  "start": "2026-11-15T06:45:00+04:00",
+  "end": null,
+  "org": "110 Places Hiking Club",
+  "ig": "110_places",
+  "place": "Yerevan State University",
+  "lat": 40.1817833,
+  "lng": 44.5262361,
+  "price": 13000,
+  "book": "https://www.instagram.com/p/DZR8IzZgOg8/",
+  "km": 9.0,
+  "gain": 400.0,
+  "summit": null,
+  "diffText": "moderate",
+  "back": null,
+  "meet": null,
+  "desc": "A hike combining nature, history, and mountain views on the way to Sedvi Fortress, followed by khash after the walk. An alternative meal option is available for those who do not eat khash.",
+  "esora": "https://esora.app/en/events/sedvi-fortress-plech-81026467"
  },
  {
   "slug": "spitakavor-proshaberd-kaylarshav-hiking-to-proshaberd-fortress-and-spitakavor-ed274c91",
@@ -977,7 +877,7 @@
  {
   "slug": "hin-khotits-shinuhayr-haykakan-machu-pikchu-2e2e7daf",
   "name": {
-   "en": "Hike from Old Khot to Shinuhayr",
+   "en": "Hiking from Old Khot to Shinuhayr",
    "hy": "Քայլարշավ Հին Խոտից Շինուհայր",
    "ru": "Поход из Старого Хота в Шинуайр"
   },
@@ -993,10 +893,10 @@
   "km": 10.0,
   "gain": 500.0,
   "summit": null,
-  "diffText": "moderate, suitable for beginne",
+  "diffText": "Moderate (suitable for beginne",
   "back": null,
-  "meet": "near the SAS supermarket at Yeritasardakan.",
-  "desc": "A 10 km hike through the Vorotan Gorge in Syunik, following a trail from the ancient village of Old Khot to Shinuhayr.",
+  "meet": "near SAS Supermarket at Yeritasardakan.",
+  "desc": "Hike through the Vorotan Gorge in Syunik province, following a trail from the historic village of Old Khot to Shinuhayr.",
   "esora": "https://esora.app/en/events/hin-khotits-shinuhayr-haykakan-machu-pikchu-2e2e7daf"
  },
  {
@@ -1173,6 +1073,56 @@
   "meet": null,
   "desc": "Hike to Mount Gayledzor (2,762 m) in the Theksar mountain range in Vayots Dzor.",
   "esora": "https://esora.app/en/events/gayledzor-vayots-dzor-4a02ec02"
+ },
+ {
+  "slug": "lake-gosh-and-plech-74e9b357",
+  "name": {
+   "en": "Gosh Lake and Plech",
+   "hy": "Գոշի լիճ + Պլեճ",
+   "ru": "Озеро Гош и плеч"
+  },
+  "start": "2026-11-15T07:45:00+04:00",
+  "end": null,
+  "org": "110 Places Hiking Club",
+  "ig": "110_places",
+  "place": "Yerevan State University",
+  "lat": 40.1817833,
+  "lng": 44.5262361,
+  "price": 10000,
+  "book": "https://www.instagram.com/p/DfRlGxUEXzw/",
+  "km": 6.0,
+  "gain": 400.0,
+  "summit": null,
+  "diffText": "easy",
+  "back": null,
+  "meet": null,
+  "desc": "An easy hike through the Dilijan forests to peaceful Lake Gosh, followed by hot plech. Suitable for those looking to get out of the city and spend a day in nature without strenuous climbs.",
+  "esora": "https://esora.app/en/events/lake-gosh-and-plech-74e9b357"
+ },
+ {
+  "slug": "mets-parakhadem-563be866",
+  "name": {
+   "en": "Mets Parakhadem",
+   "hy": "Քայլարշավ դեպի Մեծ Փարախադեմ",
+   "ru": "Поход на гору Мец Парахадем"
+  },
+  "start": "2026-11-15T07:45:00+04:00",
+  "end": null,
+  "org": "110 Places Hiking Club",
+  "ig": "110_places",
+  "place": "Yerevan State University",
+  "lat": 40.1817833,
+  "lng": 44.5262361,
+  "price": 11000,
+  "book": "https://www.instagram.com/p/DWjiD47CDtf/",
+  "km": 14.0,
+  "gain": 900.0,
+  "summit": null,
+  "diffText": "moderate to challenging",
+  "back": null,
+  "meet": null,
+  "desc": "A demanding mountain hike with a long ascent and expansive views, including Mount Ararat.",
+  "esora": "https://esora.app/en/events/mets-parakhadem-563be866"
  },
  {
   "slug": "yerek-bazeneri-arahet-7db12a46",
@@ -2750,31 +2700,6 @@
   "esora": "https://esora.app/en/events/inca-trails-machu-picchu-and-peru-79238da5"
  },
  {
-  "slug": "balkans-highest-peaks-of-3-countries-fec67fcb",
-  "name": {
-   "en": "Balkans: Three Highest Peaks of Three Countries",
-   "hy": "Բալկաններ․ 3 երկրի 3 ամենաբարձր գագաթները",
-   "ru": "Балканы: три высочайшие вершины трех стран"
-  },
-  "start": "2027-07-09T07:30:00+04:00",
-  "end": "2027-07-18",
-  "org": "Armenian Geographic",
-  "ig": "armenian_geographic",
-  "place": "Yerevan",
-  "lat": null,
-  "lng": null,
-  "price": null,
-  "book": "https://www.facebook.com/events/2078481996127644/",
-  "km": null,
-  "gain": null,
-  "summit": 2764.0,
-  "diffText": null,
-  "back": null,
-  "meet": null,
-  "desc": "• Korab (2,764 m) in Albania",
-  "esora": "https://esora.app/en/events/balkans-highest-peaks-of-3-countries-fec67fcb"
- },
- {
   "slug": "ascent-of-mount-ararat-and-little-ararat-6-days-6f018523",
   "name": {
    "en": "Mount Ararat: Sis and Masis",
@@ -2848,31 +2773,6 @@
   "meet": null,
   "desc": "Details and registration: message the organizer or call 043 00 5165.",
   "esora": "https://esora.app/en/events/sis-ev-masis-4710aabb"
- },
- {
-  "slug": "climbing-mount-ararat-40ddc3fa",
-  "name": {
-   "en": "Climbing Mount Ararat",
-   "hy": "Վերելք Արարատ լեռ (5137 մ)",
-   "ru": "Восхождение на гору Арарат (5137 м)"
-  },
-  "start": "2027-07-22T18:00:00+04:00",
-  "end": "2027-07-26",
-  "org": "ArmLand Adventure & Travel",
-  "ig": "armland_adventure",
-  "place": "Mount Ararat",
-  "lat": 39.7024393,
-  "lng": 44.2990761,
-  "price": 950,
-  "book": "https://www.facebook.com/events/1085573663881941/",
-  "km": null,
-  "gain": null,
-  "summit": 5137.0,
-  "diffText": null,
-  "back": null,
-  "meet": null,
-  "desc": "High-altitude ascent to Mount Ararat (5137 m) with gradual acclimatization, stays at camps at 3,200 m and 4,100 m, and a summit push starting at night around 01:00–02:00. The August 5–11 expedition also includes visits to Kars, Van, Akhtamar Island, and the ruins of Ani. Appropriate physical fitness",
-  "esora": "https://esora.app/en/events/climbing-mount-ararat-40ddc3fa"
  },
  {
   "slug": "verelk-ararat-ler-5-6-or-trekking-to-mount-ararat-055eba74",
@@ -3048,6 +2948,31 @@
   "meet": null,
   "desc": "A 5-day expedition to Mount Ararat with visits to Ani, Bayazet, and Kars.",
   "esora": "https://esora.app/en/events/ararat-ascent-5-days-kars-ani-bayazet-ac7751e9"
+ },
+ {
+  "slug": "climbing-mount-ararat-40ddc3fa",
+  "name": {
+   "en": "Climbing Mount Ararat",
+   "hy": "Վերելք Արարատ լեռ (5137 մ)",
+   "ru": "Восхождение на гору Арарат (5137 м)"
+  },
+  "start": "2027-08-05T19:00:00+04:00",
+  "end": "2027-08-11",
+  "org": "ArmLand Adventure & Travel",
+  "ig": "armland_adventure",
+  "place": "Mount Ararat",
+  "lat": 39.7024393,
+  "lng": 44.2990761,
+  "price": 950,
+  "book": "https://armland.am/hy/verelq-ararat-2026/?utm_source=esora.app&utm_medium=referral",
+  "km": null,
+  "gain": null,
+  "summit": 5137.0,
+  "diffText": null,
+  "back": null,
+  "meet": null,
+  "desc": "High-altitude ascent to Mount Ararat (5137 m) with gradual acclimatization, stays at camps at 3,200 m and 4,100 m, and a summit push starting at night around 01:00–02:00. The August 5–11 expedition also includes visits to Kars, Van, Akhtamar Island, and the ruins of Ani. Appropriate physical fitness",
+  "esora": "https://esora.app/en/events/climbing-mount-ararat-40ddc3fa"
  },
  {
   "slug": "verelk-kazbek-2027-8531fd7b",
@@ -3452,12 +3377,12 @@
  {
   "slug": "nepal-2027-everesti-lusabatsy-3c6be86f",
   "name": {
-   "en": "Nepal 2027: Sunrise on Everest",
+   "en": "Nepal: Pikey Peak Trek",
    "hy": "Նեպալ 2027․ Էվերեստի լուսաբացը",
    "ru": "Непал 2027: Рассвет на Эвересте"
   },
   "start": "2027-10-23T12:00:00+04:00",
-  "end": null,
+  "end": "2027-10-31",
   "org": "Armenian Geographic",
   "ig": "armenian_geographic",
   "place": "Yerevan",
@@ -3471,7 +3396,7 @@
   "diffText": null,
   "back": null,
   "meet": null,
-  "desc": "A trek along the Pikey Peak route in Nepal. The main highlight of this route is a unique view of Everest, where the world's highest peak is visible in a way not seen even from Everest Base Camp.",
+  "desc": "A trek along the Pikey Peak route in Nepal. The route is known for its unique vantage point of Mount Everest, offering a view of the world's highest peak unlike any other, even from Everest Base Camp.",
   "esora": "https://esora.app/en/events/nepal-2027-everesti-lusabatsy-3c6be86f"
  }
 ]
